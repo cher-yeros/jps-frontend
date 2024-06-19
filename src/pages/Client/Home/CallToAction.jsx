@@ -14,7 +14,7 @@ export default function CallToAction() {
             situation, by prayer and petition, with thanksgiving, present your
             requests to God." - Philippians 4:6
           </p>
-          <a class="cta-btn" href="#">
+          <a class="cta-btn" href="tel:0912345678">
             Call To Prayer
           </a>
         </div>

@@ -1,38 +1,175 @@
-import React from "react";
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import Isotope from "isotope-layout";
+import React, { useEffect, useRef, useState } from "react";
 
 export default function Portfolio() {
+  const isotopeInstance = useRef(null);
+  const gridElement = useRef(null);
+
+  const [activeFilter, setActiveFilter] = useState(".category-worship");
+
+  useEffect(() => {
+    // Initialize Isotope
+    isotopeInstance.current = new Isotope(gridElement.current, {
+      itemSelector: ".portfolio-item",
+      layoutMode: "fitRows",
+    });
+
+    // Cleanup on unmount
+    return () => {
+      isotopeInstance.current.destroy();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isotopeInstance.current) {
+      isotopeInstance.current.arrange({ filter: activeFilter });
+      isotopeInstance.current.on("arrangeComplete", function () {
+        window.AOS && window.AOS.refresh(); // Refresh AOS if it's available
+      });
+    }
+  }, [activeFilter]);
+
+  const filterItems = (filter) => {
+    // isotopeInstance.current.arrange({ filter });
+
+    setActiveFilter(filter);
+  };
+  const select = (el, all = false) => {
+    el = el.trim();
+    if (all) {
+      return [...document.querySelectorAll(el)];
+    } else {
+      return document.querySelector(el);
+    }
+  };
+
+  const dataFilters = [
+    // {
+    //   className: "filter-active",
+    //   dataFilter: "*",
+    //   label: "All",
+    //   category: "*",
+    // },
+    {
+      className: "",
+      dataFilter: ".category-worship",
+      label: "Worship",
+      category: "category-worship",
+    },
+    {
+      className: "",
+      dataFilter: ".category-preaching",
+      label: "Preaching",
+      category: "category-preaching",
+    },
+    {
+      className: "",
+      dataFilter: ".category-teaching",
+      label: "Teaching",
+      category: "category-teaching",
+    },
+    {
+      className: "",
+      dataFilter: ".category-deliverance",
+      label: "Deliverance",
+      category: "category-deliverance",
+    },
+    {
+      className: "",
+      dataFilter: ".category-prayer",
+      label: "Prayer",
+      category: "category-prayer",
+    },
+    {
+      className: "",
+      dataFilter: ".category-healing",
+      label: "Healing",
+      category: "category-healing",
+    },
+    {
+      className: "",
+      dataFilter: ".category-discipleship",
+      label: "Discipleship",
+      category: "category-discipleship",
+    },
+  ];
+
   return (
-    <section id="services" class="portfolio">
-      <div class="container" data-aos="fade-up">
-        <div class="section-title">
+    <section id="services" className="portfolio">
+      <div className="container" data-aos="fade-up">
+        <div className="section-title">
           <h2>Services</h2>
           <p>Check our Services</p>
         </div>
 
-        <div class="row" data-aos="fade-up" data-aos-delay="100">
-          <div class="col-lg-12 d-flex justify-content-center">
+        <div className="row" data-aos="fade-up" data-aos-delay="100">
+          <div className="col-lg-12 d-flex justify-content-center">
             <ul id="portfolio-flters">
-              <li data-filter="*" class="filter-active">
-                All
-              </li>
-              <li data-filter=".filter-app">Worship</li>
-              <li data-filter=".filter-card">Preaching</li>
-              <li data-filter=".filter-web">Teaching</li>
-              <li data-filter=".filter-web">Deliverance</li>
-              <li data-filter=".filter-web">Prayer</li>
-              <li data-filter=".filter-web">Healing</li>
-              <li data-filter=".filter-web">Desciplineship</li>
+              {dataFilters.map((filter) => (
+                <li
+                  key={filter.label}
+                  className={
+                    activeFilter === filter.dataFilter && "filter-active"
+                  }
+                  onClick={() => filterItems(filter.dataFilter)}
+                >
+                  {filter.label}
+                </li>
+              ))}
             </ul>
           </div>
         </div>
 
         <div
-          class="row portfolio-container"
+          className="row portfolio-container"
           data-aos="fade-up"
           data-aos-delay="200"
+          ref={gridElement}
         >
-          {[...Array(9).keys()].map((n) => (
-            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+          {dataFilters.map((filter) =>
+            [...Array(6).keys()].map((n) => (
+              <div
+                key={n}
+                className={
+                  "col-lg-4 col-md-6 portfolio-item filter-app " +
+                  filter.category
+                }
+                style={{ height: "14rem" }}
+              >
+                <iframe
+                  title="testimony 1"
+                  width={"100%"}
+                  height={"100%"}
+                  src="https://www.youtube.com/embed/cpjZyWTwUSs"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+                <div className="portfolio-info">
+                  <h4>{filter.label}</h4>
+                  <p>App</p>
+                  <a
+                    href="#"
+                    data-gallery="portfolioGallery"
+                    className="portfolio-lightbox preview-link"
+                    title="App 1"
+                  >
+                    <i className="bx bx-plus"></i>
+                  </a>
+                  <a
+                    href="portfolio-details.html"
+                    className="details-link"
+                    title="More Details"
+                  >
+                    <i className="bx bx-link"></i>
+                  </a>
+                </div>
+              </div>
+            ))
+          )}
+
+          {[...Array(6).keys()].map((n) => (
+            <div className={"col-lg-4 col-md-6 portfolio-item filter-app" + ""}>
               <iframe
                 title="testimony 1"
                 width={"100%"}
@@ -41,23 +178,23 @@ export default function Portfolio() {
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               ></iframe>
-              <div class="portfolio-info">
+              <div className="portfolio-info">
                 <h4>App 1</h4>
                 <p>App</p>
                 <a
                   href="assets/img/portfolio/portfolio-1.jpg"
                   data-gallery="portfolioGallery"
-                  class="portfolio-lightbox preview-link"
+                  className="portfolio-lightbox preview-link"
                   title="App 1"
                 >
-                  <i class="bx bx-plus"></i>
+                  <i className="bx bx-plus"></i>
                 </a>
                 <a
                   href="portfolio-details.html"
-                  class="details-link"
+                  className="details-link"
                   title="More Details"
                 >
-                  <i class="bx bx-link"></i>
+                  <i className="bx bx-link"></i>
                 </a>
               </div>
             </div>

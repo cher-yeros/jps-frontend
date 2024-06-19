@@ -54,9 +54,7 @@ export default function WhyUs() {
                     <p>
                       Uplifting and spirit-filled worship every Sunday. Bible
                       Studies Engaging and informative Bible study groups for
-                      Studies Engaging and informative Bible study groups for
-                      Studies Engaging and informative Bible study groups for
-                      all ages.?
+                      all ages.
                     </p>
                   </div>
                 </li>
@@ -67,7 +65,7 @@ export default function WhyUs() {
                     data-bs-target="#accordion-list-2"
                     class="collapsed"
                   >
-                    <span>02</span> Community Outreach:
+                    <span>02</span> Prayer and Fasting
                     <i class="bx bx-chevron-down icon-show"></i>
                     <i class="bx bx-chevron-up icon-close"></i>
                   </a>
@@ -77,11 +75,16 @@ export default function WhyUs() {
                     data-bs-parent=".accordion-list"
                   >
                     <p>
-                      Various programs to support and uplift our local
-                      community. Youth Programs: Dynamic activities and
-                      mentorship for children and teenagers. mentorship for
-                      children and teenagers. mentorship for children and
-                      teenagers.
+                      This is a dedicated time for our congregation to come
+                      together in prayer and fasting, seeking God's presence,
+                      guidance, and renewal in our lives and our community.
+                      Fasting is a spiritual discipline that helps us focus on
+                      God and deepen our relationship with Him.Purpose: The
+                      purpose of this fasting service is to:Seek God's direction
+                      and wisdom for our church and individual lives.Intercede
+                      for our community, nation, and the world.Foster spiritual
+                      renewal and growth.Unite as a church family in prayer and
+                      worship.
                     </p>
                   </div>
                 </li>
@@ -92,7 +95,7 @@ export default function WhyUs() {
                     data-bs-target="#accordion-list-3"
                     class="collapsed"
                   >
-                    <span>03</span> Counseling and Support
+                    <span>03</span> Preaching Gospel
                     <i class="bx bx-chevron-down icon-show"></i>
                     <i class="bx bx-chevron-up icon-close"></i>
                   </a>
@@ -102,11 +105,11 @@ export default function WhyUs() {
                     data-bs-parent=".accordion-list"
                   >
                     <p>
-                      Compassionate counseling services for individuals and
-                      Compassionate counseling services for individuals and
-                      Compassionate counseling services for individuals and
-                      Compassionate counseling services for individuals and
-                      families.
+                      Preaching Service at JPS. This special service is
+                      dedicated to proclaiming the Good News of Jesus Christ,
+                      our Lord and Savior. Whether you are a regular attendee or
+                      a visitor, we are delighted to have you join us in worship
+                      and in hearing the transformative message of the Gospel.
                     </p>
                   </div>
                 </li>

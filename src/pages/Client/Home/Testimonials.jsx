@@ -1,6 +1,39 @@
-import React from "react";
+import React, { useEffect } from "react";
+import "swiper/css";
+import Swiper, { Autoplay, Pagination } from "swiper";
 
 export default function Testimonials() {
+  useEffect(() => {
+    const swiper = new Swiper(".testimonials-slider", {
+      speed: 600,
+      loop: true,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+      },
+      slidesPerView: 2,
+      pagination: {
+        el: ".swiper-pagination",
+        type: "bullets",
+        clickable: true,
+      },
+      breakpoints: {
+        320: {
+          slidesPerView: 1,
+          spaceBetween: 20,
+        },
+        1200: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+      },
+    });
+
+    return () => {
+      if (swiper) swiper.destroy();
+    };
+  }, []);
+
   return (
     <section id="testimonials" class="testimonials section-bg">
       <div class="container" data-aos="fade-up">
@@ -14,19 +47,20 @@ export default function Testimonials() {
           data-aos="fade-up"
           data-aos-delay="100"
         >
-          <div class="swiper-wrapper" style={{ display: "flex" }}>
-            <div class="swiper-slide" style={{ flex: 1 }}>
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
               <div class="testimonial-wrap">
                 <div class="testimonial-item">
-                  <iframe
-                    title="testimony 1"
-                    width={"100%"}
-                    height={"100%"}
-                    src="https://www.youtube.com/embed/IEz5q0Z8HLI"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  ></iframe>
-
+                  <div style={{ height: "14rem" }}>
+                    <iframe
+                      title="testimony 1"
+                      width={"100%"}
+                      height={"100%"}
+                      src="https://www.youtube.com/embed/IEz5q0Z8HLI"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    ></iframe>
+                  </div>
                   <h3>Sara Alemayehu</h3>
                   <h4>Testimony</h4>
                   <p>
@@ -42,17 +76,19 @@ export default function Testimonials() {
             </div>
             {/* <!-- End testimonial item --> */}
 
-            <div class="swiper-slide" style={{ flex: 1 }}>
+            <div class="swiper-slide">
               <div class="testimonial-wrap">
                 <div class="testimonial-item">
-                  <iframe
-                    title="testimony 1"
-                    width={"100%"}
-                    height={"100%"}
-                    src="https://www.youtube.com/embed/IEz5q0Z8HLI"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  ></iframe>
+                  <div style={{ height: "14rem" }}>
+                    <iframe
+                      title="testimony 1"
+                      width={"100%"}
+                      height={"100%"}
+                      src="https://www.youtube.com/embed/IEz5q0Z8HLI"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    ></iframe>
+                  </div>
                   <h3>Solomon Tiruneh</h3>
                   <h4>Testimony</h4>
                   <p>
@@ -69,17 +105,19 @@ export default function Testimonials() {
             </div>
             {/* <!-- End testimonial item --> */}
 
-            <div class="swiper-slide" style={{ flex: 1 }}>
+            <div class="swiper-slide">
               <div class="testimonial-wrap">
                 <div class="testimonial-item">
-                  <iframe
-                    title="testimony 1"
-                    width={"100%"}
-                    height={"100%"}
-                    src="https://www.youtube.com/embed/IEz5q0Z8HLI"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  ></iframe>
+                  <div style={{ height: "14rem" }}>
+                    <iframe
+                      title="testimony 1"
+                      width={"100%"}
+                      height={"100%"}
+                      src="https://www.youtube.com/embed/IEz5q0Z8HLI"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    ></iframe>
+                  </div>
                   <h3>Keyra A/kadir</h3>
                   <h4>Testimony</h4>
                   <p>

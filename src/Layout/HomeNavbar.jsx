@@ -15,7 +15,8 @@ export default function HomeNavbar() {
   const navbars = [
     {
       label: "Home",
-      link: "#hero",
+      link: "/#",
+      navigated: true,
     },
     {
       label: "Services",
@@ -36,19 +37,23 @@ export default function HomeNavbar() {
     },
     {
       label: "Gallery",
-      link: "#",
+      link: "/gallery",
+      navigated: true,
     },
     {
       label: "Blog",
-      link: "#",
+      link: "/blog",
+      navigated: true,
     },
     {
       label: "Bible Study",
-      link: "#",
+      link: "/bible-study",
+      navigated: true,
     },
     {
       label: "Partnership",
-      link: "#",
+      link: "/partnership",
+      navigated: true,
     },
   ];
 
@@ -58,27 +63,33 @@ export default function HomeNavbar() {
   };
 
   return (
-    <header id="header" class="fixed-top">
-      <div class="container d-flex align-items-center justify-content-between">
-        <h1 class="logo">
+    <header id="header" className="fixed-top">
+      <div className="container d-flex align-items-center justify-content-between">
+        <h1 className="logo">
           <a href="#">JPS Ministry</a>
         </h1>
 
-        {/* <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>--> */}
+        {/* <!-- <a href="index.html" className="logo"><img src="assets/img/logo.png" alt="" className="img-fluid"></a>--> */}
 
-        <nav id="navbar" class="navbar">
+        <nav id="navbar" className="navbar">
           <ul>
             {navbars?.map((navbar) => (
-              <li>
-                <a class="nav-link scrollto" href={navbar.link}>
-                  {navbar?.label}
-                </a>
+              <li key={navbar.label}>
+                {navbar?.navigated ? (
+                  <Link className="nav-link scrollto" to={navbar.link}>
+                    {navbar?.label}
+                  </Link>
+                ) : (
+                  <a className="nav-link scrollto" href={navbar.link}>
+                    {navbar?.label}
+                  </a>
+                )}
               </li>
             ))}
 
-            <li class="dropdown">
+            <li className="dropdown">
               <a href="#">
-                <span>Language</span> <i class="bi bi-chevron-down"></i>
+                <span>Language</span> <i className="bi bi-chevron-down"></i>
               </a>
               <ul>
                 <li>
@@ -98,12 +109,12 @@ export default function HomeNavbar() {
             </li>
 
             <li>
-              <a class="getstarted scrollto" href="#">
-                Donate
-              </a>
+              <Link className="getstarted scrollto" to={"/partnership"}>
+                Give
+              </Link>
             </li>
           </ul>
-          <i class="bi bi-list mobile-nav-toggle"></i>
+          <i className="bi bi-list mobile-nav-toggle"></i>
         </nav>
       </div>
     </header>
