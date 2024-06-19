@@ -12,21 +12,21 @@ export default function Dashboard() {
         <div className="row">
           <div className="col-lg-3 col-md-6">
             <StatisticsCard
-              label={"Clients"}
+              label={"Partners"}
               icon={"bi-person"}
               value={loading ? "-" : data?.dashboardStats?.clientsCount}
             />
           </div>
           <div className="col-lg-3 col-md-6">
             <StatisticsCard
-              label={"Freelencera"}
+              label={"Members"}
               icon={"bi-person"}
               value={loading ? "-" : data?.dashboardStats?.freelancersCount}
             />
           </div>
           <div className="col-lg-3 col-md-6">
             <StatisticsCard
-              label={"Jobs"}
+              label={"Bible Study Sessions"}
               icon={"bi-person"}
               value={loading ? "-" : data?.dashboardStats?.jobsCount}
             />

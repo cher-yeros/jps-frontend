@@ -4,15 +4,15 @@ import { Link } from "react-router-dom";
 export default function SideBar() {
   const menus = [
     { label: "Dashboard", link: "/admin/dashboard", icon: "bi-grid-fill" },
-    { label: "Clients", link: "/admin/clients", icon: "bi-people-fill" },
+    { label: "Partners", link: "/admin/clients", icon: "bi-people-fill" },
     {
-      label: "Freelancers",
+      label: "Members",
       link: "/admin/freelancers",
       icon: "bi-person-workspace",
     },
-    { label: "Jobs", link: "/admin/jobs", icon: "bi-journal-bookmark" },
+    { label: "Tieths", link: "/admin/jobs", icon: "bi-journal-bookmark" },
 
-    { label: "Skills", link: "/admin/Skills", icon: "bi-card-checklist" },
+    { label: "Donations", link: "/admin/Skills", icon: "bi-card-checklist" },
   ];
 
   return (
@@ -23,7 +23,7 @@ export default function SideBar() {
         {menus?.map((menu) =>
           !menu.subMenus ? (
             <li className="nav-item" key={menu.label}>
-              <Link className="nav-link collapsed" to={menu.link}>
+              <Link className="nav-link collapsed" to={"/admin" || menu.link}>
                 <i className={"bi " + menu.icon}></i>
                 <span>{menu.label}</span>
               </Link>
@@ -47,7 +47,7 @@ export default function SideBar() {
               >
                 {menu.subMenus.map((subMenu) => (
                   <li key={subMenu.label}>
-                    <Link to={menu.link + subMenu.link}>
+                    <Link to={"/admin" || menu.link + subMenu.link}>
                       <i className="bi bi-circle"></i>
                       <span>{subMenu.label}</span>
                     </Link>

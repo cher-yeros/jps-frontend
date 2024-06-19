@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { controlSidebar } from "../redux/slices/systemSlice";
-import { Chip } from "@mui/material";
+import { Avatar, Chip } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { logoutFinished } from "../redux/slices/authSlice";
@@ -37,8 +37,8 @@ export default function Header() {
     <header id="header" className="header fixed-top d-flex align-items-center">
       <div className="d-flex align-items-center justify-content-between">
         <Link to="/admin" className="logo d-flex align-items-center">
-          {/* <img src="assets/img/logo.png" alt="" /> */}
-          <span className="d-none d-lg-block">{t("Skill Connect")}</span>
+          <img src="assets/img/logo.png" alt="" />
+          <span className="d-none d-lg-block pl-4">{t("JPS Ministry")}</span>
         </Link>
         <i
           className="bi bi-list toggle-sidebar-btn"
@@ -78,19 +78,20 @@ export default function Header() {
               href="#"
               data-bs-toggle="dropdown"
             >
-              <img
+              {/* <img
                 src="assets/img/profile-img.jpg"
                 alt="Profile"
                 className="rounded-circle"
-              />
+              /> */}
+              <Avatar></Avatar>
               <span className="d-none d-md-block dropdown-toggle ps-2">
-                {currentUser?.firstname + " " + currentUser.lastname}
+                Abebe Tilahun
               </span>{" "}
             </a>
 
             <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
               <li className="dropdown-header">
-                <h6> {currentUser?.firstname + " " + currentUser.lastname}</h6>
+                <h6> Abebe Tilahun</h6>
                 <span>
                   <Chip color="success" label={t(currentUser?.role)} />
                 </span>
