@@ -9,9 +9,10 @@ import Gallery from "./pages/Client/Gallery/Gallery";
 import Home from "./pages/Client/Home/Home";
 import Login from "./pages/Client/Login";
 import MyProfile from "./pages/Client/MyProfile";
-import PaymentSuccess from "./pages/Client/PaymentSuccess";
-import SignUp from "./pages/Client/SignUp";
 import Partnership from "./pages/Client/Partnership/Partnership";
+import SignUp from "./pages/Client/SignUp";
+import EmailVerified from "./pages/Status/EmailVerified";
+import PaymentSuccessful from "./pages/Status/PaymentSuccessful";
 
 function App() {
   return (
@@ -35,7 +36,8 @@ function App() {
           <Route path="" element={<Dashboard />} />
           <Route path="dashboard" element={<Dashboard />} />
         </Route>
-        <Route path="/payment-success/:tx_no" element={<PaymentSuccess />} />
+        <Route path="/payment-success/:tx_no" element={<PaymentSuccessful />} />
+        <Route path="/verify-email/:token" element={<EmailVerified />} />
       </Route>
     </Routes>
   );

@@ -16,12 +16,13 @@ export function CustomTextField({
   tf,
   rows,
   multiline,
+  endAdornment,
   ...props
 }) {
   const { t } = useTranslation();
 
   return (
-    <div className="d-flex mt-3">
+    <div className="d-flex mt-3" style={{ flex: 1 }}>
       <div style={{ flex: 12 || tf || 7 }} className="input-group">
         <Controller
           control={control}
@@ -39,6 +40,9 @@ export function CustomTextField({
                 rows={rows}
                 error={error}
                 helperText={error?.message}
+                InputProps={{
+                  endAdornment: endAdornment,
+                }}
               >
                 {options?.map((option) => (
                   <MenuItem

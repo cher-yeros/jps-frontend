@@ -1,10 +1,8 @@
-import { useQuery } from "@apollo/client";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { DASHBOARD_STATS } from "../../graphql/admin";
 
 export default function Dashboard() {
-  const { data, loading } = useQuery(DASHBOARD_STATS);
+  // const { data, loading } = useQuery(DASHBOARD_STATS);
 
   return (
     <div className="row">
@@ -14,56 +12,56 @@ export default function Dashboard() {
             <StatisticsCard
               label={"Partners"}
               icon={"bi-person"}
-              value={loading ? "-" : data?.dashboardStats?.clientsCount}
+              // value={loading ? "-" : data?.dashboardStats?.clientsCount}
             />
           </div>
           <div className="col-lg-3 col-md-6">
             <StatisticsCard
               label={"Members"}
               icon={"bi-person"}
-              value={loading ? "-" : data?.dashboardStats?.freelancersCount}
+              // value={loading ? "-" : data?.dashboardStats?.freelancersCount}
             />
           </div>
           <div className="col-lg-3 col-md-6">
             <StatisticsCard
               label={"Bible Study Sessions"}
               icon={"bi-person"}
-              value={loading ? "-" : data?.dashboardStats?.jobsCount}
+              // value={loading ? "-" : data?.dashboardStats?.jobsCount}
             />
           </div>
           <div className="col-lg-3 col-md-6">
             <StatisticsCard
               label={"Contracts"}
               icon={"bi-person"}
-              value={loading ? "-" : data?.dashboardStats?.contractsCount}
+              // value={loading ? "-" : data?.dashboardStats?.contractsCount}
             />
           </div>
           <div className="col-lg-4 col-md-6">
             <StatisticsCard
               label={"Applications"}
               icon={"bi-person"}
-              value={loading ? "-" : data?.dashboardStats?.applicationsCount}
+              // value={loading ? "-" : data?.dashboardStats?.applicationsCount}
             />
           </div>
           <div className="col-lg-4 col-md-6">
             <StatisticsCard
               label={"Transactions"}
               icon={"bi-person"}
-              value={loading ? "-" : data?.dashboardStats?.transactionsCount}
+              // value={loading ? "-" : data?.dashboardStats?.transactionsCount}
             />
           </div>
           <div className="col-lg-4 col-md-6">
             <StatisticsCard
               label={"Transactions"}
               icon={"bi-person"}
-              value={loading ? "-" : data?.dashboardStats?.transactionsCount}
+              // value={loading ? "-" : data?.dashboardStats?.transactionsCount}
             />
           </div>
 
-          <DataTable
+          {/* <DataTable
             loading={loading}
             recentTransactions={data?.dashboardStats?.recentTransactions}
-          />
+          /> */}
         </div>
       </div>
     </div>

@@ -2,9 +2,9 @@ import React from "react";
 
 export default function CallToAction() {
   return (
-    <section id="cta" class="cta">
-      <div class="container" data-aos="zoom-in">
-        <div class="text-center">
+    <section id="cta" className="cta">
+      <div className="container" data-aos="zoom-in">
+        <div className="text-center">
           <h3>Call To Prayer</h3>
           <p>
             As we journey through life, we encounter many joys and challenges.
@@ -14,7 +14,7 @@ export default function CallToAction() {
             situation, by prayer and petition, with thanksgiving, present your
             requests to God." - Philippians 4:6
           </p>
-          <a class="cta-btn" href="tel:0912345678">
+          <a className="cta-btn" href="tel:0912345678">
             Call To Prayer
           </a>
         </div>

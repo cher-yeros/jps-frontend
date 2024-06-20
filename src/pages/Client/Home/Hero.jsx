@@ -1,54 +1,67 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 export default function Hero() {
+  const { currentUser } = useSelector((state) => state.auth);
+
   return (
     <section id="hero">
       <div
         id="heroCarousel"
         data-bs-interval="5000"
-        class="carousel slide carousel-fade"
+        className="carousel slide carousel-fade"
         data-bs-ride="carousel"
       >
-        <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
+        <ol className="carousel-indicators" id="hero-carousel-indicators"></ol>
 
-        <div class="carousel-inner" role="listbox">
+        <div className="carousel-inner" role="listbox">
           {/* <!-- Slide 1 --> */}
           <div
-            class="carousel-item active"
+            className="carousel-item active"
             style={{ backgroundImage: "url(assets/img/hero/hero-0.jpg)" }}
           >
-            <div class="carousel-container">
-              <div class="container">
-                <h2 class="animate__animated animate__fadeInDown">
+            <div className="carousel-container">
+              <div className="container">
+                <h2 className="animate__animated animate__fadeInDown">
                   Welcome to <span>JPS Ministry</span>
                 </h2>
-                <p class="animate__animated animate__fadeInUp">
+                <p className="animate__animated animate__fadeInUp">
                   Join us in worship, fellowship, and service. At Our Community
                   Church, we celebrate faith and family, offering a place to
                   grow spiritually and connect deeply with others. Everyone is
                   welcome here.
                 </p>
-                <a
-                  href="#about"
-                  class="btn-get-started animate__animated animate__fadeInUp scrollto"
-                >
-                  Read More
-                </a>
+                {currentUser ? (
+                  <a
+                    href={"#about"}
+                    className="btn-get-started animate__animated animate__fadeInUp scrollto"
+                  >
+                    Get Started
+                  </a>
+                ) : (
+                  <Link
+                    to={"/login"}
+                    className="btn-get-started animate__animated animate__fadeInUp scrollto"
+                  >
+                    Join Us
+                  </Link>
+                )}
               </div>
             </div>
           </div>
 
           {/* <!-- hero 2 --> */}
           <div
-            class="carousel-item"
+            className="carousel-item"
             style={{ backgroundImage: "url(assets/img/hero/hero-4.jpg)" }}
           >
-            <div class="carousel-container">
-              <div class="container">
-                <h2 class="animate__animated animate__fadeInDown">
+            <div className="carousel-container">
+              <div className="container">
+                <h2 className="animate__animated animate__fadeInDown">
                   Embrace Hope and Love
                 </h2>
-                <p class="animate__animated animate__fadeInUp">
+                <p className="animate__animated animate__fadeInUp">
                   Discover a sanctuary of peace and inspiration at Hope Church.
                   Our vibrant community invites you to experience God's love,
                   participate in meaningful worship, and engage in
@@ -56,7 +69,7 @@ export default function Hero() {
                 </p>
                 <a
                   href="#about"
-                  class="btn-get-started animate__animated animate__fadeInUp scrollto"
+                  className="btn-get-started animate__animated animate__fadeInUp scrollto"
                 >
                   Read More
                 </a>
@@ -66,15 +79,15 @@ export default function Hero() {
 
           {/* <!-- hero 3 --> */}
           <div
-            class="carousel-item"
+            className="carousel-item"
             style={{ backgroundImage: "url(assets/img/hero/hero-5.jpg)" }}
           >
-            <div class="carousel-container">
-              <div class="container">
-                <h2 class="animate__animated animate__fadeInDown">
+            <div className="carousel-container">
+              <div className="container">
+                <h2 className="animate__animated animate__fadeInDown">
                   Experience Faith Together
                 </h2>
-                <p class="animate__animated animate__fadeInUp">
+                <p className="animate__animated animate__fadeInUp">
                   Faith Church is a warm, inclusive place where you can deepen
                   your relationship with God. Join us for uplifting services,
                   supportive small groups, and a variety of community outreach
@@ -82,7 +95,7 @@ export default function Hero() {
                 </p>
                 <a
                   href="#about"
-                  class="btn-get-started animate__animated animate__fadeInUp scrollto"
+                  className="btn-get-started animate__animated animate__fadeInUp scrollto"
                 >
                   Read More
                 </a>
@@ -92,25 +105,25 @@ export default function Hero() {
         </div>
 
         <a
-          class="carousel-control-prev"
+          className="carousel-control-prev"
           href="#heroCarousel"
           role="button"
           data-bs-slide="prev"
         >
           <span
-            class="carousel-control-prev-icon bi bi-chevron-left"
+            className="carousel-control-prev-icon bi bi-chevron-left"
             aria-hidden="true"
           ></span>
         </a>
 
         <a
-          class="carousel-control-next"
+          className="carousel-control-next"
           href="#heroCarousel"
           role="button"
           data-bs-slide="next"
         >
           <span
-            class="carousel-control-next-icon bi bi-chevron-right"
+            className="carousel-control-next-icon bi bi-chevron-right"
             aria-hidden="true"
           ></span>
         </a>

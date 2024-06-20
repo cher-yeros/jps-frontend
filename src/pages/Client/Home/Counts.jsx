@@ -2,17 +2,17 @@ import React from "react";
 
 export default function Counts() {
   return (
-    <section id="counts" class="counts">
-      <div class="container" data-aos="fade-up">
-        <div class="row no-gutters">
-          <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
-            <div class="count-box">
-              <i class="bi bi-emoji-smile"></i>
+    <section id="counts" className="counts">
+      <div className="container" data-aos="fade-up">
+        <div className="row no-gutters">
+          <div className="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
+            <div className="count-box">
+              <i className="bi bi-emoji-smile"></i>
               <span
                 data-purecounter-start="0"
                 data-purecounter-end="232"
                 data-purecounter-duration="1"
-                class="purecounter"
+                className="purecounter"
               ></span>
               <p>
                 <strong>Happy Clients</strong> consequuntur quae qui deca rode
@@ -21,14 +21,14 @@ export default function Counts() {
             </div>
           </div>
 
-          <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
-            <div class="count-box">
-              <i class="bi bi-journal-richtext"></i>
+          <div className="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
+            <div className="count-box">
+              <i className="bi bi-journal-richtext"></i>
               <span
                 data-purecounter-start="0"
                 data-purecounter-end="521"
                 data-purecounter-duration="1"
-                class="purecounter"
+                className="purecounter"
               ></span>
               <p>
                 <strong>Projects</strong> adipisci atque cum quia aut numquam
@@ -38,14 +38,14 @@ export default function Counts() {
             </div>
           </div>
 
-          <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
-            <div class="count-box">
-              <i class="bi bi-headset"></i>
+          <div className="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
+            <div className="count-box">
+              <i className="bi bi-headset"></i>
               <span
                 data-purecounter-start="0"
                 data-purecounter-end="1463"
                 data-purecounter-duration="1"
-                class="purecounter"
+                className="purecounter"
               ></span>
               <p>
                 <strong>Hours Of Support</strong> aut commodi quaerat. Aliquam
@@ -55,14 +55,14 @@ export default function Counts() {
             </div>
           </div>
 
-          <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
-            <div class="count-box">
-              <i class="bi bi-people"></i>
+          <div className="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
+            <div className="count-box">
+              <i className="bi bi-people"></i>
               <span
                 data-purecounter-start="0"
                 data-purecounter-end="15"
                 data-purecounter-duration="1"
-                class="purecounter"
+                className="purecounter"
               ></span>
               <p>
                 <strong>Hard Workers</strong> rerum asperiores dolor molestiae

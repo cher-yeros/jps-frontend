@@ -4,10 +4,15 @@ export const CREATE_USER = gql`
   mutation CreateUser($input: CreateUserInput) {
     createUser(input: $input) {
       id
-      fullname
+      avatar
       firstname
       lastname
+      fullname
+      gender
+      phone
       email
+      address
+      dob
     }
   }
 `;
@@ -21,56 +26,42 @@ export const LOGIN_USER = gql`
         avatar
         firstname
         lastname
-        username
+        # fullname
         gender
-        bio
         phone
         email
         address
-        portfolio_dir
-        role
+        dob
+        # createdAt
       }
     }
   }
 `;
 
-export const FILL_FREELANCER_PROFILE = gql`
-  mutation UpdateProfile($input: UpdateProfileInput) {
-    updateProfile(input: $input)
+export const VERIFY_EMAIL = gql`
+  query VerifyEmail($token: String!) {
+    verifyEmail(token: $token)
   }
 `;
 
-export const GET_USER = gql`
-  query User($id: Int!) {
-    user(id: $id) {
-      id
-      avatar
-      firstname
-      lastname
-      fullname
-      username
-      gender
-      password
-      bio
-      phone
-      email
-      address
-      portfolio_dir
-      role
-      createdAt
-      updatedAt
-      skills {
-        name
-      }
-      jobs {
-        name
-      }
-      # feedbacks {
-
-      # }
-      balance {
-        balance
-      }
-    }
-  }
-`;
+// export const LOGIN_USER = gql`
+//   mutation LoginUser($input: LoginInput) {
+//     loginUser(input: $input) {
+//       token
+//       user {
+//         id
+//         avatar
+//         firstname
+//         lastname
+//         username
+//         gender
+//         bio
+//         phone
+//         email
+//         address
+//         portfolio_dir
+//         role
+//       }
+//     }
+//   }
+// `;

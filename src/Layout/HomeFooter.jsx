@@ -3,13 +3,13 @@ import React from "react";
 export default function HomeFooter() {
   return (
     <footer id="home-footer">
-      <div class="footer-top">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-4 col-md-6">
-              <div class="footer-info">
+      <div className="footer-top">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-4 col-md-6">
+              <div className="footer-info">
                 <h3>JPS Ministry</h3>
-                <p class="pb-3">
+                <p className="pb-3">
                   <em>
                     a vibrant community dedicated to worship, fellowship, and
                     service. Our mission is to glorify God through meaningful
@@ -25,76 +25,78 @@ export default function HomeFooter() {
                   <strong>Email:</strong> info@example.com
                   <br />
                 </p>
-                <div class="social-links mt-3">
-                  <a href="#" class="twitter">
-                    <i class="bx bxl-twitter"></i>
+                <div className="social-links mt-3">
+                  <a href="#" className="twitter">
+                    <i className="bx bxl-twitter"></i>
                   </a>
-                  <a href="#" class="facebook">
-                    <i class="bx bxl-facebook"></i>
+                  <a href="#" className="facebook">
+                    <i className="bx bxl-facebook"></i>
                   </a>
-                  <a href="#" class="instagram">
-                    <i class="bx bxl-instagram"></i>
+                  <a href="#" className="instagram">
+                    <i className="bx bxl-instagram"></i>
                   </a>
-                  <a href="#" class="google-plus">
-                    <i class="bx bxl-skype"></i>
+                  <a href="#" className="google-plus">
+                    <i className="bx bxl-skype"></i>
                   </a>
-                  <a href="#" class="linkedin">
-                    <i class="bx bxl-linkedin"></i>
+                  <a href="#" className="linkedin">
+                    <i className="bx bxl-linkedin"></i>
                   </a>
                 </div>
               </div>
             </div>
 
-            <div class="col-lg-2 col-md-6 footer-links">
+            <div className="col-lg-2 col-md-6 footer-links">
               <h4>Useful Links</h4>
               <ul>
                 <li>
-                  <i class="bx bx-chevron-right"></i> <a href="#">Home</a>
+                  <i className="bx bx-chevron-right"></i> <a href="#">Home</a>
                 </li>
                 <li>
-                  <i class="bx bx-chevron-right"></i> <a href="#">About us</a>
+                  <i className="bx bx-chevron-right"></i>{" "}
+                  <a href="#">About us</a>
                 </li>
                 <li>
-                  <i class="bx bx-chevron-right"></i> <a href="#">Services</a>
+                  <i className="bx bx-chevron-right"></i>{" "}
+                  <a href="#">Services</a>
                 </li>
                 <li>
-                  <i class="bx bx-chevron-right"></i>
+                  <i className="bx bx-chevron-right"></i>
                   <a href="#">Testimonies</a>
                 </li>
                 <li>
-                  <i class="bx bx-chevron-right"></i>
+                  <i className="bx bx-chevron-right"></i>
                   <a href="#">Call to Prayer</a>
                 </li>
               </ul>
             </div>
 
-            <div class="col-lg-2 col-md-6 footer-links">
+            <div className="col-lg-2 col-md-6 footer-links">
               <h4>Our Services</h4>
               <ul>
                 <li>
-                  <i class="bx bx-chevron-right"></i>{" "}
+                  <i className="bx bx-chevron-right"></i>{" "}
                   <a href="#">Sunday Worship Services</a>
                 </li>
                 <li>
-                  <i class="bx bx-chevron-right"></i>
+                  <i className="bx bx-chevron-right"></i>
                   <a href="#">Midweek Services</a>
                 </li>
                 <li>
-                  <i class="bx bx-chevron-right"></i>
+                  <i className="bx bx-chevron-right"></i>
                   <a href="#">Special Services</a>
                 </li>
                 <li>
-                  <i class="bx bx-chevron-right"></i>{" "}
+                  <i className="bx bx-chevron-right"></i>{" "}
                   <a href="#">Youth and Children's Services</a>
                 </li>
                 <li>
-                  <i class="bx bx-chevron-right"></i>
+                  <i className="bx bx-chevron-right"></i>
                   <a href="#">Small Group Meetings</a>
                 </li>
               </ul>
             </div>
 
-            <div class="col-lg-4 col-md-6 footer-newsletter">
+            <div className="col-lg-4 col-md-6 footer-newsletter">
               <h4>Our Newsletter</h4>
               <p>Subscribe to our newsletter</p>
               <form action="" method="post">
@@ -106,8 +108,8 @@ export default function HomeFooter() {
         </div>
       </div>
 
-      <div class="container">
-        <div class="copyright">
+      <div className="container">
+        <div className="copyright">
           &copy; Copyright{" "}
           <strong>
             <span>JPS Ministry</span>
