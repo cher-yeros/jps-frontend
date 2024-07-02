@@ -1,8 +1,11 @@
 import React, { useEffect } from "react";
 import "swiper/css";
 import Swiper, { Autoplay, Pagination } from "swiper";
+import { useTranslation } from "react-i18next";
 
 export default function Testimonials() {
+  const { t } = useTranslation();
+
   useEffect(() => {
     const swiper = new Swiper(".testimonials-slider", {
       speed: 600,
@@ -38,8 +41,8 @@ export default function Testimonials() {
     <section id="testimonials" className="testimonials section-bg">
       <div className="container" data-aos="fade-up">
         <div className="section-title">
-          <h2>Testimony</h2>
-          <p>Testimony</p>
+          <h2>{t("Testimony")}</h2>
+          <p>{t("Testimony")}</p>
         </div>
 
         <div

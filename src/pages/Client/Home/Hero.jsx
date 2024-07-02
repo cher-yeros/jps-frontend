@@ -1,8 +1,11 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 export default function Hero() {
+  const { t } = useTranslation();
+
   const { currentUser } = useSelector((state) => state.auth);
 
   return (
@@ -24,27 +27,24 @@ export default function Hero() {
             <div className="carousel-container">
               <div className="container">
                 <h2 className="animate__animated animate__fadeInDown">
-                  Welcome to <span>JPS Ministry</span>
+                  {t("Welcome to JPS Ministry")}
                 </h2>
                 <p className="animate__animated animate__fadeInUp">
-                  Join us in worship, fellowship, and service. At Our Community
-                  Church, we celebrate faith and family, offering a place to
-                  grow spiritually and connect deeply with others. Everyone is
-                  welcome here.
+                  {t("Hero Description")}
                 </p>
                 {currentUser ? (
                   <a
                     href={"#about"}
                     className="btn-get-started animate__animated animate__fadeInUp scrollto"
                   >
-                    Get Started
+                    {t("Get Started")}
                   </a>
                 ) : (
                   <Link
                     to={"/login"}
                     className="btn-get-started animate__animated animate__fadeInUp scrollto"
                   >
-                    Join Us
+                    {t("Join Us")}
                   </Link>
                 )}
               </div>
@@ -59,19 +59,16 @@ export default function Hero() {
             <div className="carousel-container">
               <div className="container">
                 <h2 className="animate__animated animate__fadeInDown">
-                  Embrace Hope and Love
+                  {t("Embrace Hope and Love")}
                 </h2>
                 <p className="animate__animated animate__fadeInUp">
-                  Discover a sanctuary of peace and inspiration at Hope Church.
-                  Our vibrant community invites you to experience God's love,
-                  participate in meaningful worship, and engage in
-                  transformative service.
+                  {t("Embrace Hope and Love Body")}
                 </p>
                 <a
                   href="#about"
                   className="btn-get-started animate__animated animate__fadeInUp scrollto"
                 >
-                  Read More
+                  {t("Read More")}
                 </a>
               </div>
             </div>
@@ -85,19 +82,16 @@ export default function Hero() {
             <div className="carousel-container">
               <div className="container">
                 <h2 className="animate__animated animate__fadeInDown">
-                  Experience Faith Together
+                  {t("Experience Faith Together")}
                 </h2>
                 <p className="animate__animated animate__fadeInUp">
-                  Faith Church is a warm, inclusive place where you can deepen
-                  your relationship with God. Join us for uplifting services,
-                  supportive small groups, and a variety of community outreach
-                  programs.
+                  {t("Experience Faith Together Body")}
                 </p>
                 <a
                   href="#about"
                   className="btn-get-started animate__animated animate__fadeInUp scrollto"
                 >
-                  Read More
+                  {t("Read More")}
                 </a>
               </div>
             </div>

@@ -1,3 +1,4 @@
+import { useMutation } from "@apollo/client";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Stack, Typography } from "@mui/material";
 import React from "react";
@@ -7,9 +8,8 @@ import { toast } from "react-toastify";
 import * as Yup from "yup";
 import { CustomTextField } from "../../../components/CustomTextField";
 import { CREATE_PARTNERSHIP } from "../../../graphql/partnership";
-import { useMutation } from "@apollo/client";
 
-export default function Partnership() {
+export default function Visitors() {
   const { t } = useTranslation();
 
   const [createPartnership, { loading }] = useMutation(CREATE_PARTNERSHIP);
@@ -30,8 +30,6 @@ export default function Partnership() {
       currency: "ETB",
     },
   });
-
-  const types = ["Weekly", "Monthly", "Quarterly", "Annually"];
 
   const onSubmit = async (values) => {
     const isValid = await trigger([
@@ -86,10 +84,12 @@ export default function Partnership() {
             <div class="row d-flex justify-content-center text-center">
               <div class="col-lg-8">
                 <div className="section-title mt-4">
-                  <h2>{t("Partnership")}</h2>
-                  <p>{t("Be our partner")}</p>
+                  <h2>Visitors</h2>
+                  <p>{t("National and International Visitors")}</p>
                 </div>
-                <p class="mb-0">{t("Be our partner Body")}</p>
+                <p class="mb-0">
+                  {t("National and International Visitors Body")}
+                </p>
               </div>
             </div>
           </div>
@@ -216,7 +216,7 @@ export default function Partnership() {
                     </button>
                   </div>
                 </Stack>
-                <div class="form-group mt-3 d-flex gap-4">
+                {/* <div class="form-group mt-3 d-flex gap-4">
                   {types?.map((t) => (
                     <button
                       className="submit-btn"
@@ -232,7 +232,7 @@ export default function Partnership() {
                       {t}
                     </button>
                   ))}
-                </div>
+                </div> */}
                 <div class="form-group mt-3">
                   <CustomTextField
                     control={control}
@@ -255,7 +255,7 @@ export default function Partnership() {
                     type="button"
                     onClick={loading ? () => {} : onSubmit}
                   >
-                    {t(loading ? "Loading..." : "Give")}
+                    {t(loading ? "Loading..." : "Register")}
                   </button>
                 </div>
               </form>

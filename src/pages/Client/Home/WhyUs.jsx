@@ -1,6 +1,9 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 export default function WhyUs() {
+  const { t } = useTranslation();
+
   return (
     <section id="why-us" class="why-us section-bg">
       <div class="container-fluid" data-aos="fade-up">
@@ -22,16 +25,10 @@ export default function WhyUs() {
           <div class="col-lg-7 d-flex flex-column justify-content-center align-items-stretch">
             <div class="content">
               <h3>
-                In
-                <strong> JPS Ministry</strong>
+                {t("In")}
+                <strong> {t("JPS Ministry")}</strong>
               </h3>
-              <p>
-                Whether you're seeking a new church home, exploring faith for
-                the first time, or looking to deepen your spiritual journey, JPS
-                Ministry welcomes you with open arms. Come and be a part of our
-                family, where you can grow in faith, serve with love, and
-                experience the transformative power of God's grace.
-              </p>
+              <p>{t("In JPS Ministry Body")}</p>
             </div>
 
             <div class="accordion-list">
@@ -42,7 +39,7 @@ export default function WhyUs() {
                     class="collapse"
                     data-bs-target="#accordion-list-1"
                   >
-                    <span>01</span> Worship Services
+                    <span>01</span> {t("Worship Services 1")}
                     <i class="bx bx-chevron-down icon-show"></i>
                     <i class="bx bx-chevron-up icon-close"></i>
                   </a>
@@ -51,11 +48,7 @@ export default function WhyUs() {
                     class="collapse show"
                     data-bs-parent=".accordion-list"
                   >
-                    <p>
-                      Uplifting and spirit-filled worship every Sunday. Bible
-                      Studies Engaging and informative Bible study groups for
-                      all ages.
-                    </p>
+                    <p>{t("Worship Services Body")}</p>
                   </div>
                 </li>
 
@@ -65,7 +58,7 @@ export default function WhyUs() {
                     data-bs-target="#accordion-list-2"
                     class="collapsed"
                   >
-                    <span>02</span> Prayer and Fasting
+                    <span>02</span> {t("Prayer and Fasting")}
                     <i class="bx bx-chevron-down icon-show"></i>
                     <i class="bx bx-chevron-up icon-close"></i>
                   </a>
@@ -74,18 +67,7 @@ export default function WhyUs() {
                     class="collapse"
                     data-bs-parent=".accordion-list"
                   >
-                    <p>
-                      This is a dedicated time for our congregation to come
-                      together in prayer and fasting, seeking God's presence,
-                      guidance, and renewal in our lives and our community.
-                      Fasting is a spiritual discipline that helps us focus on
-                      God and deepen our relationship with Him.Purpose: The
-                      purpose of this fasting service is to:Seek God's direction
-                      and wisdom for our church and individual lives.Intercede
-                      for our community, nation, and the world.Foster spiritual
-                      renewal and growth.Unite as a church family in prayer and
-                      worship.
-                    </p>
+                    <p>{t("Prayer and Fasting Body")}</p>
                   </div>
                 </li>
 
@@ -95,7 +77,7 @@ export default function WhyUs() {
                     data-bs-target="#accordion-list-3"
                     class="collapsed"
                   >
-                    <span>03</span> Preaching Gospel
+                    <span>03</span> {t("Preaching Gospel")}
                     <i class="bx bx-chevron-down icon-show"></i>
                     <i class="bx bx-chevron-up icon-close"></i>
                   </a>
@@ -104,13 +86,7 @@ export default function WhyUs() {
                     class="collapse"
                     data-bs-parent=".accordion-list"
                   >
-                    <p>
-                      Preaching Service at JPS. This special service is
-                      dedicated to proclaiming the Good News of Jesus Christ,
-                      our Lord and Savior. Whether you are a regular attendee or
-                      a visitor, we are delighted to have you join us in worship
-                      and in hearing the transformative message of the Gospel.
-                    </p>
+                    <p>{t("Preaching Gospel Body")}</p>
                   </div>
                 </li>
               </ul>

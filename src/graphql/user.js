@@ -44,6 +44,12 @@ export const VERIFY_EMAIL = gql`
   }
 `;
 
+export const REQUEST_RESET_PASSWORD = gql`
+  query VerifyEmail($token: String!) {
+    verifyEmail(token: $token)
+  }
+`;
+
 // export const LOGIN_USER = gql`
 //   mutation LoginUser($input: LoginInput) {
 //     loginUser(input: $input) {

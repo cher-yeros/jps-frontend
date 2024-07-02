@@ -9,7 +9,7 @@ export default function SingleBlog() {
             <div className="row d-flex justify-content-center text-center">
               <div className="col-lg-8">
                 <div className="section-title mt-4">
-                  <h2>Blog</h2>
+                  <h2>Programs</h2>
                   <p>Embracing Grace: A Journey of Forgiveness</p>
                 </div>
                 <p className="mb-0"></p>
@@ -27,9 +27,9 @@ export default function SingleBlog() {
         <div className="container">
           <div className="row">
             <div className="col-sm-12">
-              <div className="news-img-box">
+              <div className="news-img-box d-flex justify-content-center">
                 <img
-                  src="//assets/img/slide-3.jpg"
+                  src="/assets/img/gallery/gallery (3).jpg"
                   alt=""
                   className="img-fluid"
                 />

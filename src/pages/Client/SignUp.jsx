@@ -224,7 +224,7 @@ export default function SignUp() {
 
                 <div className="col-12">
                   <p className="small mb-0">
-                    {t("Not sign up yet?")}{" "}
+                    {t("Already Registered?")}{" "}
                     <Link to={"/login"}>{t("Sign In")}</Link>
                   </p>
                 </div>

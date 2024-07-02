@@ -1,12 +1,15 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 export default function Team() {
+  const { t } = useTranslation();
+
   return (
     <section id="team" className="team section-bg">
       <div className="container" data-aos="fade-up">
         <div className="section-title">
-          <h2>Leaders</h2>
-          <p>Pastors and Leaders</p>
+          <h2>{t("Leaders")}</h2>
+          <p>{t("Pastors and Leaders")}</p>
         </div>
 
         <div className="row">
@@ -15,8 +18,8 @@ export default function Team() {
               <img src="assets/img/pastor/1.jpg" className="img-fluid" alt="" />
               <div className="member-info">
                 <div className="member-info-content">
-                  <h4>Prophet Henock</h4>
-                  <span>Churchs Visionary and Founder</span>
+                  <h4>{t("Prophet Henock")}</h4>
+                  <span>{t("Churchs Visionary and Founder")}</span>
                 </div>
                 <div className="social">
                   <a href="">

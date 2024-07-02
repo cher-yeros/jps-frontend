@@ -1,12 +1,15 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 export default function Contact() {
+  const { t } = useTranslation();
+
   return (
     <section id="contact" className="contact section-bg">
       <div className="container" data-aos="fade-up">
         <div className="section-title">
-          <h2>Contact</h2>
-          <p>Contact Us</p>
+          <h2>{t("Contact")}</h2>
+          <p>{t("Contact Us")}</p>
         </div>
 
         <div className="row">
@@ -15,14 +18,14 @@ export default function Contact() {
               <div className="col-md-12">
                 <div className="info-box">
                   <i className="bx bx-map"></i>
-                  <h3>Our Address</h3>
-                  <p>Bole Rwanda Street, Behind Rwanda Embassy</p>
+                  <h3>{t("Our Address")}</h3>
+                  <p>{t("Bole Rwanda Street, Behind Rwanda Embassy")}</p>
                 </div>
               </div>
               <div className="col-md-6">
                 <div className="info-box mt-4">
                   <i className="bx bx-envelope"></i>
-                  <h3>Email Us</h3>
+                  <h3>{t("Email Us")}</h3>
                   <p>
                     info@example.com
                     <br />
@@ -33,7 +36,7 @@ export default function Contact() {
               <div className="col-md-6">
                 <div className="info-box mt-4">
                   <i className="bx bx-phone-call"></i>
-                  <h3>Call Us</h3>
+                  <h3>{t("Call Us")}</h3>
                   <p>
                     +251 589 558 55
                     <br />
@@ -58,7 +61,7 @@ export default function Contact() {
                     name="name"
                     className="form-control"
                     id="name"
-                    placeholder="Your Name"
+                    placeholder={t("Your Name")}
                     required
                   />
                 </div>
@@ -68,7 +71,7 @@ export default function Contact() {
                     className="form-control"
                     name="email"
                     id="email"
-                    placeholder="Your Email"
+                    placeholder={t("Your Email")}
                     required
                   />
                 </div>
@@ -79,7 +82,7 @@ export default function Contact() {
                   className="form-control"
                   name="subject"
                   id="subject"
-                  placeholder="Subject"
+                  placeholder={t("Subject")}
                   required
                 />
               </div>
@@ -88,7 +91,7 @@ export default function Contact() {
                   className="form-control"
                   name="message"
                   rows="5"
-                  placeholder="Message"
+                  placeholder={t("Message")}
                   required
                 ></textarea>
               </div>
@@ -100,7 +103,7 @@ export default function Contact() {
                 </div>
               </div>
               <div className="text-center">
-                <button type="submit">Send Message</button>
+                <button type="submit">{t("Send Message")}</button>
               </div>
             </form>
           </div>

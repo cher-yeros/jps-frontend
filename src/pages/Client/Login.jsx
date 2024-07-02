@@ -69,6 +69,34 @@ export default function Login() {
       }
   };
 
+  const resetPassword = async () => {
+    const isValid = await trigger(["email"]);
+
+    if (isValid)
+      try {
+        const { data } = await loginUser({
+          variables: {
+            input: {
+              email: watch("email"),
+              password: watch("password"),
+            },
+          },
+        });
+
+        dispatch(loginFinished(data?.loginUser));
+
+        if (data?.loginUser?.user?.role === "admin") navigate("/admin");
+        else navigate("/");
+
+        reset();
+        toast.success("You have Successfully logged in!", { autoClose: 500 });
+      } catch (error) {
+        toast.error(error.message, {
+          autoClose: 500,
+        });
+      }
+  };
+
   return (
     <main id="home-main">
       <div class="page-title" data-aos="fade">
@@ -77,8 +105,8 @@ export default function Login() {
             <div class="row d-flex justify-content-center text-center">
               <div class="col-lg-8">
                 <div className="section-title mt-4">
-                  <h2>Sign In</h2>
-                  <p>Sign In</p>
+                  <h2>{t("Sign In")}</h2>
+                  <p>{t("Sign In")}</p>
                 </div>
                 <p class="mb-0"></p>
               </div>
