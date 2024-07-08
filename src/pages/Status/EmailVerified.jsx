@@ -4,7 +4,7 @@ import React from "react";
 import { useLocation, useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { VERIFY_EMAIL } from "../../graphql/user";
-import "./.css";
+import "./status.css";
 export default function EmailVerified() {
   const params = useParams();
   const location = useLocation();
