@@ -2,23 +2,23 @@ import React from "react";
 
 export default function FAQ() {
   return (
-    <section id="faq" class="faq">
-      <div class="container" data-aos="fade-up">
-        <div class="section-title">
+    <section id="faq" className="faq">
+      <div className="container" data-aos="fade-up">
+        <div className="section-title">
           <h2>F.A.Q</h2>
           <p>Frequently Asked Questions</p>
         </div>
 
         <div
-          class="row faq-item d-flex align-items-stretch"
+          className="row faq-item d-flex align-items-stretch"
           data-aos="fade-up"
           data-aos-delay="100"
         >
-          <div class="col-lg-5">
-            <i class="bx bx-help-circle"></i>
+          <div className="col-lg-5">
+            <i className="bx bx-help-circle"></i>
             <h4> 1. What should I expect during a Sunday service?</h4>
           </div>
-          <div class="col-lg-7">
+          <div className="col-lg-7">
             <p>
               Our Sunday services include vibrant worship music, inspiring
               sermons, and a welcoming community. Services typically last about
@@ -31,15 +31,15 @@ export default function FAQ() {
         {/* <!-- End F.A.Q Item--> */}
 
         <div
-          class="row faq-item d-flex align-items-stretch"
+          className="row faq-item d-flex align-items-stretch"
           data-aos="fade-up"
           data-aos-delay="200"
         >
-          <div class="col-lg-5">
-            <i class="bx bx-help-circle"></i>
+          <div className="col-lg-5">
+            <i className="bx bx-help-circle"></i>
             <h4>2. Do I need to dress a certain way to attend?</h4>
           </div>
-          <div class="col-lg-7">
+          <div className="col-lg-7">
             <p>
               No, there is no dress code at our church. We encourage you to come
               as you are, whether that means dressing casually or more formally.
@@ -50,15 +50,15 @@ export default function FAQ() {
         {/* <!-- End F.A.Q Item--> */}
 
         <div
-          class="row faq-item d-flex align-items-stretch"
+          className="row faq-item d-flex align-items-stretch"
           data-aos="fade-up"
           data-aos-delay="300"
         >
-          <div class="col-lg-5">
-            <i class="bx bx-help-circle"></i>
+          <div className="col-lg-5">
+            <i className="bx bx-help-circle"></i>
             <h4>3. Is there a place for my children?</h4>
           </div>
-          <div class="col-lg-7">
+          <div className="col-lg-7">
             <p>
               Absolutely! We offer a variety of programs for children of all
               ages. During our Sunday services, we have a children's ministry
@@ -70,15 +70,15 @@ export default function FAQ() {
         {/* <!-- End F.A.Q Item--> */}
 
         <div
-          class="row faq-item d-flex align-items-stretch"
+          className="row faq-item d-flex align-items-stretch"
           data-aos="fade-up"
           data-aos-delay="400"
         >
-          <div class="col-lg-5">
-            <i class="bx bx-help-circle"></i>
+          <div className="col-lg-5">
+            <i className="bx bx-help-circle"></i>
             <h4>4. How can I get involved in the church?</h4>
           </div>
-          <div class="col-lg-7">
+          <div className="col-lg-7">
             <p>
               There are many ways to get involved at our church. You can join a
               small group, volunteer in one of our ministries, participate in
@@ -91,15 +91,15 @@ export default function FAQ() {
         {/* <!-- End F.A.Q Item--> */}
 
         <div
-          class="row faq-item d-flex align-items-stretch"
+          className="row faq-item d-flex align-items-stretch"
           data-aos="fade-up"
           data-aos-delay="500"
         >
-          <div class="col-lg-5">
-            <i class="bx bx-help-circle"></i>
+          <div className="col-lg-5">
+            <i className="bx bx-help-circle"></i>
             <h4>5. What do you believe?</h4>
           </div>
-          <div class="col-lg-7">
+          <div className="col-lg-7">
             <p>
               We believe in the Trinity: one God in three persons – Father, Son,
               and Holy Spirit. We believe that salvation is a gift from God

@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -10,6 +10,8 @@ export default function HomeNavbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const [navbarOpened, setNavbarOpened] = useState(false);
+
   const { currentUser } = useSelector((state) => state.auth);
 
   const navbars = [
@@ -19,8 +21,8 @@ export default function HomeNavbar() {
       navigated: true,
     },
     {
-      label: "Services",
-      link: "#services",
+      label: "JPS TV",
+      link: "http://localhost:3000#services",
     },
     {
       label: "About Us",
@@ -41,8 +43,8 @@ export default function HomeNavbar() {
       navigated: true,
     },
     {
-      label: "Blog",
-      link: "/blog",
+      label: "Programs",
+      link: "/programs",
       navigated: true,
     },
     {
@@ -53,6 +55,11 @@ export default function HomeNavbar() {
     {
       label: "Partnership",
       link: "/partnership",
+      navigated: true,
+    },
+    {
+      label: "Visitors",
+      link: "/visitors",
       navigated: true,
     },
   ];
@@ -66,12 +73,15 @@ export default function HomeNavbar() {
     <header id="header" className="fixed-top">
       <div className="container d-flex align-items-center justify-content-between">
         <h1 className="logo">
-          <a href="#">JPS Ministry</a>
+          <Link to={"/"}>JPS Ministry</Link>
         </h1>
 
         {/* <!-- <a href="index.html" className="logo"><img src="assets/img/logo.png" alt="" className="img-fluid"></a>--> */}
 
-        <nav id="navbar" className="navbar">
+        <nav
+          id="navbar"
+          className={`navbar ${navbarOpened ? "navbar-mobile" : ""}`}
+        >
           <ul>
             {navbars?.map((navbar) => (
               <li key={navbar.label}>
@@ -109,12 +119,24 @@ export default function HomeNavbar() {
             </li>
 
             <li>
-              <Link className="getstarted scrollto" to={"/partnership"}>
-                Give
+              <Link className="getstarted scrollto" to={"/give"}>
+                {t("Give")}
               </Link>
             </li>
           </ul>
-          <i className="bi bi-list mobile-nav-toggle"></i>
+          <i
+            className={` ${
+              navbarOpened ? "bi bi-x" : "bi bi-list"
+            } mobile-nav-toggle`}
+            // className={"bi mobile-nav-toggle bi-list"}
+            onClick={() => {
+              setNavbarOpened(!navbarOpened);
+              // if (document.getElementById("navbar").has)
+              //   document
+              //     .getElementById("navbar")
+              //     .classList.add("navbar-mobile");
+            }}
+          ></i>
         </nav>
       </div>
     </header>

@@ -1,21 +1,17 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 export default function CallToAction() {
+  const { t } = useTranslation();
+
   return (
-    <section id="cta" class="cta">
-      <div class="container" data-aos="zoom-in">
-        <div class="text-center">
-          <h3>Call To Prayer</h3>
-          <p>
-            As we journey through life, we encounter many joys and challenges.
-            Prayer is a powerful way to connect with God, seek His guidance, and
-            find comfort in His presence. We invite you to join us in a time of
-            dedicated prayer. "Do not be anxious about anything, but in every
-            situation, by prayer and petition, with thanksgiving, present your
-            requests to God." - Philippians 4:6
-          </p>
-          <a class="cta-btn" href="tel:0912345678">
-            Call To Prayer
+    <section id="cta" className="cta">
+      <div className="container" data-aos="zoom-in">
+        <div className="text-center">
+          <h3>{t("Call To Prayer")}</h3>
+          <p>{t("Call To Prayer Body")} </p>
+          <a className="cta-btn" href="tel:0912345678">
+            {t("Call To Prayer")}
           </a>
         </div>
       </div>

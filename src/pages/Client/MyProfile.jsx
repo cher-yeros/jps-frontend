@@ -1,20 +1,17 @@
-import { useQuery } from "@apollo/client";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Visibility } from "@mui/icons-material";
-import { Chip, IconButton } from "@mui/material";
+import { IconButton } from "@mui/material";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import * as Yup from "yup";
 import { CustomTextField } from "../../components/CustomTextField";
-import { GET_USER } from "../../graphql/user";
-import { numberFormat } from "../../utils/misc";
 
 export default function MyProfile() {
   const { currentUser } = useSelector((state) => state.auth);
-  const { data, loading } = useQuery(GET_USER, {
-    variables: { id: currentUser.id },
-  });
+  // const { data, loading } = useQuery(GET_USER, {
+  //   variables: { id: currentUser.id },
+  // });
 
   const {
     control,
@@ -28,30 +25,30 @@ export default function MyProfile() {
   });
 
   return (
-    <main id="home-main" class="home-main px-5">
-      <div class="pagetitle">
+    <main id="home-main" className="home-main px-5">
+      <div className="pagetitle">
         <h1>Profile</h1>
         <nav>
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item">
+          <ol className="breadcrumb">
+            <li className="breadcrumb-item">
               <a href="index.html">Home</a>
             </li>
-            <li class="breadcrumb-item">Users</li>
-            <li class="breadcrumb-item active">Profile</li>
+            <li className="breadcrumb-item">Users</li>
+            <li className="breadcrumb-item active">Profile</li>
           </ol>
         </nav>
       </div>
       {/* <!-- End Page Title --> */}
 
-      <section class="section profile">
-        <div class="row">
-          <div class="col-xl-4">
-            <div class="card">
-              <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+      <section className="section profile">
+        <div className="row">
+          <div className="col-xl-4">
+            <div className="card">
+              <div className="card-body profile-card pt-4 d-flex flex-column align-items-center">
                 <img
                   src={currentUser?.avatar}
                   alt="Profile"
-                  class="rounded-circle"
+                  className="rounded-circle"
                 />
                 <h2>{currentUser?.firstname + " " + currentUser.lastname}</h2>
                 <h3>{currentUser?.role}</h3>
@@ -59,14 +56,14 @@ export default function MyProfile() {
             </div>
           </div>
 
-          <div class="col-xl-8">
-            <div class="card">
-              <div class="card-body pt-3">
+          <div className="col-xl-8">
+            <div className="card">
+              <div className="card-body pt-3">
                 {/* <!-- Bordered Tabs --> */}
-                <ul class="nav nav-tabs nav-tabs-bordered">
-                  <li class="nav-item">
+                <ul className="nav nav-tabs nav-tabs-bordered">
+                  <li className="nav-item">
                     <button
-                      class="nav-link active"
+                      className="nav-link active"
                       data-bs-toggle="tab"
                       data-bs-target="#profile-overview"
                     >
@@ -74,9 +71,9 @@ export default function MyProfile() {
                     </button>
                   </li>
 
-                  <li class="nav-item">
+                  <li className="nav-item">
                     <button
-                      class="nav-link"
+                      className="nav-link"
                       data-bs-toggle="tab"
                       data-bs-target="#profile-change-password"
                     >
@@ -84,84 +81,80 @@ export default function MyProfile() {
                     </button>
                   </li>
                 </ul>
-                <div class="tab-content pt-2">
+                <div className="tab-content pt-2">
                   <div
-                    class="tab-pane fade show active profile-overview"
+                    className="tab-pane fade show active profile-overview"
                     id="profile-overview"
                   >
-                    <h5 class="card-title">About</h5>
-                    <p class="small fst-italic">
+                    <h5 className="card-title">About</h5>
+                    <p className="small fst-italic">
                       {currentUser?.role === "freelance" && currentUser?.bio}
                     </p>
 
-                    <h5 class="card-title">Profile Details</h5>
+                    <h5 className="card-title">Profile Details</h5>
 
-                    <div class="row">
-                      <div class="col-lg-3 col-md-4 label">Full Name</div>
-                      <div class="col-lg-9 col-md-8">
+                    <div className="row">
+                      <div className="col-lg-3 col-md-4 label">Full Name</div>
+                      <div className="col-lg-9 col-md-8">
                         {currentUser?.firstname + " " + currentUser.lastname}
                       </div>
                     </div>
 
-                    <div class="row">
-                      <div class="col-lg-3 col-md-4 label">Phone</div>
-                      <div class="col-lg-9 col-md-8">{currentUser?.phone}</div>
+                    <div className="row">
+                      <div className="col-lg-3 col-md-4 label">Phone</div>
+                      <div className="col-lg-9 col-md-8">
+                        {currentUser?.phone}
+                      </div>
                     </div>
 
-                    <div class="row">
-                      <div class="col-lg-3 col-md-4 label">Email</div>
-                      <div class="col-lg-9 col-md-8">{currentUser?.email}</div>
+                    <div className="row">
+                      <div className="col-lg-3 col-md-4 label">Email</div>
+                      <div className="col-lg-9 col-md-8">
+                        {currentUser?.email}
+                      </div>
                     </div>
 
-                    <div class="row">
-                      <div class="col-lg-3 col-md-4 label">Address</div>
-                      <div class="col-lg-9 col-md-8">
+                    <div className="row">
+                      <div className="col-lg-3 col-md-4 label">Address</div>
+                      <div className="col-lg-9 col-md-8">
                         {currentUser?.address}
                       </div>
                     </div>
 
-                    <div class="row">
-                      <div class="col-lg-3 col-md-4 label">Gender</div>
-                      <div class="col-lg-9 col-md-8">{currentUser?.gender}</div>
+                    <div className="row">
+                      <div className="col-lg-3 col-md-4 label">Gender</div>
+                      <div className="col-lg-9 col-md-8">
+                        {currentUser?.gender}
+                      </div>
                     </div>
 
-                    <div class="row">
-                      <div class="col-lg-3 col-md-4 label">Portfolio</div>
-                      <div class="col-lg-9 col-md-8">
+                    <div className="row">
+                      <div className="col-lg-3 col-md-4 label">Portfolio</div>
+                      <div className="col-lg-9 col-md-8">
                         {currentUser?.portfolio_dir}
                       </div>
                     </div>
 
-                    <div class="row">
-                      <div class="col-lg-3 col-md-4 label">Skills</div>
-                      <div class="col-lg-9 col-md-8">
-                        {loading
-                          ? ""
-                          : data?.user?.skills?.map((s) => (
-                              <Chip
-                                size="small"
-                                color="success"
-                                label={s?.name}
-                              />
-                            ))}{" "}
-                      </div>
+                    <div className="row">
+                      <div className="col-lg-3 col-md-4 label">Skills</div>
+                      <div className="col-lg-9 col-md-8"></div>
                     </div>
 
-                    <div class="row">
-                      <div class="col-lg-3 col-md-6 label">User Balance</div>
-                      <div class="col-lg-9 col-md-6">
-                        {loading
-                          ? ""
-                          : numberFormat(data?.user?.balance?.balance) +
-                            "ETB"}{" "}
-                      </div>{" "}
+                    <div className="row">
+                      <div className="col-lg-3 col-md-6 label">
+                        User Balance
+                      </div>
+                      <div className="col-lg-9 col-md-6"></div>{" "}
                     </div>
                   </div>
 
-                  <div class="tab-pane fade pt-3" id="profile-change-password">
+                  <div
+                    className="tab-pane fade pt-3"
+                    id="profile-change-password"
+                  >
                     {/* <!-- Change Password Form --> */}
                     <form>
-                      <div class="row mb-3">
+                      <div className="row mb-3">
                         <CustomTextField
                           control={control}
                           name={"current_password"}
@@ -203,8 +196,8 @@ export default function MyProfile() {
                         />
                       </div>
 
-                      <div class="text-center">
-                        <button type="submit" class="btn btn-primary">
+                      <div className="text-center">
+                        <button type="submit" className="btn btn-primary">
                           Change Password
                         </button>
                       </div>

@@ -1,17 +1,14 @@
 import React from "react";
-import Hero from "./Hero";
+import HomeFooter from "../../../Layout/HomeFooter";
 import AboutUs from "./AboutUs";
-import Counts from "./Counts";
-import WhyUs from "./WhyUs";
-import Services from "./Services";
-import Testimonials from "./Testimonials";
 import CallToAction from "./CallToAction";
+import Contact from "./Contact";
+import FAQ from "./FAQ";
+import Hero from "./Hero";
 import Portfolio from "./Portfolio";
 import Team from "./Team";
-import Pricing from "./Pricing";
-import FAQ from "./FAQ";
-import Contact from "./Contact";
-import HomeFooter from "../../../Layout/HomeFooter";
+import Testimonials from "./Testimonials";
+import WhyUs from "./WhyUs";
 
 export default function Home() {
   return (

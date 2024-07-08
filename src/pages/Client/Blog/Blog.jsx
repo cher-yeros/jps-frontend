@@ -1,27 +1,23 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 export default function Blog() {
+  const { t } = useTranslation();
+
   return (
     <main id="home-main">
-      <div class="page-title" data-aos="fade">
-        <div class="heading">
-          <div class="container">
-            <div class="row d-flex justify-content-center text-center">
-              <div class="col-lg-8">
+      <div className="page-title" data-aos="fade">
+        <div className="heading">
+          <div className="container">
+            <div className="row d-flex justify-content-center text-center">
+              <div className="col-lg-8">
                 <div className="section-title mt-4">
-                  <h2>Blog</h2>
-                  <p>Check our Blog</p>
+                  <h2>{t("Programs")}</h2>
+                  <p>{t("Check our Programs")}</p>
                 </div>
-                <p class="mb-0">
-                  Welcome to our gallery! Here, we capture the heart and soul of
-                  our church community through moments of worship, fellowship,
-                  and service. From joyful celebrations to heartfelt outreach,
-                  these images tell the story of our faith journey together. We
-                  hope they inspire and uplift you as much as they do us.
-                  Explore and experience the vibrant life of JPS Church.
-                </p>
-                {/* <a href="contact.html" class="cta-btn">
+                <p className="mb-0">{t("Programs Body")}</p>
+                {/* <a href="contact.html" className="cta-btn">
                   Available for Hire
                   <br />
                 </a> */}
@@ -30,223 +26,74 @@ export default function Blog() {
           </div>
         </div>
       </div>
-      <section id="gallery" class="section gallery news-grid grid">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-4">
-              <div class="card-box-b card-shadow news-box">
-                <div class="img-box-b">
-                  <img
-                    src="assets/img/post-1.jpg"
-                    alt=""
-                    class="img-b img-fluid"
-                  />
-                </div>
-                <div class="card-overlay">
-                  <div class="card-header-b">
-                    <div class="card-category-b">
-                      <a href="#" class="category-b">
-                        Travel
-                      </a>
-                    </div>
-                    <div class="card-title-b">
-                      <h2 class="title-2">
-                        <Link to="jesus-christ-loves-you">
-                          Travel is comming <br />
-                          new
-                        </Link>
-                      </h2>
-                    </div>
-                    <div class="card-date">
-                      <span class="date-b">18 Sep. 2017</span>
-                    </div>
+      <section
+        id="gallery"
+        className="section gallery news-grid grid"
+        data-aos="fade-up"
+        data-aos-delay="100"
+      >
+        <div className="container">
+          <div className="row">
+            {[...Array(9).keys()].map((n) => (
+              <div className="col-md-4" key={n}>
+                <div className="card-box-b card-shadow news-box">
+                  <div className="img-box-b">
+                    <img
+                      src={`assets/img/gallery/gallery (${n + 1}).jpg`}
+                      alt=""
+                      className="img-b img-fluid"
+                    />
                   </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card-box-b card-shadow news-box">
-                <div class="img-box-b">
-                  <img
-                    src="assets/img/post-2.jpg"
-                    alt=""
-                    class="img-b img-fluid"
-                  />
-                </div>
-                <div class="card-overlay">
-                  <div class="card-header-b">
-                    <div class="card-category-b">
-                      <a href="blog-single.html" class="category-b">
-                        Travel
-                      </a>
-                    </div>
-                    <div class="card-title-b">
-                      <h2 class="title-2">
-                        <a href="blog-single.html">
-                          Travel is comming <br />
-                          new
+                  <div className="card-overlay">
+                    <div className="card-header-b">
+                      <div className="card-category-b">
+                        <a href="#" className="category-b">
+                          {t("Sunday")}
                         </a>
-                      </h2>
-                    </div>
-                    <div class="card-date">
-                      <span class="date-b">18 Sep. 2017</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card-box-b card-shadow news-box">
-                <div class="img-box-b">
-                  <img
-                    src="assets/img/post-3.jpg"
-                    alt=""
-                    class="img-b img-fluid"
-                  />
-                </div>
-                <div class="card-overlay">
-                  <div class="card-header-b">
-                    <div class="card-category-b">
-                      <a href="#" class="category-b">
-                        Travel
-                      </a>
-                    </div>
-                    <div class="card-title-b">
-                      <h2 class="title-2">
-                        <a href="blog-single.html">
-                          Travel is comming <br />
-                          new
-                        </a>
-                      </h2>
-                    </div>
-                    <div class="card-date">
-                      <span class="date-b">18 Sep. 2017</span>
+                      </div>
+                      <div className="card-title-b">
+                        <h2 className="title-2">
+                          <Link to="jesus-christ-loves-you">
+                            {t("Holy Spirit Movement")}
+                          </Link>
+                        </h2>
+                      </div>
+                      <div className="card-date">
+                        <span className="date-b">18 Sep. 2017</span>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card-box-b card-shadow news-box">
-                <div class="img-box-b">
-                  <img
-                    src="assets/img/post-4.jpg"
-                    alt=""
-                    class="img-b img-fluid"
-                  />
-                </div>
-                <div class="card-overlay">
-                  <div class="card-header-b">
-                    <div class="card-category-b">
-                      <a href="#" class="category-b">
-                        Travel
-                      </a>
-                    </div>
-                    <div class="card-title-b">
-                      <h2 class="title-2">
-                        <a href="blog-single.html">
-                          Travel is comming <br />
-                          new
-                        </a>
-                      </h2>
-                    </div>
-                    <div class="card-date">
-                      <span class="date-b">18 Sep. 2017</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card-box-b card-shadow news-box">
-                <div class="img-box-b">
-                  <img
-                    src="assets/img/post-5.jpg"
-                    alt=""
-                    class="img-b img-fluid"
-                  />
-                </div>
-                <div class="card-overlay">
-                  <div class="card-header-b">
-                    <div class="card-category-b">
-                      <a href="#" class="category-b">
-                        Travel
-                      </a>
-                    </div>
-                    <div class="card-title-b">
-                      <h2 class="title-2">
-                        <a href="blog-single.html">
-                          Travel is comming <br />
-                          new
-                        </a>
-                      </h2>
-                    </div>
-                    <div class="card-date">
-                      <span class="date-b">18 Sep. 2017</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card-box-b card-shadow news-box">
-                <div class="img-box-b">
-                  <img
-                    src="assets/img/post-6.jpg"
-                    alt=""
-                    class="img-b img-fluid"
-                  />
-                </div>
-                <div class="card-overlay">
-                  <div class="card-header-b">
-                    <div class="card-category-b">
-                      <a href="#" class="category-b">
-                        Travel
-                      </a>
-                    </div>
-                    <div class="card-title-b">
-                      <h2 class="title-2">
-                        <a href="blog-single.html">
-                          Travel is comming <br />
-                          new
-                        </a>
-                      </h2>
-                    </div>
-                    <div class="card-date">
-                      <span class="date-b">18 Sep. 2017</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
-          <div class="row">
-            <div class="col-sm-12">
-              <nav class="pagination-a">
-                <ul class="pagination justify-content-end">
-                  <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1">
-                      <span class="bi bi-chevron-left"></span>
+          <div className="row">
+            <div className="col-sm-12">
+              <nav className="pagination-a">
+                <ul className="pagination justify-content-end">
+                  <li className="page-item disabled">
+                    <a className="page-link" href="#" tabindex="-1">
+                      <span className="bi bi-chevron-left"></span>
                     </a>
                   </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">
+                  <li className="page-item">
+                    <a className="page-link" href="#">
                       1
                     </a>
                   </li>
-                  <li class="page-item active">
-                    <a class="page-link" href="#">
+                  <li className="page-item active">
+                    <a className="page-link" href="#">
                       2
                     </a>
                   </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">
+                  <li className="page-item">
+                    <a className="page-link" href="#">
                       3
                     </a>
                   </li>
-                  <li class="page-item next">
-                    <a class="page-link" href="#">
-                      <span class="bi bi-chevron-right"></span>
+                  <li className="page-item next">
+                    <a className="page-link" href="#">
+                      <span className="bi bi-chevron-right"></span>
                     </a>
                   </li>
                 </ul>

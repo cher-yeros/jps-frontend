@@ -3,17 +3,17 @@ import React from "react";
 export default function SingleBlog() {
   return (
     <main id="home-main">
-      <div class="page-title" data-aos="fade">
-        <div class="heading">
-          <div class="container">
-            <div class="row d-flex justify-content-center text-center">
-              <div class="col-lg-8">
+      <div className="page-title" data-aos="fade">
+        <div className="heading">
+          <div className="container">
+            <div className="row d-flex justify-content-center text-center">
+              <div className="col-lg-8">
                 <div className="section-title mt-4">
-                  <h2>Blog</h2>
+                  <h2>Programs</h2>
                   <p>Embracing Grace: A Journey of Forgiveness</p>
                 </div>
-                <p class="mb-0"></p>
-                {/* <a href="contact.html" class="cta-btn">
+                <p className="mb-0"></p>
+                {/* <a href="contact.html" className="cta-btn">
                   Available for Hire
                   <br />
                 </a> */}
@@ -23,32 +23,36 @@ export default function SingleBlog() {
         </div>
       </div>
 
-      <section class="news-single nav-arrow-b">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="news-img-box">
-                <img src="//assets/img/slide-3.jpg" alt="" class="img-fluid" />
+      <section className="news-single nav-arrow-b">
+        <div className="container">
+          <div className="row">
+            <div className="col-sm-12">
+              <div className="news-img-box d-flex justify-content-center">
+                <img
+                  src="/assets/img/gallery/gallery (3).jpg"
+                  alt=""
+                  className="img-fluid"
+                />
               </div>
             </div>
-            <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
-              <div class="post-information">
-                <ul class="list-inline text-center color-a">
-                  <li class="list-inline-item mr-2">
+            <div className="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+              <div className="post-information">
+                <ul className="list-inline text-center color-a">
+                  <li className="list-inline-item mr-2">
                     <strong>Author: </strong>
-                    <span class="color-text-a">Morgan Jimenez</span>
+                    <span className="color-text-a">Morgan Jimenez</span>
                   </li>
-                  <li class="list-inline-item mr-2">
+                  <li className="list-inline-item mr-2">
                     <strong>Category: </strong>
-                    <span class="color-text-a">Travel</span>
+                    <span className="color-text-a">Travel</span>
                   </li>
-                  <li class="list-inline-item">
+                  <li className="list-inline-item">
                     <strong>Date: </strong>
-                    <span class="color-text-a">19 Apr. 2017</span>
+                    <span className="color-text-a">19 Apr. 2017</span>
                   </li>
                 </ul>
               </div>
-              <div class="post-content color-text-a">
+              <div className="post-content color-text-a">
                 <p className="post-intro">
                   In the hustle and bustle of daily life, it's easy to get
                   caught up in our own challenges and grievances. But as
@@ -97,60 +101,60 @@ export default function SingleBlog() {
                 compassion, and a steadfast commitment to following Christ's
                 example. Together, let's cultivate a community where grace
                 abounds and forgiveness transforms hearts.
-                <blockquote class="blockquote">
-                  <p class="mb-4">
+                <blockquote className="blockquote">
+                  <p className="mb-4">
                     "Be kind and compassionate to one another, forgiving each
                     other, just as in Christ God forgave you."
                   </p>
-                  <footer class="blockquote-footer">
+                  <footer className="blockquote-footer">
                     <strong> Ephesians 4:32 (NIV): </strong>
                     <cite title="Source Title"></cite>
                   </footer>
                 </blockquote>
               </div>
 
-              <div class="post-footer">
-                <div class="post-share">
+              <div className="post-footer">
+                <div className="post-share">
                   <span>Share: </span>
-                  <ul class="list-inline socials">
-                    <li class="list-inline-item">
+                  <ul className="list-inline socials">
+                    <li className="list-inline-item">
                       <a href="#">
-                        <i class="bi bi-facebook" aria-hidden="true"></i>
+                        <i className="bi bi-facebook" aria-hidden="true"></i>
                       </a>
                     </li>
-                    <li class="list-inline-item">
+                    <li className="list-inline-item">
                       <a href="#">
-                        <i class="bi bi-twitter" aria-hidden="true"></i>
+                        <i className="bi bi-twitter" aria-hidden="true"></i>
                       </a>
                     </li>
-                    <li class="list-inline-item">
+                    <li className="list-inline-item">
                       <a href="#">
-                        <i class="bi bi-instagram" aria-hidden="true"></i>
+                        <i className="bi bi-instagram" aria-hidden="true"></i>
                       </a>
                     </li>
-                    <li class="list-inline-item">
+                    <li className="list-inline-item">
                       <a href="#">
-                        <i class="bi bi-linkedin" aria-hidden="true"></i>
+                        <i className="bi bi-linkedin" aria-hidden="true"></i>
                       </a>
                     </li>
                   </ul>
                 </div>
               </div>
             </div>
-            <div class="col-md-10 offset-md-1 col-lg-10 offset-lg-1">
-              <div class="title-box-d">
-                <h3 class="title-d">Comments (4)</h3>
+            <div className="col-md-10 offset-md-1 col-lg-10 offset-lg-1">
+              <div className="title-box-d">
+                <h3 className="title-d">Comments (4)</h3>
               </div>
-              <div class="box-comments">
-                <ul class="list-comments">
+              <div className="box-comments">
+                <ul className="list-comments">
                   <li>
-                    <div class="comment-avatar">
+                    <div className="comment-avatar">
                       <img src="/assets/img/author-2.jpg" alt="" />
                     </div>
-                    <div class="comment-details">
-                      <h4 class="comment-author">Emma Stone</h4>
+                    <div className="comment-details">
+                      <h4 className="comment-author">Emma Stone</h4>
                       <span>18 Sep 2017</span>
-                      <p class="comment-description">
+                      <p className="comment-description">
                         Ephesians 4:32 is such a powerful reminder of the
                         importance of forgiveness in our Christian walk. It
                         challenges me to extend grace to others just as God has
@@ -159,14 +163,14 @@ export default function SingleBlog() {
                       <a href="3">Reply</a>
                     </div>
                   </li>
-                  <li class="comment-children">
-                    <div class="comment-avatar">
+                  <li className="comment-children">
+                    <div className="comment-avatar">
                       <img src="/assets/img/author-1.jpg" alt="" />
                     </div>
-                    <div class="comment-details">
-                      <h4 class="comment-author">Oliver Colmenares</h4>
+                    <div className="comment-details">
+                      <h4 className="comment-author">Oliver Colmenares</h4>
                       <span>18 Sep 2017</span>
-                      <p class="comment-description">
+                      <p className="comment-description">
                         "I've been struggling with forgiving someone who hurt me
                         deeply. This verse encourages me to pray for the
                         strength to forgive as Christ forgave. Thank you for
@@ -176,13 +180,13 @@ export default function SingleBlog() {
                     </div>
                   </li>
                   <li>
-                    <div class="comment-avatar">
+                    <div className="comment-avatar">
                       <img src="/assets/img/author-2.jpg" alt="" />
                     </div>
-                    <div class="comment-details">
-                      <h4 class="comment-author">Emma Stone</h4>
+                    <div className="comment-details">
+                      <h4 className="comment-author">Emma Stone</h4>
                       <span>18 Sep 2017</span>
-                      <p class="comment-description">
+                      <p className="comment-description">
                         This verse has been my anchor during tough times. It
                         reminds me that God's love is unconditional and His
                         forgiveness knows no bounds. Let's strive to mirror His
@@ -193,53 +197,53 @@ export default function SingleBlog() {
                   </li>
                 </ul>
               </div>
-              <div class="form-comments">
-                <div class="title-box-d">
-                  <h3 class="title-d">Leave a Reply</h3>
+              <div className="form-comments">
+                <div className="title-box-d">
+                  <h3 className="title-d">Leave a Reply</h3>
                 </div>
-                <form class="form-a">
-                  <div class="row">
-                    <div class="col-md-6 mb-3">
-                      <div class="form-group">
+                <form className="form-a">
+                  <div className="row">
+                    <div className="col-md-6 mb-3">
+                      <div className="form-group">
                         <label for="inputName">Enter name</label>
                         <input
                           type="text"
-                          class="form-control form-control-lg form-control-a"
+                          className="form-control form-control-lg form-control-a"
                           id="inputName"
                           placeholder="Name *"
                           required
                         />
                       </div>
                     </div>
-                    <div class="col-md-6 mb-3">
-                      <div class="form-group">
+                    <div className="col-md-6 mb-3">
+                      <div className="form-group">
                         <label for="inputEmail1">Enter email</label>
                         <input
                           type="email"
-                          class="form-control form-control-lg form-control-a"
+                          className="form-control form-control-lg form-control-a"
                           id="inputEmail1"
                           placeholder="Email *"
                           required
                         />
                       </div>
                     </div>
-                    <div class="col-md-12 mb-3">
-                      <div class="form-group">
+                    <div className="col-md-12 mb-3">
+                      <div className="form-group">
                         <label for="inputUrl">Enter website</label>
                         <input
                           type="url"
-                          class="form-control form-control-lg form-control-a"
+                          className="form-control form-control-lg form-control-a"
                           id="inputUrl"
                           placeholder="Website"
                         />
                       </div>
                     </div>
-                    <div class="col-md-12 mb-3">
-                      <div class="form-group">
+                    <div className="col-md-12 mb-3">
+                      <div className="form-group">
                         <label for="textMessage">Enter message</label>
                         <textarea
                           id="textMessage"
-                          class="form-control"
+                          className="form-control"
                           placeholder="Comment *"
                           name="message"
                           cols="45"
@@ -248,8 +252,8 @@ export default function SingleBlog() {
                         ></textarea>
                       </div>
                     </div>
-                    <div class="col-md-12">
-                      <button type="submit" class="btn btn-a">
+                    <div className="col-md-12">
+                      <button type="submit" className="btn btn-a">
                         Send Message
                       </button>
                     </div>

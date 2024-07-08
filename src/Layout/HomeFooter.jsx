@@ -1,102 +1,105 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 export default function HomeFooter() {
+  const { t } = useTranslation();
+
   return (
     <footer id="home-footer">
-      <div class="footer-top">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-4 col-md-6">
-              <div class="footer-info">
-                <h3>JPS Ministry</h3>
-                <p class="pb-3">
-                  <em>
-                    a vibrant community dedicated to worship, fellowship, and
-                    service. Our mission is to glorify God through meaningful
-                    worship
-                  </em>
+      <div className="footer-top">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-4 col-md-6">
+              <div className="footer-info">
+                <h3>{t("JPS Ministry")}</h3>
+                <p className="pb-3">
+                  <em></em>
                 </p>
+                {t("JPS Footer Body")}
                 <p>
-                  Bole Rwanda, Addis Ababa, Ethiopia
+                  {t("Bole Rwanda, Addis Ababa, Ethiopia")}
                   <br />
                   <br />
-                  <strong>Phone:</strong> +251 89 55488 55
+                  <strong>{t("Phone")}:</strong> +251 89 55488 55
                   <br />
-                  <strong>Email:</strong> info@example.com
+                  <strong>{t("Email")}:</strong> info@example.com
                   <br />
                 </p>
-                <div class="social-links mt-3">
-                  <a href="#" class="twitter">
-                    <i class="bx bxl-twitter"></i>
+                <div className="social-links mt-3">
+                  <a href="#" className="twitter">
+                    <i className="bx bxl-twitter"></i>
                   </a>
-                  <a href="#" class="facebook">
-                    <i class="bx bxl-facebook"></i>
+                  <a href="#" className="facebook">
+                    <i className="bx bxl-facebook"></i>
                   </a>
-                  <a href="#" class="instagram">
-                    <i class="bx bxl-instagram"></i>
+                  <a href="#" className="instagram">
+                    <i className="bx bxl-instagram"></i>
                   </a>
-                  <a href="#" class="google-plus">
-                    <i class="bx bxl-skype"></i>
+                  <a href="#" className="google-plus">
+                    <i className="bx bxl-skype"></i>
                   </a>
-                  <a href="#" class="linkedin">
-                    <i class="bx bxl-linkedin"></i>
+                  <a href="#" className="linkedin">
+                    <i className="bx bxl-linkedin"></i>
                   </a>
                 </div>
               </div>
             </div>
 
-            <div class="col-lg-2 col-md-6 footer-links">
-              <h4>Useful Links</h4>
+            <div className="col-lg-2 col-md-6 footer-links">
+              <h4>{t("Useful Links")}</h4>
               <ul>
                 <li>
-                  <i class="bx bx-chevron-right"></i> <a href="#">Home</a>
+                  <i className="bx bx-chevron-right"></i>{" "}
+                  <a href="#">{t("Home")}</a>
                 </li>
                 <li>
-                  <i class="bx bx-chevron-right"></i> <a href="#">About us</a>
+                  <i className="bx bx-chevron-right"></i>{" "}
+                  <a href="#">{t("About us")}</a>
                 </li>
                 <li>
-                  <i class="bx bx-chevron-right"></i> <a href="#">Services</a>
+                  <i className="bx bx-chevron-right"></i>{" "}
+                  <a href="#">{t("Services")}</a>
                 </li>
                 <li>
-                  <i class="bx bx-chevron-right"></i>
-                  <a href="#">Testimonies</a>
+                  <i className="bx bx-chevron-right"></i>
+                  <a href="#">{t("Testimonies")}</a>
                 </li>
                 <li>
-                  <i class="bx bx-chevron-right"></i>
-                  <a href="#">Call to Prayer</a>
+                  <i className="bx bx-chevron-right"></i>
+                  <a href="#">{t("Call to Prayer")}</a>
                 </li>
               </ul>
             </div>
 
-            <div class="col-lg-2 col-md-6 footer-links">
-              <h4>Our Services</h4>
+            <div className="col-lg-2 col-md-6 footer-links">
+              <h4>{t("Our Services")}</h4>
               <ul>
                 <li>
-                  <i class="bx bx-chevron-right"></i>{" "}
-                  <a href="#">Sunday Worship Services</a>
+                  <i className="bx bx-chevron-right"></i>{" "}
+                  <a href="#">{t("Sunday Worship Services")}</a>
                 </li>
                 <li>
-                  <i class="bx bx-chevron-right"></i>
-                  <a href="#">Midweek Services</a>
+                  <i className="bx bx-chevron-right"></i>
+                  <a href="#">{t("Midweek Services")}</a>
                 </li>
                 <li>
-                  <i class="bx bx-chevron-right"></i>
-                  <a href="#">Special Services</a>
+                  <i className="bx bx-chevron-right"></i>
+                  <a href="#">{t("Special Services")}</a>
                 </li>
                 <li>
-                  <i class="bx bx-chevron-right"></i>{" "}
-                  <a href="#">Youth and Children's Services</a>
+                  <i className="bx bx-chevron-right"></i>{" "}
+                  <a href="#">{t("Youth and Children's Services")}</a>
                 </li>
                 <li>
-                  <i class="bx bx-chevron-right"></i>
-                  <a href="#">Small Group Meetings</a>
+                  <i className="bx bx-chevron-right"></i>
+                  <a href="#">{t("Small Group Meetings")}</a>
                 </li>
               </ul>
             </div>
 
-            <div class="col-lg-4 col-md-6 footer-newsletter">
-              <h4>Our Newsletter</h4>
-              <p>Subscribe to our newsletter</p>
+            <div className="col-lg-4 col-md-6 footer-newsletter">
+              <h4>{t("Our Newsletter")}</h4>
+              <p>{t("Subscribe to our newsletter")}</p>
               <form action="" method="post">
                 <input type="email" name="email" />
                 <input type="submit" value="Subscribe" />
@@ -106,8 +109,8 @@ export default function HomeFooter() {
         </div>
       </div>
 
-      <div class="container">
-        <div class="copyright">
+      <div className="container">
+        <div className="copyright">
           &copy; Copyright{" "}
           <strong>
             <span>JPS Ministry</span>

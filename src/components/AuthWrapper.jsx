@@ -15,13 +15,13 @@ import { createClient } from "graphql-ws";
 
 export const apolloClient = new ApolloClient({
   cache: new InMemoryCache(),
-  link: createHttpLink({
-    uri: "http://localhost:4000/graphql",
-    credentials: "include",
-    headers: (token) => ({
-      authorization: token ? `Bearer ${token}` : "",
-    }),
-  }),
+  // link: createHttpLink({
+  //   uri: "http://localhost:4000/graphql",
+  //   credentials: "include",
+  //   headers: (token) => ({
+  //     authorization: token ? `Bearer ${token}` : "",
+  //   }),
+  // }),
   defaultOptions: {
     watchQuery: {
       fetchPolicy: "no-cache",
@@ -43,7 +43,7 @@ export default function AuthWrapper() {
 
   const wsLink = new GraphQLWsLink(
     createClient({
-      url: "ws://localhost:4000/subscription",
+      url: "ws://localhost:4000/graphql",
       connectionParams: {
         authorization: token ? `Bearer ${token}` : "",
       },

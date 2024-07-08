@@ -1,8 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import Isotope from "isotope-layout";
 import React, { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function Portfolio() {
+  const { t } = useTranslation();
+
   const isotopeInstance = useRef(null);
   const gridElement = useRef(null);
 
@@ -34,14 +37,6 @@ export default function Portfolio() {
     // isotopeInstance.current.arrange({ filter });
 
     setActiveFilter(filter);
-  };
-  const select = (el, all = false) => {
-    el = el.trim();
-    if (all) {
-      return [...document.querySelectorAll(el)];
-    } else {
-      return document.querySelector(el);
-    }
   };
 
   const dataFilters = [
@@ -114,7 +109,7 @@ export default function Portfolio() {
                   }
                   onClick={() => filterItems(filter.dataFilter)}
                 >
-                  {filter.label}
+                  {t(filter.label)}
                 </li>
               ))}
             </ul>
@@ -123,8 +118,8 @@ export default function Portfolio() {
 
         <div
           className="row portfolio-container"
-          data-aos="fade-up"
-          data-aos-delay="200"
+          // data-aos="fade-up"
+          // data-aos-delay="200"
           ref={gridElement}
         >
           {dataFilters.map((filter) =>
