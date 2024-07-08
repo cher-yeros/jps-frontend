@@ -1,6 +1,6 @@
 import React from "react";
 import { useLocation, useParams } from "react-router";
-import "./.css";
+import "./status.css";
 export default function PaymentSuccessful() {
   const params = useParams();
   const location = useLocation();
