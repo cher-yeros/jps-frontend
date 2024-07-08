@@ -31,7 +31,7 @@ function App() {
             <Route path="" element={<Blog />} />
             <Route path=":title" element={<SingleBlog />} />
           </Route>
-          <Route path="/bible-study" element={<Gallery />} />
+          <Route path="/bible-study" element={<div> </div>} />
           <Route path="/partnership" element={<Partnership />} />
           <Route path="/visitors" element={<Visitors />} />
           <Route path="/give" element={<Give />} />
