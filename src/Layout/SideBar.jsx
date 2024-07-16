@@ -1,32 +1,108 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function SideBar() {
   const menus = [
-    { label: "Dashboard", link: "/admin/dashboard", icon: "bi-grid-fill" },
-    { label: "Partners", link: "/admin/clients", icon: "bi-people-fill" },
+    { label: "Dashboard", link: "dashboard", icon: "bi-grid-fill" },
+    { label: "Blog", title: true },
+
+    { label: "Posts", link: "blog/posts", icon: "bi-grid-fill" },
+    { label: "Categories", link: "blog/category", icon: "bi-grid-fill" },
+
+    { label: "Subscription and Users", title: true },
+
+    { label: "Partners", link: "partners", icon: "bi-people-fill" },
+
     {
-      label: "Members",
-      link: "/admin/freelancers",
+      label: "Payments",
+      link: "payments",
       icon: "bi-person-workspace",
     },
-    { label: "Tieths", link: "/admin/jobs", icon: "bi-journal-bookmark" },
+    {
+      label: "Feedbacks",
+      link: "feedbacks",
+      icon: "bi-person-workspace",
+    },
 
-    { label: "Donations", link: "/admin/Skills", icon: "bi-card-checklist" },
+    { label: "Services and Gallery", title: true },
+
+    {
+      label: "Service Categories",
+      link: "service-category",
+      icon: "bi-person-workspace",
+    },
+    {
+      label: "Services",
+      link: "services",
+      icon: "bi-person-workspace",
+    },
+    {
+      label: "Gallery Categories",
+      link: "gallery-category",
+      icon: "bi-person-workspace",
+    },
+    {
+      label: "Gallery",
+      link: "gallery",
+      icon: "bi-person-workspace",
+    },
+
+    { label: "Online Bible Study", title: true },
+
+    {
+      label: "Bible Study Sessions",
+      link: "prophetic-school-sessions",
+      icon: "bi-journal-bookmark",
+    },
+
+    {
+      label: "Bible Study Members",
+      link: "prophetic-school-members",
+      icon: "bi-card-checklist",
+    },
+
+    { label: "Vistors", title: true },
+
+    // {
+    //   label: "Vistors Prayer Schedule",
+    //   link: "visitors-schedules",
+    //   icon: "bi-journal-bookmark",
+    // },
+
+    {
+      label: "Vistors ",
+      link: "visitors-applications",
+      icon: "bi-card-checklist",
+    },
   ];
 
   return (
-    <aside id="sidebar" className="sidebar">
+    <aside
+      id="sidebar"
+      className="sidebar"
+      style={{
+        background: "#2f2f59",
+      }}
+    >
       <ul className="sidebar-nav" id="sidebar-nav">
         <li className="nav-heading">Pages</li>
 
         {menus?.map((menu) =>
-          !menu.subMenus ? (
+          menu?.title ? (
+            <li class="nav-heading">{menu.label}</li>
+          ) : !menu.subMenus ? (
             <li className="nav-item" key={menu.label}>
-              <Link className="nav-link collapsed" to={"/admin" || menu.link}>
+              <NavLink
+                // className="nav-link collapsed"
+                className={({ isActive, isPending }) =>
+                  isActive ? "nav-link collapsed active" : "nav-link collapsed"
+                }
+                to={menu.link}
+                style={{ backgroundColor: "#2f2f59", color: "white" }}
+              >
                 <i className={"bi " + menu.icon}></i>
                 <span>{menu.label}</span>
-              </Link>
+              </NavLink>
             </li>
           ) : (
             <li className="nav-item" key={menu.label}>
@@ -47,10 +123,15 @@ export default function SideBar() {
               >
                 {menu.subMenus.map((subMenu) => (
                   <li key={subMenu.label}>
-                    <Link to={"/admin" || menu.link + subMenu.link}>
+                    <NavLink
+                      className={({ isActive, isPending }) =>
+                        isPending ? " pending" : isActive ? " active" : " "
+                      }
+                      to={menu.link + subMenu.link}
+                    >
                       <i className="bi bi-circle"></i>
                       <span>{subMenu.label}</span>
-                    </Link>
+                    </NavLink>
                   </li>
                 ))}
               </ul>

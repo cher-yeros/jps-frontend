@@ -1,8 +1,12 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { DASHBOARD_STATS } from "../../graphql/admin";
+import { useQuery } from "@apollo/client";
+import { numberFormat } from "../../utils/misc";
+import { Chip } from "@mui/material";
 
 export default function Dashboard() {
-  // const { data, loading } = useQuery(DASHBOARD_STATS);
+  const { data, loading } = useQuery(DASHBOARD_STATS);
 
   return (
     <div className="row">
@@ -12,56 +16,61 @@ export default function Dashboard() {
             <StatisticsCard
               label={"Partners"}
               icon={"bi-person"}
-              // value={loading ? "-" : data?.dashboardStats?.clientsCount}
+              value={loading ? "-" : data?.stats?.partners}
             />
           </div>
           <div className="col-lg-3 col-md-6">
             <StatisticsCard
               label={"Members"}
               icon={"bi-person"}
-              // value={loading ? "-" : data?.dashboardStats?.freelancersCount}
+              value={loading ? "-" : data?.stats?.members}
             />
           </div>
           <div className="col-lg-3 col-md-6">
             <StatisticsCard
-              label={"Bible Study Sessions"}
+              label={"Prophetic School Sessions"}
               icon={"bi-person"}
-              // value={loading ? "-" : data?.dashboardStats?.jobsCount}
+              value={loading ? "-" : data?.stats?.propheticSchoolSessions || 0}
             />
           </div>
           <div className="col-lg-3 col-md-6">
             <StatisticsCard
-              label={"Contracts"}
+              label={"Blogs"}
               icon={"bi-person"}
-              // value={loading ? "-" : data?.dashboardStats?.contractsCount}
-            />
-          </div>
-          <div className="col-lg-4 col-md-6">
-            <StatisticsCard
-              label={"Applications"}
-              icon={"bi-person"}
-              // value={loading ? "-" : data?.dashboardStats?.applicationsCount}
-            />
-          </div>
-          <div className="col-lg-4 col-md-6">
-            <StatisticsCard
-              label={"Transactions"}
-              icon={"bi-person"}
-              // value={loading ? "-" : data?.dashboardStats?.transactionsCount}
-            />
-          </div>
-          <div className="col-lg-4 col-md-6">
-            <StatisticsCard
-              label={"Transactions"}
-              icon={"bi-person"}
-              // value={loading ? "-" : data?.dashboardStats?.transactionsCount}
+              value={loading ? "-" : data?.stats?.blogs}
             />
           </div>
 
-          {/* <DataTable
+          <div className="col-lg-4 col-md-6">
+            <StatisticsCard
+              label={"Visitors"}
+              icon={"bi-person"}
+              value={loading ? "-" : data?.stats?.visitors}
+            />
+          </div>
+          <div className="col-lg-4 col-md-4">
+            <StatisticsCard
+              label={"Foreign Transactions"}
+              icon={"bi-person"}
+              value={
+                loading ? "-" : numberFormat(data?.stats?.foreign_txn) + " USD"
+              }
+            />
+          </div>
+          <div className="col-lg-4 col-md-6">
+            <StatisticsCard
+              label={"Local Transactions"}
+              icon={"bi-person"}
+              value={
+                loading ? "-" : numberFormat(data?.stats?.local_txn) + " ETB"
+              }
+            />
+          </div>
+
+          <DataTable
             loading={loading}
-            recentTransactions={data?.dashboardStats?.recentTransactions}
-          /> */}
+            recentTransactions={data?.stats?.recentTransactions}
+          />
         </div>
       </div>
     </div>
@@ -85,8 +94,9 @@ function DataTable({ loading, recentTransactions }) {
               <tr>
                 <th scope="col">{t("Transaction #")}</th>
                 <th scope="col">{t("From")}</th>
-                <th scope="col">{t("To")}</th>
+                <th scope="col">{t("Payment Method")}</th>
                 <th scope="col">{t("Amount")}</th>
+                <th scope="col">{t("Date")}</th>
                 <th scope="col">{t("Status")}</th>
               </tr>
             </thead>
@@ -97,14 +107,19 @@ function DataTable({ loading, recentTransactions }) {
                 recentTransactions?.map((tx) => (
                   <tr>
                     <th scope="row">
-                      <a href="#">{tx.id}</a>
+                      <a href="#">{tx?.tx_ref}</a>
                     </th>
-                    <td>{tx?.from}</td>
-                    <td>{tx?.to}</td>
+                    <td>{tx?.first_name + " " + tx?.last_name}</td>
+                    <td>{tx?.payment_method}</td>
 
-                    <td>{tx.amount} ETB</td>
                     <td>
-                      <span className="badge bg-success">{tx.status}</span>
+                      {numberFormat(tx.amount) +
+                        " " +
+                        (tx.payment_method === "Paypal" ? "USD" : "ETB")}{" "}
+                    </td>
+                    <td>{new Date(tx?.createdAt).toLocaleDateString()}</td>
+                    <td>
+                      <span className="badge bg-success">{tx?.status}</span>
                     </td>
                   </tr>
                 ))

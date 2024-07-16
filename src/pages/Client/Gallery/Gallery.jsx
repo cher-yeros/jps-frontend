@@ -3,6 +3,8 @@ import "glightbox/dist/css/glightbox.min.css";
 import { t } from "i18next";
 import Isotope from "isotope-layout";
 import React, { useEffect, useRef, useState } from "react";
+import { GET_GALLERY_FOR_USERS } from "../../../graphql/gallery";
+import { useQuery } from "@apollo/client";
 export default function Gallery() {
   useEffect(() => {
     const lightbox = GLightbox({
@@ -22,6 +24,8 @@ export default function Gallery() {
   const gridElement = useRef(null);
 
   const [activeFilter, setActiveFilter] = useState(".category-worship");
+
+  const { data, loading } = useQuery(GET_GALLERY_FOR_USERS);
 
   useEffect(() => {
     // Initialize Isotope
@@ -130,19 +134,26 @@ export default function Gallery() {
       <section id="gallery" className="gallery section portfolio">
         <div className="col-lg-12 d-flex justify-content-center">
           <ul id="portfolio-flters">
-            {dataFilters.map((filter) => (
+            {data?.galleryCategoryForUsers?.map((category) => (
               <li
-                key={filter.label}
+                key={category.title}
                 className={
-                  activeFilter === filter.dataFilter && "filter-active"
+                  activeFilter ===
+                    category?.title?.toLowerCase().replaceAll(" ", "_") &&
+                  "filter-active"
                 }
-                onClick={() => filterItems(filter.dataFilter)}
+                onClick={() =>
+                  filterItems(
+                    category?.title?.toLowerCase().replaceAll(" ", "_")
+                  )
+                }
               >
-                {filter.label}
+                {category.title}
               </li>
             ))}
           </ul>
         </div>
+
         <div
           className="container-fluid"
           data-aos="fade-up"
@@ -150,35 +161,37 @@ export default function Gallery() {
           ref={gridElement}
         >
           <div className="row gy-4 justify-content-center">
-            {[...Array(44).keys()].map((n) => (
-              <div
-                className={
-                  "col-xl-3 col-lg-4 col-md-6 " +
-                  dataFilters[Math.floor(Math.random() * dataFilters.length)]
-                    .category
-                }
-              >
-                <div className="gallery-item h-100">
-                  <img
-                    src={`assets/img/gallery/gallery (${n + 1}).jpg`}
-                    className="img-fluid"
-                    alt=""
-                  />
-                  <div className="gallery-links d-flex align-items-center justify-content-center">
-                    <a
-                      href={`assets/img/gallery/gallery (${n + 1}).jpg`}
-                      title="Gallery 1"
-                      className="glightbox preview-link"
-                    >
-                      <i className="bi bi-arrows-angle-expand"></i>
-                    </a>
-                    {/* <a href="gallery-single.html" className="details-link">
+            {data?.galleryCategoryForUsers.map((category) =>
+              category?.galleries?.map((gallery) =>
+                gallery?.images?.map((image) => (
+                  <div
+                    key={image}
+                    className={
+                      "col-xl-3 col-lg-4 col-md-6 " +
+                      dataFilters[
+                        Math.floor(Math.random() * dataFilters.length)
+                      ].category
+                    }
+                  >
+                    <div className="gallery-item h-100">
+                      <img src={image} className="img-fluid" alt="" />
+                      <div className="gallery-links d-flex align-items-center justify-content-center">
+                        <a
+                          href={image}
+                          title="Gallery 1"
+                          className="glightbox preview-link"
+                        >
+                          <i className="bi bi-arrows-angle-expand"></i>
+                        </a>
+                        {/* <a href="gallery-single.html" className="details-link">
                     <i className="bi bi-link-45deg"></i>
                   </a> */}
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            ))}
+                ))
+              )
+            )}
           </div>
         </div>
       </section>

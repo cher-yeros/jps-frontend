@@ -34,7 +34,10 @@ export default function AuthWrapper() {
   const { token } = useSelector((state) => state.auth);
 
   const httpLink = createHttpLink({
-    uri: "http://localhost:4000/graphql",
+    uri:
+      process.env.NODE_ENV === "production"
+        ? "https://api.jpstvethiopia.com/graphql"
+        : "http://localhost:4000/graphql",
     credentials: "include",
     headers: {
       authorization: token ? `Bearer ${token}` : "",
@@ -43,7 +46,10 @@ export default function AuthWrapper() {
 
   const wsLink = new GraphQLWsLink(
     createClient({
-      url: "ws://localhost:4000/graphql",
+      url:
+        process.env.NODE_ENV === "production"
+          ? "wss://api.jpstvethiopia.com/graphql"
+          : "ws://localhost:4000/graphql",
       connectionParams: {
         authorization: token ? `Bearer ${token}` : "",
       },

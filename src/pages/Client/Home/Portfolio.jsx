@@ -2,6 +2,8 @@
 import Isotope from "isotope-layout";
 import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { GET_SERVICES_FOR_USERS } from "../../../graphql/services";
+import { useQuery } from "@apollo/client";
 
 export default function Portfolio() {
   const { t } = useTranslation();
@@ -9,7 +11,9 @@ export default function Portfolio() {
   const isotopeInstance = useRef(null);
   const gridElement = useRef(null);
 
-  const [activeFilter, setActiveFilter] = useState(".category-worship");
+  const [activeFilter, setActiveFilter] = useState("*");
+
+  const { data, loading } = useQuery(GET_SERVICES_FOR_USERS);
 
   useEffect(() => {
     // Initialize Isotope
@@ -22,7 +26,7 @@ export default function Portfolio() {
     return () => {
       isotopeInstance.current.destroy();
     };
-  }, []);
+  }, [activeFilter]);
 
   useEffect(() => {
     if (isotopeInstance.current) {
@@ -101,15 +105,21 @@ export default function Portfolio() {
         <div className="row" data-aos="fade-up" data-aos-delay="100">
           <div className="col-lg-12 d-flex justify-content-center">
             <ul id="portfolio-flters">
-              {dataFilters.map((filter) => (
+              {data?.serviceCategoryForUsers?.map((category) => (
                 <li
-                  key={filter.label}
+                  key={category.id}
                   className={
-                    activeFilter === filter.dataFilter && "filter-active"
+                    activeFilter ===
+                      category?.title?.toLowerCase().replace(" ", "_") &&
+                    "filter-active"
                   }
-                  onClick={() => filterItems(filter.dataFilter)}
+                  onClick={() =>
+                    filterItems(
+                      category?.title?.toLowerCase().replace(" ", "_")
+                    )
+                  }
                 >
-                  {t(filter.label)}
+                  {t(category.title)}
                 </li>
               ))}
             </ul>
@@ -122,13 +132,13 @@ export default function Portfolio() {
           // data-aos-delay="200"
           ref={gridElement}
         >
-          {dataFilters.map((filter) =>
-            [...Array(6).keys()].map((n) => (
+          {data?.serviceCategoryForUsers?.map((category) =>
+            category?.services?.map((service) => (
               <div
-                key={n}
+                key={service?.id}
                 className={
                   "col-lg-4 col-md-6 portfolio-item filter-app " +
-                  filter.category
+                  category?.title?.toLowerCase().replaceAll(" ", "_")
                 }
                 style={{ height: "14rem" }}
               >
@@ -136,12 +146,15 @@ export default function Portfolio() {
                   title="testimony 1"
                   width={"100%"}
                   height={"100%"}
-                  src="https://www.youtube.com/embed/cpjZyWTwUSs"
+                  src={
+                    "https://www.youtube.com/embed/" +
+                    getYouTubeID(service?.youtube_link)
+                  }
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 ></iframe>
-                <div className="portfolio-info">
-                  <h4>{filter.label}</h4>
+                {/* <div className="portfolio-info">
+                  <h4>{category.title}</h4>
                   <p>App</p>
                   <a
                     href="#"
@@ -158,44 +171,23 @@ export default function Portfolio() {
                   >
                     <i className="bx bx-link"></i>
                   </a>
-                </div>
+                </div> */}
               </div>
             ))
           )}
-
-          {[...Array(6).keys()].map((n) => (
-            <div className={"col-lg-4 col-md-6 portfolio-item filter-app" + ""}>
-              <iframe
-                title="testimony 1"
-                width={"100%"}
-                height={"100%"}
-                src="https://www.youtube.com/embed/cpjZyWTwUSs"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
-              <div className="portfolio-info">
-                <h4>App 1</h4>
-                <p>App</p>
-                <a
-                  href="assets/img/portfolio/portfolio-1.jpg"
-                  data-gallery="portfolioGallery"
-                  className="portfolio-lightbox preview-link"
-                  title="App 1"
-                >
-                  <i className="bx bx-plus"></i>
-                </a>
-                <a
-                  href="portfolio-details.html"
-                  className="details-link"
-                  title="More Details"
-                >
-                  <i className="bx bx-link"></i>
-                </a>
-              </div>
-            </div>
-          ))}
         </div>
       </div>
     </section>
   );
+}
+
+function getYouTubeID(url) {
+  var regExp =
+    /^.*(youtu.be\/|v\/|\/u\/\w\/|embed\/|watch\?v=|\&v=|youtu.be\/|\/embed\/)([^#\&\?]*).*/;
+  var match = url.match(regExp);
+  if (match && match[2].length == 11) {
+    return match[2];
+  } else {
+    return null;
+  }
 }

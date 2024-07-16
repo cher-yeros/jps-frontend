@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { controlSidebar } from "../redux/slices/systemSlice";
 import { Avatar, Chip } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { logoutFinished } from "../redux/slices/authSlice";
 
@@ -12,6 +12,7 @@ export default function Header() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const { sidebar } = useSelector((state) => state.system);
   const { currentUser } = useSelector((state) => state.auth);
@@ -34,19 +35,59 @@ export default function Header() {
   }
 
   return (
-    <header id="header" className="header fixed-top d-flex align-items-center">
+    <header
+      id="header"
+      className="header fixed-top d-flex align-items-center"
+      style={{ background: "#2f2f59", color: "white" }}
+    >
       <div className="d-flex align-items-center justify-content-between">
         <Link to="/admin" className="logo d-flex align-items-center">
           <img src="assets/img/logo.png" alt="" />
-          <span className="d-none d-lg-block pl-4">{t("JPS Ministry")}</span>
+          <span
+            className="d-none d-lg-block pl-4"
+            style={{ color: "white", marginLeft: "1.8rem" }}
+          >
+            {t("JPS TV")}
+          </span>
         </Link>
         <i
+          style={{ color: "white" }}
           className="bi bi-list toggle-sidebar-btn"
           onClick={sidebarController}
         ></i>
       </div>
 
-      <div className="search-bar">
+      <div
+        className="pagetitle"
+        style={{
+          marginBottom: "0",
+          fontSize: "20px",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          paddingTop: "10px",
+          paddingLeft: "15px",
+          color: "white",
+        }}
+      >
+        <h1 style={{ color: "inherit" }}>{t("Dashboard")}</h1>
+        <nav style={{ lineHeight: 1 }}>
+          <ol className="breadcrumb">
+            {pathname?.split("/").map(
+              (path) =>
+                path && (
+                  <li
+                    className="breadcrumb-item active"
+                    style={{ textTransform: "capitalize" }}
+                  >
+                    {path.replaceAll("-", " ")}
+                  </li>
+                )
+            )}
+          </ol>
+        </nav>
+      </div>
+      {/* <div className="search-bar">
         <form
           className="search-form d-flex align-items-center"
           method="POST"
@@ -62,7 +103,7 @@ export default function Header() {
             <i className="bi bi-search"></i>
           </button>
         </form>
-      </div>
+      </div> */}
 
       <nav className="header-nav ms-auto">
         <ul className="d-flex align-items-center">
@@ -84,14 +125,20 @@ export default function Header() {
                 className="rounded-circle"
               /> */}
               <Avatar></Avatar>
-              <span className="d-none d-md-block dropdown-toggle ps-2">
-                Abebe Tilahun
+              <span
+                className="d-none d-md-block dropdown-toggle ps-2"
+                style={{ color: "white" }}
+              >
+                {currentUser?.first_name + " " + currentUser.last_name}
               </span>{" "}
             </a>
 
             <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
               <li className="dropdown-header">
-                <h6> Abebe Tilahun</h6>
+                <h6>
+                  {" "}
+                  {currentUser?.first_name + " " + currentUser.last_name}
+                </h6>
                 <span>
                   <Chip color="success" label={t(currentUser?.role)} />
                 </span>

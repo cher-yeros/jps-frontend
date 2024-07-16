@@ -1,5 +1,21 @@
-import { Autocomplete, MenuItem, TextField } from "@mui/material";
-import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import {
+  Autocomplete,
+  Box,
+  FormControl,
+  FormControlLabel,
+  MenuItem,
+  Radio,
+  RadioGroup,
+  Stack,
+  TextField,
+  Typography,
+  colors,
+} from "@mui/material";
+import {
+  DesktopDatePicker,
+  DesktopTimePicker,
+  LocalizationProvider,
+} from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import React from "react";
@@ -23,7 +39,7 @@ export function CustomTextField({
 
   return (
     <div className="d-flex mt-3" style={{ flex: 1 }}>
-      <div style={{ flex: 12 || tf || 7 }} className="input-group">
+      <Box style={{ flex: 12 || tf || 7 }} className="input-group">
         <Controller
           control={control}
           name={name}
@@ -32,6 +48,7 @@ export function CustomTextField({
               <TextField
                 {...props}
                 {...field}
+                value={field.value || ""}
                 label={t(label)}
                 variant="outlined"
                 fullWidth
@@ -56,7 +73,7 @@ export function CustomTextField({
             );
           }}
         />
-      </div>
+      </Box>
     </div>
   );
 }
@@ -179,17 +196,91 @@ export const CustomDateTimePicker = ({
                   onChange={(newValue) => {
                     onChange(dayjs(newValue).toDate());
                   }}
-                  sx={{
-                    width: "100%",
-                    // "& .MuiFormControl-root": {
-                    //   width: "100%",
-                    //   ...customStyle,
-                    // },
-                    // "& .MuiOutlinedInput-input": {
-                    //   padding: small
-                    //     ? "6px 10px!important"
-                    //     : "8.5px 10px!important",
-                    // },
+                  // textFiel
+                  renderInput={(params) => (
+                    <TextField
+                      fullWidth
+                      error={!!error}
+                      helperText={error?.message}
+                      label={t(label)}
+                      // sx={
+                      //   {
+                      //     "& .MuiFormControl-root": { width: "100%" },
+                      //     "& .MuiOutlinedInput-input": {
+                      //       padding: small
+                      //         ? "6px 10px!important"
+                      //         : "8.5px 10px!important",
+                      //     },
+                      //   }
+                      // small
+                      //   ? {
+                      //       ...datePickerStyle,
+                      //       "& .MuiOutlinedInput-input": {
+                      //         padding: small && "8px 10px",
+                      //         fontSize: small && ".85rem",
+                      //       },
+                      //     }
+                      //   : { ...datePickerStyle })
+                      // }
+                      {...params}
+                    />
+                  )}
+                />
+              </LocalizationProvider>
+            );
+          }}
+        />
+      </div>
+    </div>
+  );
+};
+
+export const CustomTimePicker = ({
+  label,
+  cg,
+  lg,
+  tg,
+  helperText,
+  options,
+  children,
+  value,
+  disabled,
+  // onChange,
+  noLabel,
+  small,
+  endAfterIcon,
+  startBeforeIcon,
+  name,
+  register,
+  setValue,
+  customStyle,
+
+  control,
+  tf,
+  ...otherProps
+}) => {
+  const { t } = useTranslation();
+
+  return (
+    <div className="d-flex mt-3">
+      <div style={{ flex: 12 || tf || 7 }} className="input-group">
+        <Controller
+          name={name}
+          control={control}
+          render={({ field, fieldState: { error } }) => {
+            const { value, onChange, ...other } = field;
+
+            return (
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DesktopTimePicker
+                  {...other}
+                  flex={1}
+                  label={label}
+                  disabled={disabled}
+                  inputFormat="DD/MM/YYYY"
+                  value={dayjs(value)}
+                  onChange={(newValue) => {
+                    onChange(dayjs(newValue).toDate());
                   }}
                   // textFiel
                   renderInput={(params) => (
@@ -225,6 +316,91 @@ export const CustomDateTimePicker = ({
             );
           }}
         />
+      </div>
+    </div>
+  );
+};
+
+export const CustomRadio = ({
+  label,
+  cg,
+  lg,
+  tg,
+  helperText,
+  options,
+  children,
+  value,
+  disabled,
+  // onChange,
+  noLabel,
+  small,
+  endAfterIcon,
+  startBeforeIcon,
+  name,
+  register,
+  setValue,
+  customStyle,
+
+  vertical,
+
+  control,
+  tf,
+  ...otherProps
+}) => {
+  const { t } = useTranslation();
+
+  return (
+    <div className="d-flex mt-3">
+      <div style={{ flex: 12 || tf || 7 }} className="input-group">
+        <FormControl
+          sx={{ flexDirection: !vertical && "row" }}
+          variant="standard"
+          error={true}
+        >
+          <Controller
+            name={name}
+            control={control}
+            render={({ field, fieldState: { error } }) => {
+              const { value, ...other } = field;
+
+              return (
+                <RadioGroup
+                  {...other}
+                  value={value || null}
+                  aria-label="options"
+                  size=""
+                  row
+                  sx={{ alignItems: "center" }}
+                >
+                  {options?.map((option) => (
+                    <Stack key={option.label || option}>
+                      <FormControlLabel
+                        key={option.label || option}
+                        sx={{
+                          // "& .MuiTypography-root": { fontSize: "1.5rem" },
+                          ...otherProps,
+                        }}
+                        label={
+                          <Typography sx={{ color: error && colors.red[500] }}>
+                            {t(option.label || option)}
+                          </Typography>
+                        }
+                        value={option.value || option}
+                        control={
+                          <Radio
+                            size="medium"
+                            sx={{ color: error && colors.red[500] }}
+                            disabled={disabled}
+                          />
+                        }
+                      />
+                    </Stack>
+                  ))}
+                </RadioGroup>
+              );
+            }}
+          />
+        </FormControl>
       </div>
     </div>
   );

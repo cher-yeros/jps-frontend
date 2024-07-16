@@ -7,12 +7,12 @@ import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
 import { CustomTextField } from "../../../components/CustomTextField";
-import { CREATE_PARTNERSHIP } from "../../../graphql/partnership";
+import { CREATE_DONATION } from "../../../graphql/donation";
 
 export default function Give() {
   const { t } = useTranslation();
 
-  const [createPartnership, { loading }] = useMutation(CREATE_PARTNERSHIP);
+  const [createPartnership, { loading }] = useMutation(CREATE_DONATION);
 
   const {
     control,
@@ -35,15 +35,14 @@ export default function Give() {
 
   const onSubmit = async (values) => {
     const isValid = await trigger([
-      "firstname",
-      "lastname",
+      "first_name",
+      "last_name",
       "phone",
       "email",
       "payment_method",
-      "plan",
       "amount",
       "currency",
-      "message",
+      "additional_message",
     ]);
 
     if (isValid)
@@ -51,21 +50,20 @@ export default function Give() {
         const { data } = await createPartnership({
           variables: {
             input: {
-              firstname: watch("firstname"),
-              lastname: watch("lastname"),
+              first_name: watch("first_name"),
+              last_name: watch("last_name"),
               phone: watch("phone"),
               email: watch("email"),
               payment_method: watch("payment_method"),
-              plan: watch("plan"),
               amount: parseFloat(watch("amount")),
               currency: watch("currency"),
-              message: watch("message"),
+              additional_message: watch("additional_message"),
             },
           },
         });
 
-        if (data?.createPartnership?.status === "success") {
-          window.open(data?.createPartnership?.data?.checkout_url, "_blank");
+        if (data?.createDonation?.status === "success") {
+          window.location = data?.createDonation?.data?.checkout_url;
         }
         // reset();
         toast.success("You have Successfully registered for partnership !", {
@@ -101,45 +99,18 @@ export default function Give() {
           <div class="row justify-content-center">
             <div class="col-lg-6">
               <form class="php-email-form">
-                {/* <div class="d-flex align-items-center justify-content-center gap-2 mb-2">
-                  <button className="submit-btn"
-                    type="button"
-                    style={{
-                      flex: 1,
-                      background: currency !== "ETB" && "transparent",
-                      border: "1px solid #ed502e",
-                      color: currency !== "ETB" && "#ed502e",
-                    }}
-                    onClick={() => setValue("currency","ETB")}
-                  >
-                    Local Currency (ETB)
-                  </button>
-                  <button className="submit-btn"
-                    type="button"
-                    style={{
-                      flex: 1,
-                      background: currency !== "USD" && "transparent",
-                      border: "1px solid #ed502e",
-                      color: currency !== "USD" && "#ed502e",
-                    }}
-                    onClick={() => setValue("currency","USD")}
-                  >
-                    Foreign Currency (USD)
-                  </button>
-                </div> */}
-
                 <div class="row">
                   <div class="col-md-6 form-group">
                     <CustomTextField
                       control={control}
-                      name={"firstname"}
+                      name={"first_name"}
                       label={"First Name"}
                     />
                   </div>
                   <div class="col-md-6 form-group mt-3 mt-md-0">
                     <CustomTextField
                       control={control}
-                      name={"lastname"}
+                      name={"last_name"}
                       label={"Last Name"}
                     />
                   </div>
@@ -168,7 +139,7 @@ export default function Give() {
                     name={"payment_method"}
                     select
                     label={"Payment Method"}
-                    options={["Local Currency", "International Card", "Paypal"]}
+                    options={["Local Currency", "Paypal"]}
                   />
                 </div>
                 <Stack direction={"row"} alignItems={"end"} spacing={2}>
@@ -185,7 +156,7 @@ export default function Give() {
                     }
                   />
 
-                  <div class="d-flex align-items-stretch justify-content-center gap-2 mb-2">
+                  <div class="d-flex align-items-stretch justify-content-center gap-2">
                     <button
                       className="submit-btn"
                       type="button"
@@ -209,6 +180,7 @@ export default function Give() {
                           watch("currency") !== "USD" && "transparent",
                         border: "1px solid #ed502e",
                         color: watch("currency") !== "USD" && "#ed502e",
+                        padding: "14px 30px",
                       }}
                       onClick={() => setValue("currency", "USD")}
                     >
@@ -216,23 +188,7 @@ export default function Give() {
                     </button>
                   </div>
                 </Stack>
-                {/* <div class="form-group mt-3 d-flex gap-4">
-                  {types?.map((t) => (
-                    <button
-                      className="submit-btn"
-                      type="button"
-                      style={{
-                        flex: 1,
-                        background: watch("plan") !== t && "transparent",
-                        border: "1px solid #ed502e",
-                        color: watch("plan") !== t && "#ed502e",
-                      }}
-                      onClick={() => setValue("plan", t)}
-                    >
-                      {t}
-                    </button>
-                  ))}
-                </div> */}
+
                 <div class="form-group mt-3">
                   <CustomTextField
                     control={control}
@@ -269,8 +225,8 @@ export default function Give() {
 
 const validator = yupResolver(
   Yup.object().shape({
-    firstname: Yup.string().required("First Name is required!"),
-    lastname: Yup.string().required("Last Name is required!"),
+    first_name: Yup.string().required("First Name is required!"),
+    last_name: Yup.string().required("Last Name is required!"),
     phone: Yup.string().required("Phone is required!"),
     email: Yup.string()
       .email("Enter a Valid Email!")
@@ -278,7 +234,6 @@ const validator = yupResolver(
     payment_method: Yup.string().required("Payment Method is required!"),
     currency: Yup.string().required("Currency is required!"),
     amount: Yup.number().min(0).required("Amount is required!"),
-    plan: Yup.string().required("Plan is required!"),
-    message: Yup.string().notRequired(),
+    additional_message: Yup.string().notRequired(),
   })
 );

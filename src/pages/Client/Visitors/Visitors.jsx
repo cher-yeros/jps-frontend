@@ -63,7 +63,7 @@ export default function Visitors() {
         });
 
         if (data?.createPartnership?.status === "success") {
-          window.open(data?.createPartnership?.data?.checkout_url, "_blank");
+          window.location = data?.createPartnership?.data?.checkout_url;
         }
         // reset();
         toast.success("You have Successfully registered for partnership !", {

@@ -1,6 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Stack, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
@@ -8,9 +8,12 @@ import * as Yup from "yup";
 import { CustomTextField } from "../../../components/CustomTextField";
 import { CREATE_PARTNERSHIP } from "../../../graphql/partnership";
 import { useMutation } from "@apollo/client";
+import { useSelector } from "react-redux";
 
 export default function Partnership() {
   const { t } = useTranslation();
+
+  const { currentUser } = useSelector((state) => state.auth);
 
   const [createPartnership, { loading }] = useMutation(CREATE_PARTNERSHIP);
 
@@ -26,12 +29,25 @@ export default function Partnership() {
     mode: "all",
     resolver: validator,
     defaultValues: {
-      plan: "Monthly",
+      partnership_plan: 1,
       currency: "ETB",
+      partnership_type: "Recurring",
     },
   });
 
-  const types = ["Weekly", "Monthly", "Quarterly", "Annually"];
+  useEffect(() => {
+    setValue("first_name", currentUser?.first_name);
+    setValue("last_name", currentUser?.last_name);
+    setValue("email", currentUser?.email);
+    setValue("phone", currentUser?.phone);
+  }, []);
+
+  const types = [
+    { label: "Monthly", value: "1" },
+    { label: "Quarterly", value: "3" },
+    { label: "Half-Anually", value: "6" },
+    { label: "Anually", value: "12" },
+  ];
 
   const onSubmit = async (values) => {
     const isValid = await trigger([
@@ -40,10 +56,11 @@ export default function Partnership() {
       "phone",
       "email",
       "payment_method",
-      "plan",
+      "partnership_plan",
       "amount",
       "currency",
-      "message",
+      "address",
+      "additional_message",
     ]);
 
     if (isValid)
@@ -51,21 +68,23 @@ export default function Partnership() {
         const { data } = await createPartnership({
           variables: {
             input: {
-              firstname: watch("firstname"),
-              lastname: watch("lastname"),
+              first_name: watch("first_name"),
+              last_name: watch("last_name"),
               phone: watch("phone"),
               email: watch("email"),
               payment_method: watch("payment_method"),
-              plan: watch("plan"),
+              partnership_plan: watch("partnership_plan"),
+              partnership_type: watch("partnership_type"),
               amount: parseFloat(watch("amount")),
               currency: watch("currency"),
-              message: watch("message"),
+              address: watch("address"),
+              additional_message: watch("additional_message"),
             },
           },
         });
 
         if (data?.createPartnership?.status === "success") {
-          window.open(data?.createPartnership?.data?.checkout_url, "_blank");
+          window.location = data?.createPartnership?.data?.checkout_url;
         }
         // reset();
         toast.success("You have Successfully registered for partnership !", {
@@ -101,45 +120,18 @@ export default function Partnership() {
           <div class="row justify-content-center">
             <div class="col-lg-6">
               <form class="php-email-form">
-                {/* <div class="d-flex align-items-center justify-content-center gap-2 mb-2">
-                  <button className="submit-btn"
-                    type="button"
-                    style={{
-                      flex: 1,
-                      background: currency !== "ETB" && "transparent",
-                      border: "1px solid #ed502e",
-                      color: currency !== "ETB" && "#ed502e",
-                    }}
-                    onClick={() => setValue("currency","ETB")}
-                  >
-                    Local Currency (ETB)
-                  </button>
-                  <button className="submit-btn"
-                    type="button"
-                    style={{
-                      flex: 1,
-                      background: currency !== "USD" && "transparent",
-                      border: "1px solid #ed502e",
-                      color: currency !== "USD" && "#ed502e",
-                    }}
-                    onClick={() => setValue("currency","USD")}
-                  >
-                    Foreign Currency (USD)
-                  </button>
-                </div> */}
-
                 <div class="row">
                   <div class="col-md-6 form-group">
                     <CustomTextField
                       control={control}
-                      name={"firstname"}
+                      name={"first_name"}
                       label={"First Name"}
                     />
                   </div>
                   <div class="col-md-6 form-group mt-3 mt-md-0">
                     <CustomTextField
                       control={control}
-                      name={"lastname"}
+                      name={"last_name"}
                       label={"Last Name"}
                     />
                   </div>
@@ -168,7 +160,7 @@ export default function Partnership() {
                     name={"payment_method"}
                     select
                     label={"Payment Method"}
-                    options={["Local Currency", "International Card", "Paypal"]}
+                    options={["Local Currency", "Paypal"]}
                   />
                 </div>
                 <Stack direction={"row"} alignItems={"end"} spacing={2}>
@@ -185,7 +177,7 @@ export default function Partnership() {
                     }
                   />
 
-                  <div class="d-flex align-items-stretch justify-content-center gap-2 mb-2">
+                  <div class="d-flex align-items-stretch justify-content-center gap-2 ">
                     <button
                       className="submit-btn"
                       type="button"
@@ -195,6 +187,7 @@ export default function Partnership() {
                           watch("currency") !== "ETB" && "transparent",
                         border: "1px solid #ed502e",
                         color: watch("currency") !== "ETB" && "#ed502e",
+                        padding: "14px 30px",
                       }}
                       onClick={() => setValue("currency", "ETB")}
                     >
@@ -223,20 +216,31 @@ export default function Partnership() {
                       type="button"
                       style={{
                         flex: 1,
-                        background: watch("plan") !== t && "transparent",
+                        background:
+                          watch("partnership_plan") !== t?.value &&
+                          "transparent",
                         border: "1px solid #ed502e",
-                        color: watch("plan") !== t && "#ed502e",
+                        color:
+                          watch("partnership_plan") !== t?.value && "#ed502e",
                       }}
-                      onClick={() => setValue("plan", t)}
+                      onClick={() => setValue("partnership_plan", t.value)}
                     >
-                      {t}
+                      {t?.label}
                     </button>
                   ))}
+                </div>
+                <div className="form-group mt-3">
+                  <CustomTextField
+                    control={control}
+                    name={"address"}
+                    label={"Address"}
+                    x
+                  />{" "}
                 </div>
                 <div class="form-group mt-3">
                   <CustomTextField
                     control={control}
-                    name={"message"}
+                    name={"additional_message"}
                     label={"Message"}
                     multiline
                     rows={3}
@@ -255,7 +259,7 @@ export default function Partnership() {
                     type="button"
                     onClick={loading ? () => {} : onSubmit}
                   >
-                    {t(loading ? "Loading..." : "Give")}
+                    {t(loading ? "Loading..." : "Register")}
                   </button>
                 </div>
               </form>
@@ -269,16 +273,23 @@ export default function Partnership() {
 
 const validator = yupResolver(
   Yup.object().shape({
-    firstname: Yup.string().required("First Name is required!"),
-    lastname: Yup.string().required("Last Name is required!"),
+    first_name: Yup.string().required("First Name is required!"),
+    last_name: Yup.string().required("Last Name is required!"),
     phone: Yup.string().required("Phone is required!"),
     email: Yup.string()
       .email("Enter a Valid Email!")
       .required("Email is required!"),
-    payment_method: Yup.string().required("Payment Method is required!"),
-    currency: Yup.string().required("Currency is required!"),
+    partnership_type: Yup.string().required("partnership Type is required!"),
+    partnership_plan: Yup.string().when("partnership_type", {
+      is: (value) => value !== "One Time",
+      then: (schema) => schema.required("Partnership Plan is required!"),
+      otherwise: (schema) =>
+        schema.notRequired("partnership Plan is required!"),
+    }),
     amount: Yup.number().min(0).required("Amount is required!"),
-    plan: Yup.string().required("Plan is required!"),
-    message: Yup.string().notRequired(),
+    payment_method: Yup.string().required("Payment Method is required!"),
+    // church_name: Yup.string().required("Church Name is is required!"),
+    address: Yup.string().required("Address is required!"),
+    additional_message: Yup.string().notRequired(),
   })
 );
