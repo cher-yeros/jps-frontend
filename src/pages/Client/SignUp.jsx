@@ -39,8 +39,8 @@ export default function SignUp() {
 
   const onSubmit = async () => {
     const isValid = await trigger([
-      "firstname",
-      "lastname",
+      "first_name",
+      "last_name",
       "phone",
       "email",
       "gender",
@@ -55,8 +55,8 @@ export default function SignUp() {
         await createUser({
           variables: {
             input: {
-              firstname: watch("firstname"),
-              lastname: watch("lastname"),
+              first_name: watch("first_name"),
+              last_name: watch("last_name"),
               phone: watch("phone"),
               email: watch("email"),
               gender: watch("gender"),
@@ -73,6 +73,7 @@ export default function SignUp() {
 
         navigate("/login", { state: { unverified: true } });
       } catch (error) {
+        console.log(error);
         toast.error(error.message, {
           autoClose: 500,
         });
@@ -116,14 +117,14 @@ export default function SignUp() {
                   <div class="col-md-6 form-group">
                     <CustomTextField
                       control={control}
-                      name={"firstname"}
+                      name={"first_name"}
                       label={"First Name"}
                     />
                   </div>
                   <div class="col-md-6 form-group mt-3 mt-md-0">
                     <CustomTextField
                       control={control}
-                      name={"lastname"}
+                      name={"last_name"}
                       label={"Last Name"}
                     />
                   </div>
@@ -239,8 +240,8 @@ export default function SignUp() {
 
 const validator = yupResolver(
   Yup.object().shape({
-    firstname: Yup.string().required("First Name is required!"),
-    lastname: Yup.string().required("Last Name is required!"),
+    first_name: Yup.string().required("First Name is required!"),
+    last_name: Yup.string().required("Last Name is required!"),
     phone: Yup.string().required("Phone is required!"),
     email: Yup.string()
       .email("Enter a Valid Email!")

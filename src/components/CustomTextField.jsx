@@ -203,6 +203,17 @@ export const CustomDateTimePicker = ({
                       error={!!error}
                       helperText={error?.message}
                       label={t(label)}
+                      sx={{
+                        "& .MuiFormControl-root": {
+                          width: "100%!important",
+                        },
+                        "& .MuiTextField-root": {
+                          width: "100%!important",
+                        },
+                        "& .MuiOutlinedInput-root": {
+                          width: "100%!important",
+                        },
+                      }}
                       // sx={
                       //   {
                       //     "& .MuiFormControl-root": { width: "100%" },

@@ -16,7 +16,7 @@ import DataGridWrapper from "../../../components/DataGridWrapper";
 import {
   CREATE_GUEST_HOUSE_PRAYER_SCHEDULE,
   GET_GUEST_HOUSE_PRAYER_SCHEDULES,
-} from "../../../graphql/guest_house";
+} from "../../../graphql/visitor";
 
 export default function GuestHousePrayerSchedules() {
   const { t } = useTranslation();

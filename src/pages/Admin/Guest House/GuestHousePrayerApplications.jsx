@@ -1,10 +1,9 @@
 import { useQuery } from "@apollo/client";
 import { Add, Delete, Edit, Launch } from "@mui/icons-material";
-import { DataGrid } from "@mui/x-data-grid";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import DataGridWrapper from "../../../components/DataGridWrapper";
-import { GET_GUEST_HOUSE_PRAYERS } from "../../../graphql/guest_house";
+import { GET_GUEST_HOUSE_PRAYERS } from "../../../graphql/visitor";
 
 export default function GuestHousePrayerApplications() {
   const { t } = useTranslation();
@@ -53,16 +52,15 @@ export default function GuestHousePrayerApplications() {
       flex: 1,
     },
     {
-      field: "start_date",
-      headerName: "From",
+      field: "date",
+      headerName: "Date",
       flex: 1,
       renderCell: ({ value }) => new Date(value).toLocaleDateString(),
     },
     {
-      field: "end_date",
-      headerName: "To",
-      flex: 1,
-      renderCell: ({ value }) => new Date(value).toLocaleDateString(),
+      field: "address",
+      headerName: "Address",
+      flex: 2,
     },
     {
       field: "request_detail",
@@ -101,7 +99,7 @@ export default function GuestHousePrayerApplications() {
     <DataGridWrapper
       toolbars={toolbars}
       columns={columns}
-      rows={data?.guestHousePrayers || []}
+      rows={data?.Visitors || []}
       loading={loading}
     />
   );

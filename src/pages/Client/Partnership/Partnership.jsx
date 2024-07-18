@@ -29,7 +29,7 @@ export default function Partnership() {
     mode: "all",
     resolver: validator,
     defaultValues: {
-      partnership_plan: 1,
+      partnership_plan: "1",
       currency: "ETB",
       partnership_type: "Recurring",
     },
@@ -163,70 +163,78 @@ export default function Partnership() {
                     options={["Local Currency", "Paypal"]}
                   />
                 </div>
-                <Stack direction={"row"} alignItems={"end"} spacing={2}>
-                  <CustomTextField
-                    control={control}
-                    name={"amount"}
-                    label={"Amount"}
-                    type="number"
-                    flex={1}
-                    endAdornment={
-                      <Typography color={"GrayText"}>
-                        {t(watch("currency"))}
-                      </Typography>
-                    }
-                  />
 
-                  <div class="d-flex align-items-stretch justify-content-center gap-2 ">
-                    <button
-                      className="submit-btn"
-                      type="button"
-                      style={{
-                        flex: 1,
-                        background:
-                          watch("currency") !== "ETB" && "transparent",
-                        border: "1px solid #ed502e",
-                        color: watch("currency") !== "ETB" && "#ed502e",
-                        padding: "14px 30px",
-                      }}
-                      onClick={() => setValue("currency", "ETB")}
-                    >
-                      {t("ETB")}
-                    </button>
-                    <button
-                      className="submit-btn"
-                      type="button"
-                      style={{
-                        flex: 1,
-                        background:
-                          watch("currency") !== "USD" && "transparent",
-                        border: "1px solid #ed502e",
-                        color: watch("currency") !== "USD" && "#ed502e",
-                      }}
-                      onClick={() => setValue("currency", "USD")}
-                    >
-                      {t("USD")}
-                    </button>
+                <div className="row">
+                  <div className="col-sm-12 col-lg-8">
+                    <CustomTextField
+                      control={control}
+                      name={"amount"}
+                      label={"Amount"}
+                      type="number"
+                      flex={1}
+                      endAdornment={
+                        <Typography color={"GrayText"}>
+                          {t(watch("currency"))}
+                        </Typography>
+                      }
+                    />
                   </div>
-                </Stack>
-                <div class="form-group mt-3 d-flex gap-4">
+                  <div className="col-sm-12 col-lg-4 mt-3">
+                    {" "}
+                    <div class="d-flex align-items-stretch justify-content-center gap-2 ">
+                      <button
+                        className="submit-btn"
+                        type="button"
+                        style={{
+                          flex: 1,
+                          background:
+                            watch("currency") !== "ETB" && "transparent",
+                          border: "1px solid #ed502e",
+                          color: watch("currency") !== "ETB" && "#ed502e",
+                          padding: "14px 30px",
+                        }}
+                        onClick={() => setValue("currency", "ETB")}
+                      >
+                        {t("ETB")}
+                      </button>
+                      <button
+                        className="submit-btn"
+                        type="button"
+                        style={{
+                          flex: 1,
+                          background:
+                            watch("currency") !== "USD" && "transparent",
+                          border: "1px solid #ed502e",
+                          color: watch("currency") !== "USD" && "#ed502e",
+                        }}
+                        onClick={() => setValue("currency", "USD")}
+                      >
+                        {t("USD")}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row mt-3 ">
                   {types?.map((t) => (
-                    <button
-                      className="submit-btn"
-                      type="button"
-                      style={{
-                        flex: 1,
-                        background:
-                          watch("partnership_plan") !== t?.value &&
-                          "transparent",
-                        border: "1px solid #ed502e",
-                        color:
-                          watch("partnership_plan") !== t?.value && "#ed502e",
-                      }}
-                      onClick={() => setValue("partnership_plan", t.value)}
-                    >
-                      {t?.label}
-                    </button>
+                    <div className="col-md-6 col-lg-3 pb-1">
+                      <button
+                        className="submit-btn"
+                        type="button"
+                        style={{
+                          width: "100%",
+                          background:
+                            watch("partnership_plan") !== t?.value &&
+                            "transparent",
+                          border: "1px solid #ed502e",
+                          color:
+                            watch("partnership_plan") !== t?.value && "#ed502e",
+                        }}
+                        onClick={() => setValue("partnership_plan", t.value)}
+                      >
+                        {t?.label}
+                      </button>
+                    </div>
                   ))}
                 </div>
                 <div className="form-group mt-3">

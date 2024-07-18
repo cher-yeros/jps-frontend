@@ -29,9 +29,15 @@ export const CREATE_GUEST_HOUSE_PRAYER_SCHEDULE = gql`
   }
 `;
 
-export const CREATE_GUEST_HOUSE_PRAYER = gql`
-  mutation CreateGuestHousePrayer($input: CreateGuestHousePrayerInput!) {
-    createGuestHousePrayer(input: $input)
+export const CREATE_VISITOR = gql`
+  mutation CreateVisitor($input: CreateVisitorInput!) {
+    createVisitor(input: $input) {
+      message
+      status
+      data {
+        checkout_url
+      }
+    }
   }
 `;
 
@@ -66,21 +72,25 @@ export const CAPTURE_GUEST_HOUSE_PRAYER_ORDER = gql`
 `;
 
 export const GET_GUEST_HOUSE_PRAYERS = gql`
-  query GuestHousePrayers {
-    guestHousePrayers {
+  query Visitors {
+    Visitors {
       id
       first_name
       last_name
       email
       phone
-      request_detail
-      include_pickup_from_airport
-      status
-      createdAt
-      updatedAt
 
-      start_date
-      end_date
+      address
+      request_detail
+      # include_pickup_from_airport
+      # status
+      createdAt
+      # updatedAt
+
+      date
+
+      # start_date
+      # end_date
       # schedule {
       #   start_time
       #   end_time

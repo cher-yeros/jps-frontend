@@ -1,9 +1,10 @@
 import { useMutation } from "@apollo/client";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Stack, Typography } from "@mui/material";
-import React from "react";
+import { Typography } from "@mui/material";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
 import { CustomTextField } from "../../../components/CustomTextField";
@@ -11,6 +12,8 @@ import { CREATE_DONATION } from "../../../graphql/donation";
 
 export default function Give() {
   const { t } = useTranslation();
+
+  const { currentUser } = useSelector((state) => state.auth);
 
   const [createPartnership, { loading }] = useMutation(CREATE_DONATION);
 
@@ -31,7 +34,12 @@ export default function Give() {
     },
   });
 
-  const types = ["Weekly", "Monthly", "Quarterly", "Annually"];
+  useEffect(() => {
+    setValue("first_name", currentUser?.first_name);
+    setValue("last_name", currentUser?.last_name);
+    setValue("email", currentUser?.email);
+    setValue("phone", currentUser?.phone);
+  }, []);
 
   const onSubmit = async (values) => {
     const isValid = await trigger([
@@ -142,52 +150,57 @@ export default function Give() {
                     options={["Local Currency", "Paypal"]}
                   />
                 </div>
-                <Stack direction={"row"} alignItems={"end"} spacing={2}>
-                  <CustomTextField
-                    control={control}
-                    name={"amount"}
-                    label={"Amount"}
-                    type="number"
-                    flex={1}
-                    endAdornment={
-                      <Typography color={"GrayText"}>
-                        {t(watch("currency"))}
-                      </Typography>
-                    }
-                  />
 
-                  <div class="d-flex align-items-stretch justify-content-center gap-2">
-                    <button
-                      className="submit-btn"
-                      type="button"
-                      style={{
-                        flex: 1,
-                        background:
-                          watch("currency") !== "ETB" && "transparent",
-                        border: "1px solid #ed502e",
-                        color: watch("currency") !== "ETB" && "#ed502e",
-                      }}
-                      onClick={() => setValue("currency", "ETB")}
-                    >
-                      {t("ETB")}
-                    </button>
-                    <button
-                      className="submit-btn"
-                      type="button"
-                      style={{
-                        flex: 1,
-                        background:
-                          watch("currency") !== "USD" && "transparent",
-                        border: "1px solid #ed502e",
-                        color: watch("currency") !== "USD" && "#ed502e",
-                        padding: "14px 30px",
-                      }}
-                      onClick={() => setValue("currency", "USD")}
-                    >
-                      {t("USD")}
-                    </button>
+                <div className="row">
+                  <div className="col-sm-12 col-lg-8">
+                    <CustomTextField
+                      control={control}
+                      name={"amount"}
+                      label={"Amount"}
+                      type="number"
+                      flex={1}
+                      endAdornment={
+                        <Typography color={"GrayText"}>
+                          {t(watch("currency"))}
+                        </Typography>
+                      }
+                    />
                   </div>
-                </Stack>
+                  <div className="col-sm-12 col-lg-4 mt-3">
+                    {" "}
+                    <div class="d-flex align-items-stretch justify-content-center gap-2 ">
+                      <button
+                        className="submit-btn"
+                        type="button"
+                        style={{
+                          flex: 1,
+                          background:
+                            watch("currency") !== "ETB" && "transparent",
+                          border: "1px solid #ed502e",
+                          color: watch("currency") !== "ETB" && "#ed502e",
+                          padding: "14px 30px",
+                        }}
+                        onClick={() => setValue("currency", "ETB")}
+                      >
+                        {t("ETB")}
+                      </button>
+                      <button
+                        className="submit-btn"
+                        type="button"
+                        style={{
+                          flex: 1,
+                          background:
+                            watch("currency") !== "USD" && "transparent",
+                          border: "1px solid #ed502e",
+                          color: watch("currency") !== "USD" && "#ed502e",
+                        }}
+                        onClick={() => setValue("currency", "USD")}
+                      >
+                        {t("USD")}
+                      </button>
+                    </div>
+                  </div>
+                </div>
 
                 <div class="form-group mt-3">
                   <CustomTextField
