@@ -14,16 +14,16 @@ import {
 } from "../../../components/CustomTextField";
 import DataGridWrapper from "../../../components/DataGridWrapper";
 import {
-  CREATE_GUEST_HOUSE_PRAYER_SCHEDULE,
-  GET_GUEST_HOUSE_PRAYER_SCHEDULES,
+  CREATE_VISITOR_PRAYER_SCHEDULE,
+  GET_VISITOR_PRAYER_SCHEDULES,
 } from "../../../graphql/visitor";
 
-export default function GuestHousePrayerSchedules() {
+export default function VisitorPrayerSchedules() {
   const { t } = useTranslation();
 
   const [open, setOpen] = useState(false);
 
-  const { data, loading, refetch } = useQuery(GET_GUEST_HOUSE_PRAYER_SCHEDULES);
+  const { data, loading, refetch } = useQuery(GET_VISITOR_PRAYER_SCHEDULES);
 
   const actions = [
     {
@@ -128,7 +128,7 @@ export default function GuestHousePrayerSchedules() {
 
 function AddSchedule({ open, onClose, title, refetch }) {
   const [createRecord, { loading }] = useMutation(
-    CREATE_GUEST_HOUSE_PRAYER_SCHEDULE
+    CREATE_VISITOR_PRAYER_SCHEDULE
   );
 
   const {

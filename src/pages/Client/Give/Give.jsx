@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import * as Yup from "yup";
 import { CustomTextField } from "../../../components/CustomTextField";
 import { CREATE_DONATION } from "../../../graphql/donation";
+import GivePaypalButton from "./GivePaypalButton";
 
 export default function Give() {
   const { t } = useTranslation();
@@ -219,13 +220,20 @@ export default function Give() {
                   </div>
                 </div>
                 <div class="text-center">
-                  <button
-                    className="submit-btn"
-                    type="button"
-                    onClick={loading ? () => {} : onSubmit}
-                  >
-                    {t(loading ? "Loading..." : "Give")}
-                  </button>
+                  {" "}
+                  {watch("payment_method") === "Paypal" ? (
+                    <GivePaypalButton watch={watch} trigger={trigger} />
+                  ) : (
+                    <div className="d-flex justify-content-center">
+                      <button
+                        className="submit-btn"
+                        type="button"
+                        onClick={loading ? () => {} : onSubmit}
+                      >
+                        {t(loading ? "Loading..." : "Give")}
+                      </button>
+                    </div>
+                  )}
                 </div>
               </form>
             </div>

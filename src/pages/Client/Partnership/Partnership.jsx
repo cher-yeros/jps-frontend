@@ -1,14 +1,15 @@
+import { useMutation } from "@apollo/client";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Stack, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
 import { CustomTextField } from "../../../components/CustomTextField";
 import { CREATE_PARTNERSHIP } from "../../../graphql/partnership";
-import { useMutation } from "@apollo/client";
-import { useSelector } from "react-redux";
+import OneTimePaypalButton from "./OneTimePaypalButton";
 
 export default function Partnership() {
   const { t } = useTranslation();
@@ -262,13 +263,25 @@ export default function Partnership() {
                   </div>
                 </div>
                 <div class="text-center">
-                  <button
-                    className="submit-btn"
-                    type="button"
-                    onClick={loading ? () => {} : onSubmit}
-                  >
-                    {t(loading ? "Loading..." : "Register")}
-                  </button>
+                  {watch("payment_method") === "Paypal" ? (
+                    // watch("partnership_type") === "One Time" ? (
+
+                    // ) : (
+                    //   <RecurringPaypalButton watch={watch} trigger={trigger} />
+                    // )
+
+                    <OneTimePaypalButton watch={watch} trigger={trigger} />
+                  ) : (
+                    <div className="d-flex justify-content-center">
+                      <button
+                        className="submit-btn btn-block"
+                        type="button"
+                        onClick={loading ? () => {} : onSubmit}
+                      >
+                        {t(loading ? "Loading..." : "Register")}
+                      </button>
+                    </div>
+                  )}{" "}
                 </div>
               </form>
             </div>

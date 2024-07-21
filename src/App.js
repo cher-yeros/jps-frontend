@@ -26,11 +26,12 @@ import Partnership from "./pages/Client/Partnership/Partnership";
 import SignUp from "./pages/Client/SignUp";
 import Visitors from "./pages/Client/Visitors/Visitors";
 
+import Partners from "./pages/Admin/Partners";
+import Portfolio from "./pages/Client/Home/Portfolio";
 import PageNotFound from "./pages/Status/404";
 import EmailVerified from "./pages/Status/EmailVerified";
 import PaymentSuccessful from "./pages/Status/PaymentSuccessful";
 import ResetPassword from "./pages/Status/ResetPassword";
-import Partners from "./pages/Admin/Partners";
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/my-profile" element={<MyProfile />} />
+          <Route path="/services" element={<Portfolio />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/programs">
             <Route path="" element={<Blog />} />

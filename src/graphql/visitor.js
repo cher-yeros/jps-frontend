@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
-export const GET_GUEST_HOUSE_PRAYER_SCHEDULES = gql`
-  query GuestHousePrayerSchedules {
+export const GET_VISITOR_PRAYER_SCHEDULES = gql`
+  query VisitorPrayerSchedules {
     guestHousePrayerSchedules {
       id
       date
@@ -19,11 +19,11 @@ export const GET_GUEST_HOUSE_PRAYER_SCHEDULES = gql`
   }
 `;
 
-export const CREATE_GUEST_HOUSE_PRAYER_SCHEDULE = gql`
-  mutation CreateGuestHousePrayerSchedule(
-    $input: CreateGuestHousePrayerScheduleInput!
+export const CREATE_VISITOR_PRAYER_SCHEDULE = gql`
+  mutation CreateVisitorPrayerSchedule(
+    $input: CreateVisitorPrayerScheduleInput!
   ) {
-    createGuestHousePrayerSchedule(input: $input) {
+    createVisitorPrayerSchedule(input: $input) {
       id
     }
   }
@@ -41,8 +41,8 @@ export const CREATE_VISITOR = gql`
   }
 `;
 
-export const GET_GUEST_HOUSE_PRAYER_SCHEDULE_FOR_USER = gql`
-  query GuestHousePrayerScheulesForUsers {
+export const GET_VISITOR_PRAYER_SCHEDULE_FOR_USER = gql`
+  query VisitorPrayerScheulesForUsers {
     guestHousePrayerScheulesForUsers {
       id
       date
@@ -59,19 +59,19 @@ export const GET_GUEST_HOUSE_PRAYER_SCHEDULE_FOR_USER = gql`
   }
 `;
 
-export const CREATE_GUEST_HOUSE_PRAYER_ORDER = gql`
-  mutation CreateGuestHouseOrder($input: CreateGuestHousePrayerInput) {
-    createGuestHouseOrder(input: $input)
+export const CREATE_VISITOR_PRAYER_ORDER = gql`
+  mutation CreateVisitorOrder($input: CreateVisitorInput) {
+    createVisitorOrder(input: $input)
   }
 `;
 
-export const CAPTURE_GUEST_HOUSE_PRAYER_ORDER = gql`
-  mutation CaptureGuestHouseOrder($orderId: String!) {
-    captureGuestHouseOrder(orderID: $orderId)
+export const CAPTURE_VISITOR_PRAYER_ORDER = gql`
+  mutation CaptureVisitorOrder($orderId: String!) {
+    captureVisitorOrder(orderID: $orderId)
   }
 `;
 
-export const GET_GUEST_HOUSE_PRAYERS = gql`
+export const GET_VISITOR_PRAYERS = gql`
   query Visitors {
     Visitors {
       id
@@ -101,22 +101,22 @@ export const GET_GUEST_HOUSE_PRAYERS = gql`
   }
 `;
 
-export const UPDATE_GUEST_HOUSE_PRAYER_SCHEDULE = gql`
-  mutation UpdateGuestHousePrayerSchedule(
-    $input: UpdateGuestHousePrayerScheduleInput!
+export const UPDATE_VISITOR_PRAYER_SCHEDULE = gql`
+  mutation UpdateVisitorPrayerSchedule(
+    $input: UpdateVisitorPrayerScheduleInput!
   ) {
-    updateGuestHousePrayerSchedule(input: $input)
+    updateVisitorPrayerSchedule(input: $input)
   }
 `;
 
-export const DELETE_GUEST_HOUSE_PRAYER_SCHEDULE = gql`
-  mutation DeleteGuestHousePrayerSchedule($id: Int!) {
-    deleteGuestHousePrayerSchedule(id: $id)
+export const DELETE_VISITOR_PRAYER_SCHEDULE = gql`
+  mutation DeleteVisitorPrayerSchedule($id: Int!) {
+    deleteVisitorPrayerSchedule(id: $id)
   }
 `;
 
-export const DELETE_GUEST_HOUSE_PRAYER = gql`
-  mutation DeleteGuestHousePrayer($id: Int!) {
-    deleteGuestHousePrayer(id: $id)
+export const DELETE_VISITOR_PRAYER = gql`
+  mutation DeleteVisitorPrayer($id: Int!) {
+    deleteVisitorPrayer(id: $id)
   }
 `;

@@ -23,7 +23,7 @@ export default function Gallery() {
   const isotopeInstance = useRef(null);
   const gridElement = useRef(null);
 
-  const [activeFilter, setActiveFilter] = useState(".category-worship");
+  const [activeFilter, setActiveFilter] = useState("*");
 
   const { data, loading } = useQuery(GET_GALLERY_FOR_USERS);
 
@@ -35,15 +35,15 @@ export default function Gallery() {
     });
 
     // Cleanup on unmount
-    // return () => {
-    //   isotopeInstance.current.destroy();
-    // };
+    return () => {
+      isotopeInstance.current.destroy();
+    };
   }, [activeFilter]);
 
   useEffect(() => {
     if (isotopeInstance.current) {
-      isotopeInstance?.current?.arrange({ filter: activeFilter });
-      isotopeInstance?.current?.on("arrangeComplete", function () {
+      isotopeInstance.current.arrange({ filter: activeFilter });
+      isotopeInstance.current.on("arrangeComplete", function () {
         window.AOS && window.AOS.refresh(); // Refresh AOS if it's available
       });
     }
@@ -51,7 +51,7 @@ export default function Gallery() {
 
   const filterItems = (filter) => {
     // isotopeInstance.current.arrange({ filter });
-    // console.log(filter);
+
     setActiveFilter(filter);
   };
 
@@ -139,12 +139,12 @@ export default function Gallery() {
                 key={category.title}
                 className={
                   activeFilter ===
-                    category?.title?.toLowerCase().replaceAll(" ", "_") &&
+                    "." + category?.title?.toLowerCase().replaceAll(" ", "_") &&
                   "filter-active"
                 }
                 onClick={() =>
                   filterItems(
-                    category?.title?.toLowerCase().replaceAll(" ", "_")
+                    "." + category?.title?.toLowerCase().replaceAll(" ", "_")
                   )
                 }
               >
@@ -155,45 +155,48 @@ export default function Gallery() {
         </div>
 
         <div
-          className="container-fluid"
+          className="row portfolio-container"
           data-aos="fade-up"
-          data-aos-delay="100"
+          data-aos-delay="200"
           ref={gridElement}
         >
-          <div className="row gy-4 justify-content-center">
-            {data?.galleryCategoryForUsers.map((category) =>
-              category?.galleries?.map((gallery) =>
-                gallery?.images?.map((image) => (
-                  <div
-                    key={image}
-                    className={
-                      "col-xl-3 col-lg-4 col-md-6 " +
-                      dataFilters[
-                        Math.floor(Math.random() * dataFilters.length)
-                      ].category
-                    }
-                  >
-                    <div className="gallery-item h-100">
-                      <img src={image} className="img-fluid" alt="" />
-                      <div className="gallery-links d-flex align-items-center justify-content-center">
-                        <a
-                          href={image}
-                          title="Gallery 1"
-                          className="glightbox preview-link"
-                        >
-                          <i className="bi bi-arrows-angle-expand"></i>
-                        </a>
-                        {/* <a href="gallery-single.html" className="details-link">
+          {/* <div className="row gy-4 justify-content-center row portfolio-container"> */}
+          {data?.galleryCategoryForUsers.map((category) =>
+            category?.galleries?.map((gallery) =>
+              JSON.parse(gallery?.images || {})?.map((image) => (
+                <div
+                  key={image}
+                  className={
+                    "col-lg-3 col-md-6 portfolio-item filter-app " +
+                    category?.title?.toLowerCase().replaceAll(" ", "_")
+                  }
+                >
+                  <div className="gallery-item h-100">
+                    <img
+                      src={image}
+                      className="img-fluid"
+                      alt=""
+                      style={{ width: "100%" }}
+                    />
+                    <div className="gallery-links d-flex align-items-center justify-content-center">
+                      <a
+                        href={image}
+                        title="Gallery 1"
+                        className="glightbox preview-link"
+                      >
+                        <i className="bi bi-arrows-angle-expand"></i>
+                      </a>
+                      {/* <a href="gallery-single.html" className="details-link">
                     <i className="bi bi-link-45deg"></i>
                   </a> */}
-                      </div>
                     </div>
                   </div>
-                ))
-              )
-            )}
-          </div>
+                </div>
+              ))
+            )
+          )}
         </div>
+        {/* </div> */}
       </section>
       {/* <!-- /Gallery Section --> */}
     </main>

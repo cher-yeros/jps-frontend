@@ -12,6 +12,7 @@ import {
   CustomTextField,
 } from "../../../components/CustomTextField";
 import { CREATE_VISITOR } from "../../../graphql/visitor";
+import PaypalButtonVisitor from "./PaypalButtonVisitor";
 
 export default function Visitors() {
   const { t } = useTranslation();
@@ -255,13 +256,19 @@ export default function Visitors() {
                   </div>
                 </div>
                 <div class="text-center">
-                  <button
-                    className="submit-btn"
-                    type="button"
-                    onClick={loading ? () => {} : onSubmit}
-                  >
-                    {t(loading ? "Loading..." : "Register")}
-                  </button>
+                  {watch("payment_method") === "Paypal" ? (
+                    <PaypalButtonVisitor watch={watch} trigger={trigger} />
+                  ) : (
+                    <div className="d-flex justify-content-center">
+                      <button
+                        className="submit-btn"
+                        type="button"
+                        onClick={loading ? () => {} : onSubmit}
+                      >
+                        {t(loading ? "Loading..." : "Register")}
+                      </button>
+                    </div>
+                  )}
                 </div>
               </form>
             </div>

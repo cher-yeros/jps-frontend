@@ -27,21 +27,22 @@ export default function HomeNavbar() {
     },
     {
       label: "JPS TV",
-      link: "http://localhost:3000#services",
+      link: "/services",
+      navigated: true,
     },
     {
       label: "About Us",
       link: "#about",
     },
 
-    {
-      label: "Testimonials",
-      link: "#testimonials",
-    },
-    {
-      label: "Contact",
-      link: "#contact",
-    },
+    // {
+    //   label: "Testimonials",
+    //   link: "#testimonials",
+    // },
+    // {
+    //   label: "Contact",
+    //   link: "#contact",
+    // },
     {
       label: "Gallery",
       link: "/gallery",

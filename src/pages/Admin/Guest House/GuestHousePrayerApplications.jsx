@@ -3,14 +3,14 @@ import { Add, Delete, Edit, Launch } from "@mui/icons-material";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import DataGridWrapper from "../../../components/DataGridWrapper";
-import { GET_GUEST_HOUSE_PRAYERS } from "../../../graphql/visitor";
+import { GET_VISITOR_PRAYERS } from "../../../graphql/visitor";
 
-export default function GuestHousePrayerApplications() {
+export default function VisitorPrayerApplications() {
   const { t } = useTranslation();
 
   const [open, setOpen] = useState(false);
 
-  const { data, loading, refetch } = useQuery(GET_GUEST_HOUSE_PRAYERS);
+  const { data, loading, refetch } = useQuery(GET_VISITOR_PRAYERS);
 
   const actions = [
     {

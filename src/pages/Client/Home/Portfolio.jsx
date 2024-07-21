@@ -110,12 +110,12 @@ export default function Portfolio() {
                   key={category.id}
                   className={
                     activeFilter ===
-                      category?.title?.toLowerCase().replace(" ", "_") &&
+                      "." + category?.title?.toLowerCase().replace(" ", "_") &&
                     "filter-active"
                   }
                   onClick={() =>
                     filterItems(
-                      category?.title?.toLowerCase().replace(" ", "_")
+                      "." + category?.title?.toLowerCase().replace(" ", "_")
                     )
                   }
                 >
@@ -128,8 +128,8 @@ export default function Portfolio() {
 
         <div
           className="row portfolio-container"
-          // data-aos="fade-up"
-          // data-aos-delay="200"
+          data-aos="fade-up"
+          data-aos-delay="200"
           ref={gridElement}
         >
           {data?.serviceCategoryForUsers?.map((category) =>
