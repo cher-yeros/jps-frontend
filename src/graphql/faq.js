@@ -39,7 +39,7 @@ export const UPDATE_FAQ = gql`
 `;
 
 export const DELETE_FAQ = gql`
-  mutation DeleteFAQ($deleteFaqId: ID!) {
-    deleteFAQ(id: $deleteFaqId)
+  mutation DeleteFAQ($id: ID!) {
+    deleteFAQ(id: $id)
   }
 `;
