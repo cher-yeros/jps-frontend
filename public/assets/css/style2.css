@@ -1642,6 +1642,18 @@ section {
   background: #ef6445;
 }
 
+.submit-btn {
+  background: #ed502e;
+  border: 0;
+  padding: 10px 30px;
+  border-radius: 4px;
+  color: #fff;
+  transition: 0.4s;
+}
+
+.submit-btn:hover {
+  background: #ef6445;
+}
 .contact .php-email-form .submit-btn {
   background: #ed502e;
   border: 0;

@@ -20,12 +20,33 @@ export default function Home() {
         {/* <Counts /> */}
         <WhyUs />
         {/* <Services /> */}
-        <Testimonials />
+        {/* <Testimonials /> */}
         <CallToAction />
+        <div className="container mt-5">
+          <div className="row">
+            <div className="col-xs-12">
+              <div className="d-flex justify-content-center">
+                <a
+                  href="https://t.me/jpstv"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="getstarted submit-btn"
+                  style={{ color: "white" }}
+                >
+                  Join our telegram channel
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
         {/* <Portfolio /> */}
         <Team />
         {/* <Pricing /> */}
         <FAQ />
+        {/* <div className="contact">
+          <form class="php-email-form"> */}{" "}
+        {/* </form>{" "}
+        </div> */}
         <Contact />
       </main>
 

@@ -19,57 +19,6 @@ export default function HomeNavbar() {
   //   console.log({ navbarOpened });
   // }, [navbarOpened]);
 
-  const navbars = [
-    {
-      label: "Home",
-      link: "/#",
-      navigated: true,
-    },
-    {
-      label: "JPS TV",
-      link: "/services",
-      navigated: true,
-    },
-    {
-      label: "About Us",
-      link: "#about",
-    },
-
-    // {
-    //   label: "Testimonials",
-    //   link: "#testimonials",
-    // },
-    // {
-    //   label: "Contact",
-    //   link: "#contact",
-    // },
-    {
-      label: "Gallery",
-      link: "/gallery",
-      navigated: true,
-    },
-    {
-      label: "Programs",
-      link: "/programs",
-      navigated: true,
-    },
-    {
-      label: "Bible Study",
-      link: "/bible-study",
-      navigated: true,
-    },
-    {
-      label: "Partnership",
-      link: "/partnership",
-      navigated: true,
-    },
-    {
-      label: "Visitors",
-      link: "/visitors",
-      navigated: true,
-    },
-  ];
-
   const logout = () => {
     dispatch(logoutFinished());
     navigate("/");
@@ -213,3 +162,58 @@ export default function HomeNavbar() {
     </header>
   );
 }
+export const navbars = [
+  {
+    label: "Home",
+    link: "/#",
+    navigated: true,
+  },
+  {
+    label: "JPS TV",
+    link: "/services",
+    navigated: true,
+  },
+  {
+    label: "About Us",
+    link: "#about",
+  },
+
+  // {
+  //   label: "Testimonials",
+  //   link: "#testimonials",
+  // },
+  // {
+  //   label: "Contact",
+  //   link: "#contact",
+  // },
+  {
+    label: "Gallery",
+    link: "/gallery",
+    navigated: true,
+  },
+  {
+    label: "Programs",
+    link: "/programs",
+    navigated: true,
+  },
+  // {
+  //   label: "Bible Study",
+  //   link: "/bible-study",
+  //   navigated: true,
+  // },
+  {
+    label: "Prayer Request",
+    link: "/prayer-request",
+    navigated: true,
+  },
+  {
+    label: "Partnership",
+    link: "/partnership",
+    navigated: true,
+  },
+  {
+    label: "Visitors",
+    link: "/visitors",
+    navigated: true,
+  },
+];

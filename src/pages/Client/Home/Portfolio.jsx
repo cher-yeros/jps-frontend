@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { GET_SERVICES_FOR_USERS } from "../../../graphql/services";
 import { useQuery } from "@apollo/client";
+import { Skeleton } from "@mui/material";
 
 export default function Portfolio() {
   const { t } = useTranslation();
@@ -97,9 +98,29 @@ export default function Portfolio() {
   return (
     <section id="services" className="portfolio">
       <div className="container" data-aos="fade-up">
-        <div className="section-title">
+        {/* <div className="section-title mt-4">
           <h2>Services</h2>
           <p>Check our Services</p>
+        </div> */}
+
+        <div className="page-title" data-aos="fade">
+          <div className="heading">
+            <div className="container">
+              <div className="row d-flex justify-content-center text-center">
+                <div className="col-lg-8">
+                  <div className="section-title ">
+                    <h2>{t("Services")}</h2>
+                    <p>{t("Check our Services")}</p>
+                  </div>
+                  <p className="mb-0">{t("Gallery Body")}</p>
+                  {/* <a href="contact.html" className="cta-btn">
+                  Available for Hire
+                  <br />
+                </a> */}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="row" data-aos="fade-up" data-aos-delay="100">
@@ -132,28 +153,42 @@ export default function Portfolio() {
           data-aos-delay="200"
           ref={gridElement}
         >
-          {data?.serviceCategoryForUsers?.map((category) =>
-            category?.services?.map((service) => (
-              <div
-                key={service?.id}
-                className={
-                  "col-lg-4 col-md-6 portfolio-item filter-app " +
-                  category?.title?.toLowerCase().replaceAll(" ", "_")
-                }
-                style={{ height: "14rem" }}
-              >
-                <iframe
-                  title="testimony 1"
-                  width={"100%"}
-                  height={"100%"}
-                  src={
-                    "https://www.youtube.com/embed/" +
-                    getYouTubeID(service?.youtube_link)
+          {loading ? (
+            <>
+              {" "}
+              <div className={" col-lg-4 col-md-6 portfolio-item filter-app "}>
+                <Skeleton sx={{ flex: 1 }} height={"23rem"} />
+              </div>
+              <div className={" col-lg-4 col-md-6 portfolio-item filter-app "}>
+                <Skeleton sx={{ flex: 1 }} height={"23rem"} />
+              </div>
+              <div className={" col-lg-4 col-md-6 portfolio-item filter-app "}>
+                <Skeleton sx={{ flex: 1 }} height={"23rem"} />
+              </div>
+            </>
+          ) : (
+            data?.serviceCategoryForUsers?.map((category) =>
+              category?.services?.map((service) => (
+                <div
+                  key={service?.id}
+                  className={
+                    "col-lg-4 col-md-6 portfolio-item filter-app " +
+                    category?.title?.toLowerCase().replaceAll(" ", "_")
                   }
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
-                {/* <div className="portfolio-info">
+                  style={{ height: "14rem" }}
+                >
+                  <iframe
+                    title="testimony 1"
+                    width={"100%"}
+                    height={"100%"}
+                    src={
+                      "https://www.youtube.com/embed/" +
+                      getYouTubeID(service?.youtube_link)
+                    }
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                  {/* <div className="portfolio-info">
                   <h4>{category.title}</h4>
                   <p>App</p>
                   <a
@@ -172,8 +207,9 @@ export default function Portfolio() {
                     <i className="bx bx-link"></i>
                   </a>
                 </div> */}
-              </div>
-            ))
+                </div>
+              ))
+            )
           )}
         </div>
       </div>

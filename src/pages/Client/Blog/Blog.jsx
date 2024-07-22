@@ -40,7 +40,24 @@ export default function Blog() {
         <div className="container">
           <div className="row">
             {loading ? (
-              <Skeleton height={"30rem"} />
+              <>
+                {" "}
+                <div
+                  className={" col-lg-4 col-md-6 portfolio-item filter-app "}
+                >
+                  <Skeleton sx={{ flex: 1 }} height={"23rem"} />
+                </div>
+                <div
+                  className={" col-lg-4 col-md-6 portfolio-item filter-app "}
+                >
+                  <Skeleton sx={{ flex: 1 }} height={"23rem"} />
+                </div>
+                <div
+                  className={" col-lg-4 col-md-6 portfolio-item filter-app "}
+                >
+                  <Skeleton sx={{ flex: 1 }} height={"23rem"} />
+                </div>
+              </>
             ) : (
               data?.blogs.map((blog) => (
                 <div className="col-md-4" key={blog.id}>
@@ -84,7 +101,7 @@ export default function Blog() {
               ))
             )}
           </div>
-          <div className="row">
+          {/* <div className="row">
             <div className="col-sm-12">
               <nav className="pagination-a">
                 <ul className="pagination justify-content-end">
@@ -116,7 +133,7 @@ export default function Blog() {
                 </ul>
               </nav>
             </div>
-          </div>
+          </div> */}
         </div>
       </section>
       {/* <!-- End Blog Grid--> */}

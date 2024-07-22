@@ -170,6 +170,7 @@ export default function AdminGallery() {
 
 function AddGallery({ open, onClose, title, refetch }) {
   const [selectedImages, setSelectedImages] = useState([]);
+  const [uploading, setUploading] = useState(false);
 
   const [createGallery, { loading }] = useMutation(CREATE_GALLERY);
 
@@ -197,6 +198,7 @@ function AddGallery({ open, onClose, title, refetch }) {
           ? "https://api.jpstvethiopia.com/api/upload-file"
           : "http://localhost:4000/api/upload-file";
 
+      setUploading(true);
       let filesNames = await Promise.all(
         Object.keys(selectedImages)?.map(async (key) => {
           const formData = new FormData();
@@ -208,6 +210,8 @@ function AddGallery({ open, onClose, title, refetch }) {
           return response.data?.fileName;
         })
       );
+
+      setUploading(false);
 
       // delete values.picture;
 
@@ -243,7 +247,7 @@ function AddGallery({ open, onClose, title, refetch }) {
       onClose={onClose}
       title={title}
       onSubmit={handleSubmit(onSubmit)}
-      loading={loading}
+      loading={loading || uploading}
     >
       <Grid container columnSpacing={4} rowSpacing={2}>
         <Grid item md={6} xs={12}>

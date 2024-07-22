@@ -26,8 +26,11 @@ import Partnership from "./pages/Client/Partnership/Partnership";
 import SignUp from "./pages/Client/SignUp";
 import Visitors from "./pages/Client/Visitors/Visitors";
 
+import FAQs from "./pages/Admin/FAQ/FAQs";
 import Partners from "./pages/Admin/Partners";
+import PrayerRequests from "./pages/Admin/Prayer Requests/PrayerRequests";
 import Portfolio from "./pages/Client/Home/Portfolio";
+import PrayerRequest from "./pages/Client/Prayer Request/PrayerRequest";
 import PageNotFound from "./pages/Status/404";
 import EmailVerified from "./pages/Status/EmailVerified";
 import PaymentSuccessful from "./pages/Status/PaymentSuccessful";
@@ -53,6 +56,7 @@ function App() {
           <Route path="/partnership" element={<Partnership />} />
           <Route path="/visitors" element={<Visitors />} />
           <Route path="/give" element={<Give />} />
+          <Route path="/prayer-request" element={<PrayerRequest />} />
         </Route>
         <Route path="/admin" element={<Layout />}>
           <Route path="" element={<Dashboard />} />
@@ -70,6 +74,9 @@ function App() {
           <Route path="services" element={<AdminServices />} />
           <Route path="gallery" element={<AdminGallery />} />
           <Route path="gallery-category" element={<GalleryCategory />} />
+
+          <Route path="prayer-requests" element={<PrayerRequests />} />
+          <Route path="frequently-asked-questions" element={<FAQs />} />
 
           <Route
             path="prophetic-school-sessions"

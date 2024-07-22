@@ -36,7 +36,7 @@ export default function SingleBlog() {
             </div>
             <div className="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
               <div className="post-information">
-                <ul className="list-inline text-center color-a">
+                {/* <ul className="list-inline text-center color-a">
                   <li className="list-inline-item mr-2">
                     <strong>Author: </strong>
                     <span className="color-text-a">Morgan Jimenez</span>
@@ -49,16 +49,16 @@ export default function SingleBlog() {
                     <strong>Date: </strong>
                     <span className="color-text-a">19 Apr. 2017</span>
                   </li>
-                </ul>
+                </ul> */}
               </div>
               <div className="post-content color-text-a">
                 <p className="post-intro">{state?.blog?.excerpt}</p>
-                {state?.blog?.title}
+                <pre> {state?.blog?.title}</pre>
                 <br />
                 <pre style={{ fontSize: "inherit", fontFamily: "inherit" }}>
                   {state?.blog?.body}
                 </pre>
-                <blockquote className="blockquote">
+                {/* <blockquote className="blockquote">
                   <p className="mb-4">
                     "Be kind and compassionate to one another, forgiving each
                     other, just as in Christ God forgave you."
@@ -67,10 +67,10 @@ export default function SingleBlog() {
                     <strong> Ephesians 4:32 (NIV): </strong>
                     <cite title="Source Title"></cite>
                   </footer>
-                </blockquote>
+                </blockquote> */}
               </div>
 
-              <div className="post-footer">
+              {/* <div className="post-footer">
                 <div className="post-share">
                   <span>Share: </span>
                   <ul className="list-inline socials">
@@ -96,7 +96,7 @@ export default function SingleBlog() {
                     </li>
                   </ul>
                 </div>
-              </div>
+              </div> */}
             </div>
             {/* <div className="col-md-10 offset-md-1 col-lg-10 offset-lg-1">
               <div className="title-box-d">

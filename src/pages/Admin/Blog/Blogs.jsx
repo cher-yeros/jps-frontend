@@ -152,6 +152,8 @@ export default function Blogs() {
 }
 
 function AddBlog({ open, onClose, title, refetch, record, isEdit }) {
+  const [uploading, setUploading] = useState(false);
+
   const [createBlog, { loading }] = useMutation(CREATE_BLOG);
   const [editBlog, { editBlogMut }] = useMutation(UPDATE_BLOG);
 
@@ -192,9 +194,9 @@ function AddBlog({ open, onClose, title, refetch, record, isEdit }) {
         const formData = new FormData();
 
         formData.append("picture", values.picture);
-
+        setUploading(true);
         const response = await axios.post(link, formData);
-
+        setUploading(false);
         // console.log(response);
         // return;
         delete values.picture;
@@ -237,7 +239,7 @@ function AddBlog({ open, onClose, title, refetch, record, isEdit }) {
       onClose={onClose}
       title={title}
       onSubmit={handleSubmit(onSubmit)}
-      loading={loading}
+      loading={loading || uploading}
     >
       <Grid container columnSpacing={4} rowSpacing={2}>
         <Grid item lg={6}>

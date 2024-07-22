@@ -47,19 +47,25 @@ export default function SideBar() {
       icon: "bi-person-workspace",
     },
 
-    { label: "Online Bible Study", title: true },
-
+    { label: "Prayer and Visitors", title: true },
     {
-      label: "Bible Study Sessions",
-      link: "prophetic-school-sessions",
+      label: "Prayer Requests",
+      link: "prayer-requests",
       icon: "bi-journal-bookmark",
     },
+    // { label: "Online Bible Study", title: true },
 
-    {
-      label: "Bible Study Members",
-      link: "prophetic-school-members",
-      icon: "bi-card-checklist",
-    },
+    // {
+    //   label: "Bible Study Sessions",
+    //   link: "prophetic-school-sessions",
+    //   icon: "bi-journal-bookmark",
+    // },
+
+    // {
+    //   label: "Bible Study Members",
+    //   link: "prophetic-school-members",
+    //   icon: "bi-card-checklist",
+    // },
 
     { label: "Vistors", title: true },
 
@@ -73,6 +79,13 @@ export default function SideBar() {
       label: "Vistors ",
       link: "visitors-applications",
       icon: "bi-card-checklist",
+    },
+    { label: "Settings", title: true },
+
+    {
+      label: "FAQ",
+      link: "frequently-asked-questions",
+      icon: "bi-journal-bookmark",
     },
   ];
 
