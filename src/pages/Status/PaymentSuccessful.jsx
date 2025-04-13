@@ -2,6 +2,7 @@ import React from "react";
 import { useLocation, useParams } from "react-router";
 import "./status.css";
 import { Link } from "react-router-dom";
+
 export default function PaymentSuccessful() {
   const params = useParams();
   const location = useLocation();
