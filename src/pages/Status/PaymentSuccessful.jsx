@@ -1,6 +1,8 @@
 import React from "react";
 import { useLocation, useParams } from "react-router";
 import "./status.css";
+import { Link } from "react-router-dom";
+
 export default function PaymentSuccessful() {
   const params = useParams();
   const location = useLocation();
@@ -20,6 +22,12 @@ export default function PaymentSuccessful() {
                 Thank you for your payment. we will be in contact with more
                 details shortly
               </p>
+            </div>
+
+            <div className="text-center mt-4">
+              <Link to="/" className="btn btn-primary">
+                Back to Home
+              </Link>
             </div>
           </div>
         </div>

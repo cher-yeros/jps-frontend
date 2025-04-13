@@ -5,9 +5,9 @@ export const CREATE_USER = gql`
     createUser(input: $input) {
       id
       avatar
-      firstname
-      lastname
-      fullname
+      first_name
+      last_name
+      full_name
       gender
       phone
       email
@@ -24,9 +24,10 @@ export const LOGIN_USER = gql`
       user {
         id
         avatar
-        firstname
-        lastname
-        # fullname
+        first_name
+        last_name
+        # full_name
+        role
         gender
         phone
         email
@@ -45,29 +46,29 @@ export const VERIFY_EMAIL = gql`
 `;
 
 export const REQUEST_RESET_PASSWORD = gql`
-  query VerifyEmail($token: String!) {
-    verifyEmail(token: $token)
+  mutation RequestResetPassword($email: String!) {
+    requestResetPassword(email: $email)
   }
 `;
 
-// export const LOGIN_USER = gql`
-//   mutation LoginUser($input: LoginInput) {
-//     loginUser(input: $input) {
-//       token
-//       user {
-//         id
-//         avatar
-//         firstname
-//         lastname
-//         username
-//         gender
-//         bio
-//         phone
-//         email
-//         address
-//         portfolio_dir
-//         role
-//       }
-//     }
-//   }
-// `;
+export const RESET_PASSWORD = gql`
+  mutation ResetPassword(
+    $email: String!
+    $resetToken: String!
+    $newPassword: String!
+  ) {
+    resetPassword(
+      email: $email
+      resetToken: $resetToken
+      newPassword: $newPassword
+    )
+  }
+`;
+
+export const CREATE_FEEDBACK = gql`
+  mutation CreateFeedback($input: CreateFeedbackInput) {
+    createFeedback(input: $input) {
+      id
+    }
+  }
+`;

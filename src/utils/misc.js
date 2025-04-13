@@ -10,7 +10,6 @@ export function randomNumber(min, max) {
 }
 
 export const seeMore = (str, length = 120) => {
-
   if (str[length] !== " ") {
     const space = str.indexOf(" ", length);
     length = space;
@@ -52,3 +51,6 @@ export const languageSubMenus = [
     lang: "so",
   },
 ];
+
+export const PAYPAL_CLIENT_ID =
+  "AZynZoe6nFStzHVL56ACdpDN8feobxDnD2YE68KR51x8ls_-VsTYgPIXO9RBSIuFlfefw7j5_F5v0hwk";

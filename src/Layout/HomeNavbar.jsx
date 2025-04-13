@@ -1,11 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import { Avatar } from "@mui/material";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logoutFinished } from "../redux/slices/authSlice";
 export default function HomeNavbar() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -14,66 +15,26 @@ export default function HomeNavbar() {
 
   const { currentUser } = useSelector((state) => state.auth);
 
-  const navbars = [
-    {
-      label: "Home",
-      link: "/#",
-      navigated: true,
-    },
-    {
-      label: "JPS TV",
-      link: "http://localhost:3000#services",
-    },
-    {
-      label: "About Us",
-      link: "#about",
-    },
-
-    {
-      label: "Testimonials",
-      link: "#testimonials",
-    },
-    {
-      label: "Contact",
-      link: "#contact",
-    },
-    {
-      label: "Gallery",
-      link: "/gallery",
-      navigated: true,
-    },
-    {
-      label: "Programs",
-      link: "/programs",
-      navigated: true,
-    },
-    {
-      label: "Bible Study",
-      link: "/bible-study",
-      navigated: true,
-    },
-    {
-      label: "Partnership",
-      link: "/partnership",
-      navigated: true,
-    },
-    {
-      label: "Visitors",
-      link: "/visitors",
-      navigated: true,
-    },
-  ];
+  // useEffect(() => {
+  //   console.log({ navbarOpened });
+  // }, [navbarOpened]);
 
   const logout = () => {
     dispatch(logoutFinished());
     navigate("/");
   };
 
+  const changeLanguage = (lang) => {
+    i18n.changeLanguage(lang);
+
+    setNavbarOpened(false);
+  };
+
   return (
     <header id="header" className="fixed-top">
       <div className="container d-flex align-items-center justify-content-between">
         <h1 className="logo">
-          <Link to={"/"}>JPS Ministry</Link>
+          <Link to={"/"}>{t("JPS TV")}</Link>
         </h1>
 
         {/* <!-- <a href="index.html" className="logo"><img src="assets/img/logo.png" alt="" className="img-fluid"></a>--> */}
@@ -86,12 +47,20 @@ export default function HomeNavbar() {
             {navbars?.map((navbar) => (
               <li key={navbar.label}>
                 {navbar?.navigated ? (
-                  <Link className="nav-link scrollto" to={navbar.link}>
-                    {navbar?.label}
+                  <Link
+                    className="nav-link scrollto"
+                    to={navbar.link}
+                    onClick={() => setNavbarOpened(false)}
+                  >
+                    {t(navbar?.label)}
                   </Link>
                 ) : (
-                  <a className="nav-link scrollto" href={navbar.link}>
-                    {navbar?.label}
+                  <a
+                    className="nav-link scrollto"
+                    href={navbar.link}
+                    onClick={() => setNavbarOpened(false)}
+                  >
+                    {t(navbar?.label)}
                   </a>
                 )}
               </li>
@@ -99,30 +68,81 @@ export default function HomeNavbar() {
 
             <li className="dropdown">
               <a href="#">
-                <span>Language</span> <i className="bi bi-chevron-down"></i>
+                <span>{t("Language")}</span>{" "}
+                <i className="bi bi-chevron-down"></i>
               </a>
               <ul>
                 <li>
-                  <a href="#">English</a>
+                  <a href="#" onClick={() => changeLanguage("en")}>
+                    English
+                  </a>
                 </li>
 
                 <li>
-                  <a href="#">አማርኛ</a>
+                  <a href="#" onClick={() => changeLanguage("am")}>
+                    አማርኛ
+                  </a>
                 </li>
                 <li>
-                  <a href="#">Afaan Oromoo</a>
+                  <a href="#" onClick={() => changeLanguage("or")}>
+                    Afaan Oromoo
+                  </a>
                 </li>
                 <li>
-                  <a href="#">ትግርኛ</a>
+                  <a href="#" onClick={() => changeLanguage("ti")}>
+                    ትግርኛ
+                  </a>
                 </li>
               </ul>
             </li>
 
+            {currentUser?.id ? null : (
+              <Link
+                className="nav-link scrollto"
+                to={"/login"}
+                onClick={() => setNavbarOpened(false)}
+              >
+                {t("Login")}
+              </Link>
+            )}
+
             <li>
-              <Link className="getstarted scrollto" to={"/give"}>
+              <Link
+                className="getstarted scrollto"
+                to={"/give"}
+                onClick={() => setNavbarOpened(false)}
+              >
                 {t("Give")}
               </Link>
             </li>
+
+            {currentUser?.id && (
+              <li className="dropdown">
+                <a href="#">
+                  <Avatar></Avatar>
+                  <span>
+                    {currentUser?.first_name +
+                      " " +
+                      currentUser?.last_name[0] +
+                      "."}
+                  </span>
+                  <i className="bi bi-chevron-down"></i>
+                </a>
+                <ul>
+                  <li>
+                    <Link to="#" onClick={() => setNavbarOpened(false)}>
+                      My Profile
+                    </Link>
+                  </li>
+
+                  <li>
+                    <a href="#" className="btn" onClick={logout}>
+                      Logout
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            )}
           </ul>
           <i
             className={` ${
@@ -142,3 +162,58 @@ export default function HomeNavbar() {
     </header>
   );
 }
+export const navbars = [
+  {
+    label: "Home",
+    link: "/#",
+    navigated: true,
+  },
+  {
+    label: "JPS TV",
+    link: "/services",
+    navigated: true,
+  },
+  {
+    label: "About Us",
+    link: "#about",
+  },
+
+  // {
+  //   label: "Testimonials",
+  //   link: "#testimonials",
+  // },
+  // {
+  //   label: "Contact",
+  //   link: "#contact",
+  // },
+  {
+    label: "Gallery",
+    link: "/gallery",
+    navigated: true,
+  },
+  {
+    label: "Programs",
+    link: "/programs",
+    navigated: true,
+  },
+  // {
+  //   label: "Bible Study",
+  //   link: "/bible-study",
+  //   navigated: true,
+  // },
+  {
+    label: "Prayer Request",
+    link: "/prayer-request",
+    navigated: true,
+  },
+  {
+    label: "Partnership",
+    link: "/partnership",
+    navigated: true,
+  },
+  {
+    label: "Visitors",
+    link: "/visitors",
+    navigated: true,
+  },
+];

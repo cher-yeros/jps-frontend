@@ -1,8 +1,51 @@
+import { yupResolver } from "@hookform/resolvers/yup";
 import React from "react";
+import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import * as Yup from "yup";
+import { CustomTextField } from "../../../components/CustomTextField";
+import { CREATE_FEEDBACK } from "../../../graphql/user";
+import { useMutation } from "@apollo/client";
+import { toast } from "react-toastify";
 
 export default function Contact() {
   const { t } = useTranslation();
+
+  const [sendFeedback, { loading }] = useMutation(CREATE_FEEDBACK);
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    mode: "all",
+    resolver: validator,
+    defaultValues: {},
+  });
+
+  const onSubmit = async (values) => {
+    try {
+      const { data } = await sendFeedback({
+        variables: {
+          input: {
+            ...values,
+          },
+        },
+      });
+
+      if (data?.createPartnership?.status === "success") {
+        window.location = data?.createPartnership?.data?.checkout_url;
+      }
+      reset();
+      toast.success("You have Successfully Contacted !", {
+        autoClose: 500,
+      });
+    } catch (error) {
+      toast.error(error.message, {
+        autoClose: 500,
+      });
+    }
+  };
 
   return (
     <section id="contact" className="contact section-bg">
@@ -48,52 +91,45 @@ export default function Contact() {
           </div>
 
           <div className="col-lg-6">
-            <form
-              action="forms/contact.php"
-              method="post"
-              role="form"
-              className="php-email-form"
-            >
+            <form className="php-email-form" onSubmit={handleSubmit(onSubmit)}>
               <div className="row">
                 <div className="col-md-6 form-group">
-                  <input
-                    type="text"
-                    name="name"
-                    className="form-control"
-                    id="name"
-                    placeholder={t("Your Name")}
-                    required
+                  <CustomTextField
+                    control={control}
+                    name={"name"}
+                    label={"Full Name"}
                   />
                 </div>
                 <div className="col-md-6 form-group mt-3 mt-md-0">
-                  <input
-                    type="email"
-                    className="form-control"
-                    name="email"
-                    id="email"
-                    placeholder={t("Your Email")}
-                    required
+                  <CustomTextField
+                    control={control}
+                    name={"email"}
+                    label={"Email"}
                   />
                 </div>
               </div>
               <div className="form-group mt-3">
-                <input
-                  type="text"
-                  className="form-control"
-                  name="subject"
-                  id="subject"
-                  placeholder={t("Subject")}
-                  required
+                <CustomTextField
+                  control={control}
+                  name={"phone"}
+                  label={"Phone Number"}
                 />
               </div>
               <div className="form-group mt-3">
-                <textarea
-                  className="form-control"
-                  name="message"
-                  rows="5"
-                  placeholder={t("Message")}
-                  required
-                ></textarea>
+                <CustomTextField
+                  control={control}
+                  name={"subject"}
+                  label={"Subject"}
+                />
+              </div>
+              <div className="form-group mt-3">
+                <CustomTextField
+                  control={control}
+                  name={"message"}
+                  label={"Your Message"}
+                  multiline
+                  rows={4}
+                />
               </div>
               <div className="my-3">
                 <div className="loading">Loading</div>
@@ -103,7 +139,9 @@ export default function Contact() {
                 </div>
               </div>
               <div className="text-center">
-                <button type="submit">{t("Send Message")}</button>
+                <button type="submit">
+                  {t(loading ? "Loading..." : "Send Message")}
+                </button>
               </div>
             </form>
           </div>
@@ -112,3 +150,16 @@ export default function Contact() {
     </section>
   );
 }
+
+const validator = yupResolver(
+  Yup.object().shape({
+    name: Yup.string().required("First Name is required!"),
+    phone: Yup.string().required("Phone is required!"),
+    email: Yup.string()
+      .email("Enter a Valid Email!")
+      .required("Email is required!"),
+
+    subject: Yup.string().required("Address is required!"),
+    message: Yup.string().required(),
+  })
+);

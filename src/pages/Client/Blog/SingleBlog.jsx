@@ -1,6 +1,9 @@
 import React from "react";
+import { useLocation } from "react-router";
 
 export default function SingleBlog() {
+  const { state } = useLocation();
+
   return (
     <main id="home-main">
       <div className="page-title" data-aos="fade">
@@ -10,7 +13,7 @@ export default function SingleBlog() {
               <div className="col-lg-8">
                 <div className="section-title mt-4">
                   <h2>Programs</h2>
-                  <p>Embracing Grace: A Journey of Forgiveness</p>
+                  <p>{state?.blog?.title}</p>
                 </div>
                 <p className="mb-0"></p>
                 {/* <a href="contact.html" className="cta-btn">
@@ -28,16 +31,12 @@ export default function SingleBlog() {
           <div className="row">
             <div className="col-sm-12">
               <div className="news-img-box d-flex justify-content-center">
-                <img
-                  src="/assets/img/gallery/gallery (3).jpg"
-                  alt=""
-                  className="img-fluid"
-                />
+                <img src={state?.blog?.image} alt="" className="img-fluid" />
               </div>
             </div>
             <div className="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
               <div className="post-information">
-                <ul className="list-inline text-center color-a">
+                {/* <ul className="list-inline text-center color-a">
                   <li className="list-inline-item mr-2">
                     <strong>Author: </strong>
                     <span className="color-text-a">Morgan Jimenez</span>
@@ -50,58 +49,16 @@ export default function SingleBlog() {
                     <strong>Date: </strong>
                     <span className="color-text-a">19 Apr. 2017</span>
                   </li>
-                </ul>
+                </ul> */}
               </div>
               <div className="post-content color-text-a">
-                <p className="post-intro">
-                  In the hustle and bustle of daily life, it's easy to get
-                  caught up in our own challenges and grievances. But as
-                  followers of Christ, we are called to something greater – to
-                  extend grace and forgiveness as we ourselves have received.
-                </p>
-                Finding Freedom in Forgiveness
+                <p className="post-intro">{state?.blog?.excerpt}</p>
+                <pre> {state?.blog?.title}</pre>
                 <br />
-                Forgiveness isn't always easy. It requires humility, patience,
-                and a willingness to let go of resentment. Yet, it's a
-                cornerstone of Christian faith. Jesus taught us to pray,
-                "Forgive us our trespasses, as we forgive those who trespass
-                against us." This prayer reminds us that forgiveness is both an
-                act of obedience and a pathway to healing.
-                <br />
-                Healing Through Grace
-                <br />
-                When we forgive others, we release the burden of anger and
-                bitterness from our hearts. We acknowledge our own imperfections
-                and the grace that God extends to us daily. Forgiveness doesn't
-                excuse wrongdoing but rather frees us from its power over our
-                lives.
-                <br />
-                The Power of Reconciliation
-                <br />
-                In many ways, forgiveness is also about reconciliation –
-                restoring broken relationships and building bridges of
-                understanding. It's about choosing to see others through the
-                eyes of love and compassion, just as God sees us.
-                <br />
-                Walking the Path Together
-                <br />
-                As a church community, we are called to embody forgiveness and
-                reconciliation. We support one another through prayer,
-                encouragement, and accountability. Together, we strive to live
-                out the teachings of Christ, extending grace to those around us.
-                <br />
-                Embracing Grace
-                <br />
-                Let's challenge ourselves to embrace grace in every aspect of
-                our lives. Let's be quick to forgive and slow to judge. Let's
-                extend the same grace that God has shown us to others, knowing
-                that in doing so, we reflect His love and mercy to the world.
-                <br />
-                May our journey of forgiveness be marked by humility,
-                compassion, and a steadfast commitment to following Christ's
-                example. Together, let's cultivate a community where grace
-                abounds and forgiveness transforms hearts.
-                <blockquote className="blockquote">
+                <pre style={{ fontSize: "inherit", fontFamily: "inherit" }}>
+                  {state?.blog?.body}
+                </pre>
+                {/* <blockquote className="blockquote">
                   <p className="mb-4">
                     "Be kind and compassionate to one another, forgiving each
                     other, just as in Christ God forgave you."
@@ -110,10 +67,10 @@ export default function SingleBlog() {
                     <strong> Ephesians 4:32 (NIV): </strong>
                     <cite title="Source Title"></cite>
                   </footer>
-                </blockquote>
+                </blockquote> */}
               </div>
 
-              <div className="post-footer">
+              {/* <div className="post-footer">
                 <div className="post-share">
                   <span>Share: </span>
                   <ul className="list-inline socials">
@@ -139,9 +96,9 @@ export default function SingleBlog() {
                     </li>
                   </ul>
                 </div>
-              </div>
+              </div> */}
             </div>
-            <div className="col-md-10 offset-md-1 col-lg-10 offset-lg-1">
+            {/* <div className="col-md-10 offset-md-1 col-lg-10 offset-lg-1">
               <div className="title-box-d">
                 <h3 className="title-d">Comments (4)</h3>
               </div>
@@ -260,7 +217,7 @@ export default function SingleBlog() {
                   </div>
                 </form>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>

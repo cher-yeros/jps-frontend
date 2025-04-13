@@ -9,8 +9,6 @@ export default function EmailVerified() {
   const params = useParams();
   const location = useLocation();
 
-  console.log({ params, location });
-
   const { data, loading, error } = useQuery(VERIFY_EMAIL, {
     variables: {
       token: params?.token,

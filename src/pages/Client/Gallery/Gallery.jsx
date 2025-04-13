@@ -3,6 +3,9 @@ import "glightbox/dist/css/glightbox.min.css";
 import { t } from "i18next";
 import Isotope from "isotope-layout";
 import React, { useEffect, useRef, useState } from "react";
+import { GET_GALLERY_FOR_USERS } from "../../../graphql/gallery";
+import { useQuery } from "@apollo/client";
+import { Skeleton, Stack } from "@mui/material";
 export default function Gallery() {
   useEffect(() => {
     const lightbox = GLightbox({
@@ -21,7 +24,9 @@ export default function Gallery() {
   const isotopeInstance = useRef(null);
   const gridElement = useRef(null);
 
-  const [activeFilter, setActiveFilter] = useState(".category-worship");
+  const [activeFilter, setActiveFilter] = useState("*");
+
+  const { data, loading } = useQuery(GET_GALLERY_FOR_USERS);
 
   useEffect(() => {
     // Initialize Isotope
@@ -31,15 +36,15 @@ export default function Gallery() {
     });
 
     // Cleanup on unmount
-    // return () => {
-    //   isotopeInstance.current.destroy();
-    // };
+    return () => {
+      isotopeInstance.current.destroy();
+    };
   }, [activeFilter]);
 
   useEffect(() => {
     if (isotopeInstance.current) {
-      isotopeInstance?.current?.arrange({ filter: activeFilter });
-      isotopeInstance?.current?.on("arrangeComplete", function () {
+      isotopeInstance.current.arrange({ filter: activeFilter });
+      isotopeInstance.current.on("arrangeComplete", function () {
         window.AOS && window.AOS.refresh(); // Refresh AOS if it's available
       });
     }
@@ -47,7 +52,7 @@ export default function Gallery() {
 
   const filterItems = (filter) => {
     // isotopeInstance.current.arrange({ filter });
-    // console.log(filter);
+
     setActiveFilter(filter);
   };
 
@@ -128,59 +133,100 @@ export default function Gallery() {
 
       {/* <!-- Gallery Section --> */}
       <section id="gallery" className="gallery section portfolio">
-        <div className="col-lg-12 d-flex justify-content-center">
-          <ul id="portfolio-flters">
-            {dataFilters.map((filter) => (
-              <li
-                key={filter.label}
-                className={
-                  activeFilter === filter.dataFilter && "filter-active"
-                }
-                onClick={() => filterItems(filter.dataFilter)}
-              >
-                {filter.label}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div
-          className="container-fluid"
-          data-aos="fade-up"
-          data-aos-delay="100"
-          ref={gridElement}
-        >
-          <div className="row gy-4 justify-content-center">
-            {[...Array(44).keys()].map((n) => (
-              <div
-                className={
-                  "col-xl-3 col-lg-4 col-md-6 " +
-                  dataFilters[Math.floor(Math.random() * dataFilters.length)]
-                    .category
-                }
-              >
-                <div className="gallery-item h-100">
-                  <img
-                    src={`assets/img/gallery/gallery (${n + 1}).jpg`}
-                    className="img-fluid"
-                    alt=""
-                  />
-                  <div className="gallery-links d-flex align-items-center justify-content-center">
-                    <a
-                      href={`assets/img/gallery/gallery (${n + 1}).jpg`}
-                      title="Gallery 1"
-                      className="glightbox preview-link"
+        <div className="container">
+          <div className="col-lg-12 d-flex justify-content-center">
+            <ul id="portfolio-flters">
+              {data?.galleryCategoryForUsers?.map((category) => (
+                <li
+                  key={category.title}
+                  className={
+                    activeFilter ===
+                      "." +
+                        category?.title?.toLowerCase().replaceAll(" ", "_") &&
+                    "filter-active"
+                  }
+                  onClick={() =>
+                    filterItems(
+                      "." + category?.title?.toLowerCase().replaceAll(" ", "_")
+                    )
+                  }
+                >
+                  {category.title}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div
+            className="row portfolio-container"
+            data-aos="fade-up"
+            data-aos-delay="200"
+            ref={gridElement}
+          >
+            {/* <div className="row gy-4 justify-content-center row portfolio-container"> */}
+            {loading ? (
+              <>
+                {" "}
+                <div
+                  className={" col-lg-3 col-md-6 portfolio-item filter-app "}
+                >
+                  <Skeleton sx={{ flex: 1 }} height={"20rem"} />
+                </div>
+                <div
+                  className={" col-lg-3 col-md-6 portfolio-item filter-app "}
+                >
+                  <Skeleton sx={{ flex: 1 }} height={"20rem"} />
+                </div>
+                <div
+                  className={" col-lg-3 col-md-6 portfolio-item filter-app "}
+                >
+                  <Skeleton sx={{ flex: 1 }} height={"20rem"} />
+                </div>
+                <div
+                  className={" col-lg-3 col-md-6 portfolio-item filter-app "}
+                >
+                  <Skeleton sx={{ flex: 1 }} height={"20rem"} />
+                </div>
+              </>
+            ) : (
+              data?.galleryCategoryForUsers.map((category) =>
+                category?.galleries?.map((gallery) =>
+                  JSON.parse(gallery?.images || {})?.map((image) => (
+                    <div
+                      key={image}
+                      className={
+                        "col-lg-3 col-md-6 portfolio-item filter-app " +
+                        category?.title?.toLowerCase().replaceAll(" ", "_")
+                      }
                     >
-                      <i className="bi bi-arrows-angle-expand"></i>
-                    </a>
-                    {/* <a href="gallery-single.html" className="details-link">
+                      <div className="gallery-item h-100">
+                        <img
+                          src={image}
+                          className="img-fluid"
+                          alt=""
+                          style={{ width: "100%" }}
+                        />
+                        <div className="gallery-links d-flex align-items-center justify-content-center">
+                          <a
+                            href={image}
+                            title="Gallery 1"
+                            className="glightbox preview-link"
+                          >
+                            <i className="bi bi-arrows-angle-expand"></i>
+                          </a>
+                          {/* <a href="gallery-single.html" className="details-link">
                     <i className="bi bi-link-45deg"></i>
                   </a> */}
-                  </div>
-                </div>
-              </div>
-            ))}
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                )
+              )
+            )}
           </div>
         </div>
+
+        {/* </div> */}
       </section>
       {/* <!-- /Gallery Section --> */}
     </main>

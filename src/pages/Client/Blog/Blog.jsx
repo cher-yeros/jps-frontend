@@ -1,9 +1,14 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { GET_BLOGS } from "../../../graphql/blog";
+import { useQuery } from "@apollo/client";
+import { Skeleton } from "@mui/material";
 
 export default function Blog() {
   const { t } = useTranslation();
+
+  const { data, loading, refetch } = useQuery(GET_BLOGS);
 
   return (
     <main id="home-main">
@@ -34,40 +39,69 @@ export default function Blog() {
       >
         <div className="container">
           <div className="row">
-            {[...Array(9).keys()].map((n) => (
-              <div className="col-md-4" key={n}>
-                <div className="card-box-b card-shadow news-box">
-                  <div className="img-box-b">
-                    <img
-                      src={`assets/img/gallery/gallery (${n + 1}).jpg`}
-                      alt=""
-                      className="img-b img-fluid"
-                    />
-                  </div>
-                  <div className="card-overlay">
-                    <div className="card-header-b">
-                      <div className="card-category-b">
-                        <a href="#" className="category-b">
-                          {t("Sunday")}
-                        </a>
-                      </div>
-                      <div className="card-title-b">
-                        <h2 className="title-2">
-                          <Link to="jesus-christ-loves-you">
-                            {t("Holy Spirit Movement")}
-                          </Link>
-                        </h2>
-                      </div>
-                      <div className="card-date">
-                        <span className="date-b">18 Sep. 2017</span>
+            {loading ? (
+              <>
+                {" "}
+                <div
+                  className={" col-lg-4 col-md-6 portfolio-item filter-app "}
+                >
+                  <Skeleton sx={{ flex: 1 }} height={"23rem"} />
+                </div>
+                <div
+                  className={" col-lg-4 col-md-6 portfolio-item filter-app "}
+                >
+                  <Skeleton sx={{ flex: 1 }} height={"23rem"} />
+                </div>
+                <div
+                  className={" col-lg-4 col-md-6 portfolio-item filter-app "}
+                >
+                  <Skeleton sx={{ flex: 1 }} height={"23rem"} />
+                </div>
+              </>
+            ) : (
+              data?.blogs.map((blog) => (
+                <div className="col-md-4" key={blog.id}>
+                  <div className="card-box-b card-shadow news-box">
+                    <div className="img-box-b">
+                      <img
+                        src={blog?.image}
+                        alt=""
+                        className="img-b img-fluid"
+                      />
+                    </div>
+                    <div className="card-overlay">
+                      <div className="card-header-b">
+                        <div className="card-category-b">
+                          <a href="#" className="category-b">
+                            {t(blog?.title)}
+                          </a>
+                        </div>
+                        <div className="card-title-b">
+                          <h2 className="title-2">
+                            <Link
+                              to={
+                                "/programs/" +
+                                blog?.title?.toLowerCase()?.replaceAll(" ", "-")
+                              }
+                              state={{ blog: blog }}
+                            >
+                              {t(blog?.title)}
+                            </Link>
+                          </h2>
+                        </div>
+                        <div className="card-date">
+                          <span className="date-b">
+                            {new Date(blog?.createdAt).toLocaleString()}
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))
+            )}
           </div>
-          <div className="row">
+          {/* <div className="row">
             <div className="col-sm-12">
               <nav className="pagination-a">
                 <ul className="pagination justify-content-end">
@@ -99,7 +133,7 @@ export default function Blog() {
                 </ul>
               </nav>
             </div>
-          </div>
+          </div> */}
         </div>
       </section>
       {/* <!-- End Blog Grid--> */}

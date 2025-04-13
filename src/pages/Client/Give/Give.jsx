@@ -1,18 +1,22 @@
 import { useMutation } from "@apollo/client";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Stack, Typography } from "@mui/material";
-import React from "react";
+import { Typography } from "@mui/material";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
 import { CustomTextField } from "../../../components/CustomTextField";
-import { CREATE_PARTNERSHIP } from "../../../graphql/partnership";
+import { CREATE_DONATION } from "../../../graphql/donation";
+import GivePaypalButton from "./GivePaypalButton";
 
 export default function Give() {
   const { t } = useTranslation();
 
-  const [createPartnership, { loading }] = useMutation(CREATE_PARTNERSHIP);
+  const { currentUser } = useSelector((state) => state.auth);
+
+  const [createPartnership, { loading }] = useMutation(CREATE_DONATION);
 
   const {
     control,
@@ -31,19 +35,23 @@ export default function Give() {
     },
   });
 
-  const types = ["Weekly", "Monthly", "Quarterly", "Annually"];
+  useEffect(() => {
+    setValue("first_name", currentUser?.first_name);
+    setValue("last_name", currentUser?.last_name);
+    setValue("email", currentUser?.email);
+    setValue("phone", currentUser?.phone);
+  }, []);
 
   const onSubmit = async (values) => {
     const isValid = await trigger([
-      "firstname",
-      "lastname",
+      "first_name",
+      "last_name",
       "phone",
       "email",
       "payment_method",
-      "plan",
       "amount",
       "currency",
-      "message",
+      "additional_message",
     ]);
 
     if (isValid)
@@ -51,21 +59,20 @@ export default function Give() {
         const { data } = await createPartnership({
           variables: {
             input: {
-              firstname: watch("firstname"),
-              lastname: watch("lastname"),
+              first_name: watch("first_name"),
+              last_name: watch("last_name"),
               phone: watch("phone"),
               email: watch("email"),
               payment_method: watch("payment_method"),
-              plan: watch("plan"),
               amount: parseFloat(watch("amount")),
               currency: watch("currency"),
-              message: watch("message"),
+              additional_message: watch("additional_message"),
             },
           },
         });
 
-        if (data?.createPartnership?.status === "success") {
-          window.open(data?.createPartnership?.data?.checkout_url, "_blank");
+        if (data?.createDonation?.status === "success") {
+          window.location = data?.createDonation?.data?.checkout_url;
         }
         // reset();
         toast.success("You have Successfully registered for partnership !", {
@@ -101,45 +108,18 @@ export default function Give() {
           <div class="row justify-content-center">
             <div class="col-lg-6">
               <form class="php-email-form">
-                {/* <div class="d-flex align-items-center justify-content-center gap-2 mb-2">
-                  <button className="submit-btn"
-                    type="button"
-                    style={{
-                      flex: 1,
-                      background: currency !== "ETB" && "transparent",
-                      border: "1px solid #ed502e",
-                      color: currency !== "ETB" && "#ed502e",
-                    }}
-                    onClick={() => setValue("currency","ETB")}
-                  >
-                    Local Currency (ETB)
-                  </button>
-                  <button className="submit-btn"
-                    type="button"
-                    style={{
-                      flex: 1,
-                      background: currency !== "USD" && "transparent",
-                      border: "1px solid #ed502e",
-                      color: currency !== "USD" && "#ed502e",
-                    }}
-                    onClick={() => setValue("currency","USD")}
-                  >
-                    Foreign Currency (USD)
-                  </button>
-                </div> */}
-
                 <div class="row">
                   <div class="col-md-6 form-group">
                     <CustomTextField
                       control={control}
-                      name={"firstname"}
+                      name={"first_name"}
                       label={"First Name"}
                     />
                   </div>
                   <div class="col-md-6 form-group mt-3 mt-md-0">
                     <CustomTextField
                       control={control}
-                      name={"lastname"}
+                      name={"last_name"}
                       label={"Last Name"}
                     />
                   </div>
@@ -168,71 +148,61 @@ export default function Give() {
                     name={"payment_method"}
                     select
                     label={"Payment Method"}
-                    options={["Local Currency", "International Card", "Paypal"]}
+                    options={["Local Currency", "Paypal"]}
                   />
                 </div>
-                <Stack direction={"row"} alignItems={"end"} spacing={2}>
-                  <CustomTextField
-                    control={control}
-                    name={"amount"}
-                    label={"Amount"}
-                    type="number"
-                    flex={1}
-                    endAdornment={
-                      <Typography color={"GrayText"}>
-                        {t(watch("currency"))}
-                      </Typography>
-                    }
-                  />
 
-                  <div class="d-flex align-items-stretch justify-content-center gap-2 mb-2">
-                    <button
-                      className="submit-btn"
-                      type="button"
-                      style={{
-                        flex: 1,
-                        background:
-                          watch("currency") !== "ETB" && "transparent",
-                        border: "1px solid #ed502e",
-                        color: watch("currency") !== "ETB" && "#ed502e",
-                      }}
-                      onClick={() => setValue("currency", "ETB")}
-                    >
-                      {t("ETB")}
-                    </button>
-                    <button
-                      className="submit-btn"
-                      type="button"
-                      style={{
-                        flex: 1,
-                        background:
-                          watch("currency") !== "USD" && "transparent",
-                        border: "1px solid #ed502e",
-                        color: watch("currency") !== "USD" && "#ed502e",
-                      }}
-                      onClick={() => setValue("currency", "USD")}
-                    >
-                      {t("USD")}
-                    </button>
+                <div className="row">
+                  <div className="col-sm-12 col-lg-8">
+                    <CustomTextField
+                      control={control}
+                      name={"amount"}
+                      label={"Amount"}
+                      type="number"
+                      flex={1}
+                      endAdornment={
+                        <Typography color={"GrayText"}>
+                          {t(watch("currency"))}
+                        </Typography>
+                      }
+                    />
                   </div>
-                </Stack>
-                {/* <div class="form-group mt-3 d-flex gap-4">
-                  {types?.map((t) => (
-                    <button
-                      className="submit-btn"
-                      type="button"
-                      style={{
-                        flex: 1,
-                        background: watch("plan") !== t && "transparent",
-                        border: "1px solid #ed502e",
-                        color: watch("plan") !== t && "#ed502e",
-                      }}
-                      onClick={() => setValue("plan", t)}
-                    >
-                      {t}
-                    </button>
-                  ))}
-                </div> */}
+                  <div className="col-sm-12 col-lg-4 mt-3">
+                    {" "}
+                    <div class="d-flex align-items-stretch justify-content-center gap-2 ">
+                      <button
+                        className="submit-btn"
+                        type="button"
+                        style={{
+                          flex: 1,
+                          background:
+                            watch("currency") !== "ETB" && "transparent",
+                          border: "1px solid #ed502e",
+                          color: watch("currency") !== "ETB" && "#ed502e",
+                          padding: "14px 30px",
+                        }}
+                        onClick={() => setValue("currency", "ETB")}
+                      >
+                        {t("ETB")}
+                      </button>
+                      <button
+                        className="submit-btn"
+                        type="button"
+                        style={{
+                          flex: 1,
+                          background:
+                            watch("currency") !== "USD" && "transparent",
+                          border: "1px solid #ed502e",
+                          color: watch("currency") !== "USD" && "#ed502e",
+                        }}
+                        onClick={() => setValue("currency", "USD")}
+                      >
+                        {t("USD")}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
                 <div class="form-group mt-3">
                   <CustomTextField
                     control={control}
@@ -250,13 +220,20 @@ export default function Give() {
                   </div>
                 </div>
                 <div class="text-center">
-                  <button
-                    className="submit-btn"
-                    type="button"
-                    onClick={loading ? () => {} : onSubmit}
-                  >
-                    {t(loading ? "Loading..." : "Give")}
-                  </button>
+                  {" "}
+                  {watch("payment_method") === "Paypal" ? (
+                    <GivePaypalButton watch={watch} trigger={trigger} />
+                  ) : (
+                    <div className="d-flex justify-content-center">
+                      <button
+                        className="submit-btn"
+                        type="button"
+                        onClick={loading ? () => {} : onSubmit}
+                      >
+                        {t(loading ? "Loading..." : "Give")}
+                      </button>
+                    </div>
+                  )}
                 </div>
               </form>
             </div>
@@ -269,8 +246,8 @@ export default function Give() {
 
 const validator = yupResolver(
   Yup.object().shape({
-    firstname: Yup.string().required("First Name is required!"),
-    lastname: Yup.string().required("Last Name is required!"),
+    first_name: Yup.string().required("First Name is required!"),
+    last_name: Yup.string().required("Last Name is required!"),
     phone: Yup.string().required("Phone is required!"),
     email: Yup.string()
       .email("Enter a Valid Email!")
@@ -278,7 +255,6 @@ const validator = yupResolver(
     payment_method: Yup.string().required("Payment Method is required!"),
     currency: Yup.string().required("Currency is required!"),
     amount: Yup.number().min(0).required("Amount is required!"),
-    plan: Yup.string().required("Plan is required!"),
-    message: Yup.string().notRequired(),
+    additional_message: Yup.string().notRequired(),
   })
 );
